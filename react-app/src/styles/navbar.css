@@ -1,0 +1,13 @@
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: coral;
+  height: 64px;
+  padding-right: 2rem;
+}
+
+.navbar-link {
+  display: inline;
+  margin-left: 1rem;
+}
