@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     firstName = db.Column(db.String(50), nullable=False)
     lastName = db.Column(db.String(50), nullable=False)
-    balance = db.Column(db.Integer, nullable=False)
+    balance = db.Column(db.Float, nullable=False)
 
     @property
     def password(self):
