@@ -4,6 +4,7 @@ import LogoutButton from './auth/LogoutButton';
 import '../styles/navbar.css'
 import DemoLogin from './DemoLogin';
 
+
 const NavBar = () => {
   return (
     <nav className='navbar-container'>

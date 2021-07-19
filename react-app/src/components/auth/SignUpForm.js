@@ -8,6 +8,9 @@ const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [balance, setBalance] = useState(100000.00);
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -15,7 +18,10 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, firstName, lastName, parseFloat(balance)));
+      // console.log('Balance', typeof balance, balance)
+      // console.log('Expert', typeof expert, expert)
+      // console.log(data)
       if (data) {
         setErrors(data)
       }
@@ -36,6 +42,24 @@ const SignUpForm = () => {
 
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
+  };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const updateBalance = (e) => {
+    if (e.target.value === 'novice') {
+      setBalance(100000.00)
+    } else if (e.target.value === 'advanced') {
+      setBalance(10000.00)
+    } else if (e.target.value === 'expert') {
+      setBalance(1000.00)
+    }
   };
 
   if (user) {
@@ -66,6 +90,34 @@ const SignUpForm = () => {
           onChange={updateEmail}
           value={email}
         ></input>
+      </div>
+      <div>
+        <label>First Name</label>
+        <input
+          type='text'
+          name='firstName'
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          name='lastName'
+          onChange={updateLastName}
+          value={lastName}
+        ></input>
+      </div>
+      <div>
+        <label>Difficulty</label>
+        <select
+        onChange={updateBalance}
+        >
+          <option value='novice'>Novice</option>
+          <option value='advanced'>Advanced</option>
+          <option value='expert'>Expert</option>
+        </select>
       </div>
       <div>
         <label>Password</label>
