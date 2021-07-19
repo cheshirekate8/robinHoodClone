@@ -4,8 +4,6 @@ import '../styles/watchlist.css'
 
 function Watchlist() {
 
-}
-
 return (
   <div>
     <h1>My Watchlist</h1>
@@ -15,6 +13,6 @@ return (
     <li>Stock-4</li>
   </div>
 )
-
+}
 
 export default Watchlist;

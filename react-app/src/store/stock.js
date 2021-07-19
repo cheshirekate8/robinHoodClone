@@ -38,7 +38,7 @@ export const getTicker = () => async (dispatch) => {
         if (data.errors) {
             console.log(data.errors);
         }
-        dispatch(setTicker(data));
+        dispatch(setTicker(data.finance.result[0]));
         console.log('successful');
     }
 }
@@ -51,7 +51,7 @@ export const getStock = (symbol) => async (dispatch) => {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
-    const sparkRes = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=SNAP&interval=1m&range=1d", {
+    const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=1m&range=1d`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
@@ -103,7 +103,7 @@ export const getDailyMovers = () => async (dispatch) => {
         if (data.errors) {
             console.log(data.errors);
         }
-        dispatch(setDailyMovers(data));
+        dispatch(setDailyMovers(data.finance));
     }
 }
 
