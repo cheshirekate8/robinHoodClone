@@ -4,17 +4,19 @@ import '../styles/watchlist.css'
 
 function Watchlist() {
 
+  
+  return (
+    <div className='watchlist__container'>
+      <h1>My Watchlist</h1>
+      <li>Stock-1</li>
+      <li>Stock-2</li>
+      <li>Stock-3</li>
+      <li>Stock-4</li>
+    </div>
+  )
 }
 
-return (
-  <div>
-    <h1>My Watchlist</h1>
-    <li>Stock-1</li>
-    <li>Stock-2</li>
-    <li>Stock-3</li>
-    <li>Stock-4</li>
-  </div>
-)
+
 
 
 export default Watchlist;
