@@ -36,7 +36,7 @@ export const getTicker = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors);
+            return data.errors;
         }
         dispatch(setTicker(data.finance.result[0]));
         console.log('successful');
@@ -62,8 +62,10 @@ export const getStock = (symbol) => async (dispatch) => {
         const data = await response.json();
         const spark = await sparkRes.json();
         if (data.errors || spark.errors) {
-            console.log(data.errors);
-            console.log(spark.errors)
+            if(data.errors) {
+                return data.errors;
+            }
+            return spark.errors;
         }
         const stock = {
             symbol: data.price.symbol,
@@ -84,7 +86,7 @@ export const getStock = (symbol) => async (dispatch) => {
             },
             recommendations: data.recommendationTrend.trend,
             earnings: data.earnings,
-            spark: spark
+            spark: spark[`${symbol}`]
         }
         dispatch(setStock(stock));
     }
@@ -101,7 +103,7 @@ export const getDailyMovers = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors);
+            return data.errors;
         }
         dispatch(setDailyMovers(data.finance));
     }
