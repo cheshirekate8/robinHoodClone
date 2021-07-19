@@ -47,13 +47,13 @@ function App() {
         <ProtectedRoute path='/home' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route path='/404'>
+          <h1>Page Not Found</h1>
+        </Route>
+        <Route path='*'>
+          <Redirect to='/404' />
+        </Route>
       </Switch>
-      <Route path='/404'>
-        <h1>Page Not Found</h1>
-      </Route>
-      <Route path='*'>
-        <Redirect to='/404' />
-      </Route>
     </BrowserRouter>
   );
 }
