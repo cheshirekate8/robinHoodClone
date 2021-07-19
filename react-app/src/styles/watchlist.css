@@ -1,4 +1,5 @@
 .watchlist__container {
     flex: 0.3;
     color: white;
+    padding-left: 48px;
 }
