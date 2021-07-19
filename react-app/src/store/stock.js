@@ -68,6 +68,7 @@ export const getStock = (symbol) => async (dispatch) => {
             }
             return spark.errors;
         }
+        // building my own stock object to show only relevant info needed.
         const stock = {
             symbol: data.price.symbol,
             name: data.price.shortName,
@@ -87,6 +88,7 @@ export const getStock = (symbol) => async (dispatch) => {
             },
             recommendations: data.recommendationTrend.trend,
             earnings: data.earnings,
+            // sparkline data is here
             spark: spark[`${symbol}`]
         }
         dispatch(setStock(stock));
