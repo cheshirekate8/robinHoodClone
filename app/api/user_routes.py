@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, User, Watch, Transaction
+from app.models import db, User, Watch, Transaction, transaction
+import datetime
 
 
 user_routes = Blueprint('users', __name__)
@@ -76,17 +77,34 @@ def watches_delete(userId, watchId):
 
 # <<<<<<<<User Transactions>>>>>>>>>
 
+def get_all_transactions(userId):
+    return Transaction.query.where(Transaction.userId == userId).all()
 
 # get all transaction history for a user
 @user_routes.route('/<int:userId>/transactions')
-@login_required
+# @login_required
 def transactions(userId):
-    transactions = Transaction.query.where(Transaction.userId == userId).all()
+    transactions = get_all_transactions(userId)
     return {'transactions': [transaction.to_dict() for transaction in transactions]}
 
 
 # post a new transaction for this user
 @user_routes.route('/<int:userId>/transactions', methods=['POST'])
-@login_required
+# @login_required
 def transactions_post(userId):
-    pass
+    data = request.get_json()
+    new_transaction = Transaction(userId=data['userId'], symbol=data['symbol'], shares=data['shares'], time=datetime.datetime.now())
+    db.session.add(new_transaction)
+    db.session.commit()
+    transactions = get_all_transactions(userId)
+    return {'transactions': [transaction.to_dict() for transaction in transactions]}
+
+# delete a stock from user's transactions
+@user_routes.route('/<int:userId>/transactions/<int:transactionId>', methods=['DELETE'])
+# @login_required
+def transactions_delete(userId, transactionId):
+    transaction = Transaction.query.where(Transaction.id == transactionId).first()
+    db.session.delete(transaction)
+    db.session.commit()
+    transactions = get_all_transactions(userId)
+    return {'transactions': [transaction.to_dict() for transaction in transactions]}
