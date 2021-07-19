@@ -10,11 +10,12 @@ function Watchlist() {
   const dispatch = useDispatch();
   const history = useHistory();
   let user = useSelector(state => state.session.user)
+  let watches = useSelector(state => state.watch.userWatches)
   let userId;
   if (user) {
     userId = user.id
   }
-  console.log(userId)
+
   // const [watch, getWatches] = useState('')
 
   // side effect to listen for
@@ -32,11 +33,14 @@ function Watchlist() {
   return (
     <div className='watchlist__container'>
       <h1>My Watchlist</h1>
-      <li>Stock-1</li><button>delete</button>
-      <li>Stock-2</li><button>delete</button>
-      <li>Stock-3</li><button>delete</button>
-      <li>Stock-4</li><button>delete</button>
-    </div>
+      <div className="testwatchlist">
+        {watches && watches.map((watch) => {
+          return (<p className='watchlist-link' key={watch.id}>{watch.symbol}</p>)
+
+          // < li className='watchlist-link' key={watch.id} > {watch}</li>
+        })}
+      </div>
+    </div >
   )
 }
 
