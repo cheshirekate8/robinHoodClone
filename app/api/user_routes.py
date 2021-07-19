@@ -1,10 +1,15 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import db, User, Watch, Transaction
+
 
 user_routes = Blueprint('users', __name__)
 
 
+# <<<<<<<<User Specific>>>>>>>>>
+
+
+# get all users
 @user_routes.route('/')
 @login_required
 def users():
@@ -12,8 +17,78 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
-@user_routes.route('/<int:id>')
+# get one user
+@user_routes.route('/<int:userId>')
 @login_required
-def user(id):
-    user = User.query.get(id)
+def user(userId):
+    user = User.query.get(userId)
     return user.to_dict()
+
+
+# update a user's balance
+@user_routes.route('/<int:userId>', methods=['PATCH'])
+@login_required
+def user_patch(userId):
+    data = request.get_json()
+    user = User.query.get(userId)
+    user.balance = data['balance']
+    db.session.commit()
+    return user.to_dict()
+
+
+# <<<<<<<<User Watches>>>>>>>>>
+
+
+def get_all_watches(userId):
+    return Watch.query.where(Watch.userId == userId).all()
+
+
+# Get all watches for a user
+@user_routes.route('/<int:userId>/watches')
+@login_required
+def watches(userId):
+    watches = get_all_watches(userId)
+    return {'watches': [watch.to_dict() for watch in watches]}
+
+
+# add a new stock to user's watchlist
+@user_routes.route('/<int:userId>/watches', methods=['POST'])
+@login_required
+def watches_post(userId):
+    data = request.get_json()
+    new_watch = Watch(userId=data['userId'], symbol=data['symbol'])
+    db.session.add(new_watch)
+    db.session.commit()
+    watches = get_all_watches(userId)
+    return {'watches': [watch.to_dict() for watch in watches]}
+
+
+# delete a stock from user's watchlist
+@user_routes.route('/<int:userId>/watches/<int:watchId>', methods=['DELETE'])
+@login_required
+def watches_delete(userId, watchId):
+    watch = Watch.query.where(Watch.id == watchId).first()
+    db.session.delete(watch)
+    db.session.commit()
+    watches = get_all_watches(userId)
+    return {'watches': [watch.to_dict() for watch in watches]}
+
+
+# <<<<<<<<User Transactions>>>>>>>>>
+
+
+# get all transaction history for a user
+@user_routes.route('/<int:userId>/transactions')
+@login_required
+def transactions(userId):
+    transactions = Transaction.query.where(Transaction.userId == userId).all()
+    return {'transactions': [transaction.to_dict() for transaction in transactions]}
+
+
+# post a new transaction for this user
+@user_routes.route('/<int:userId>/transactions', methods=['POST'])
+@login_required
+def transactions_post(userId):
+    pass
+
+
