@@ -6,32 +6,32 @@ import DemoLogin from './DemoLogin';
 
 const NavBar = () => {
   return (
-    <nav>
-      <ul >
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
+    <nav className='navbar-container'>
+      <ul>
+        <li className='navbar-link'>
+          <NavLink to='/home' exact={true} activeClassName='active'>
             Home
           </NavLink>
         </li>
-        <li>
+        <li className='navbar-link'>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
         </li>
-        <li>
+        <li className='navbar-link'>
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
         </li>
-        <li>
+        <li className='navbar-link'>
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
         </li>
-        <li>
+        <li className='navbar-link'>
           <DemoLogin />
         </li>
-        <li>
+        <li className='navbar-link'>
           <LogoutButton />
         </li>
       </ul>

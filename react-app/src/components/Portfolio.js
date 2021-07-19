@@ -7,6 +7,7 @@ function Portfolio() {
         <div className='app__body'>
             <div className='app__container'>
                 <Newsfeed />
+                <div className='watches-placeholder'></div>
             </div>
         </div>
     )
