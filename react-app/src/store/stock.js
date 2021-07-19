@@ -60,38 +60,39 @@ export const getStock = (symbol) => async (dispatch) => {
         }
     })
     if (response.ok && sparkRes.ok) {
-        const data = await response.json();
+        const stock = await response.json();
         const spark = await sparkRes.json();
-        if (data.errors || spark.errors) {
-            if(data.errors) {
-                return data.errors;
+        if (stock.errors || spark.errors) {
+            if(stock.errors) {
+                return stock.errors;
             }
             return spark.errors;
         }
-        // building my own stock object to show only relevant info needed.
-        const stock = {
-            symbol: data.price.symbol,
-            name: data.price.shortName,
-            price: data.price.regularMarketPrice,
-            fiftyTwoWeekChange: data.defaultKeyStatistics['52WeekChange'],
-            preMarketChange: data.price.preMarketChange,
-            preMarketChangePercent: data.price.preMarketChangePercent,
-            dayChange: data.price.regularMarketChange,
-            dayChangePercent: data.price.regularMarketChangePercent,
-            marketCap: data.price.marketCap,
-            averageVolume: data.price.averageVolume,
-            about: data.summaryProfile.longBusinessSummary,
-            employees: data.summaryProfile.fullTimeEmployees,
+        // building my own stock object to show only relevant info needed
+        // in the store.
+        const currentStock = {
+            symbol: stock.price.symbol,
+            name: stock.price.shortName,
+            price: stock.price.regularMarketPrice,
+            fiftyTwoWeekChange: stock.defaultKeyStatistics['52WeekChange'],
+            preMarketChange: stock.price.preMarketChange,
+            preMarketChangePercent: stock.price.preMarketChangePercent,
+            dayChange: stock.price.regularMarketChange,
+            dayChangePercent: stock.price.regularMarketChangePercent,
+            marketCap: stock.price.marketCap,
+            averageVolume: stock.price.averageVolume,
+            about: stock.summaryProfile.longBusinessSummary,
+            employees: stock.summaryProfile.fullTimeEmployees,
             headquarters: {
-                city: data.summaryProfile.city,
-                state: data.summaryProfile.state,
+                city: stock.summaryProfile.city, 
+                state: stock.summaryProfile.state,
             },
-            recommendations: data.recommendationTrend.trend,
-            earnings: data.earnings,
+            recommendations: stock.recommendationTrend.trend,
+            earnings: stock.earnings,
             // sparkline data is here
             spark: spark[`${symbol}`]
         }
-        dispatch(setStock(stock));
+        dispatch(setStock(currentStock));
     }
 }
 
