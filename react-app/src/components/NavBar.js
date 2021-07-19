@@ -29,10 +29,10 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li className='navbar-link'>
-          <DemoLogin />
+          <LogoutButton />
         </li>
         <li className='navbar-link'>
-          <LogoutButton />
+          <DemoLogin />
         </li>
       </ul>
     </nav>

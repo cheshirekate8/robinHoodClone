@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoggedInRoute from './components/auth/LoggedInRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import Watchlist from './components/Watchlist';
 import { authenticate } from './store/session';
 
 function App() {
