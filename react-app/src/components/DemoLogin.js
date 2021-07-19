@@ -8,6 +8,7 @@ function DemoLogin() {
     const [email, setEmail] = useState('demo@aa.io');
     const [password, setPassword] = useState('password');
     const dispatch = useDispatch();
+    const history = useHistory()
 
     const onLogin = async (e) => {
         e.preventDefault();
@@ -15,6 +16,7 @@ function DemoLogin() {
         if (data) {
             setErrors(data);
         }
+        history.push('/')
     };
 
     return (
