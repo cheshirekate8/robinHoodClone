@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 
 let months = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"]
@@ -16,6 +16,8 @@ function LineGraph() {
         ]
     };
 
+    
+
     const options = {
         plugins: {
             legend: {
@@ -27,16 +29,16 @@ function LineGraph() {
             intersect: false
         },
         scales: {
+            xAxes: {
+                ticks: {
+                    display: false
+                }
+            },
             yAxes: {
                 ticks: {
                     display: false
                 }
             },
-            xAxes: {
-                ticks: {
-                    display: false
-                }
-            }
         }
     };
 
