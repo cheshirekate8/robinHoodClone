@@ -90,5 +90,3 @@ def transactions(userId):
 @login_required
 def transactions_post(userId):
     pass
-
-
