@@ -6,10 +6,10 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoggedInRoute from './components/auth/LoggedInRoute';
+import LoggedOutRoute from './components/auth/LoggedOutRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
-import Watchlist from './components/Watchlist';
 import { authenticate } from './store/session';
 
 function App() {
@@ -46,9 +46,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/home' exact={true} >
+        <LoggedOutRoute path='/home' exact={true} >
           <Portfolio />
-        </ProtectedRoute>
+        </LoggedOutRoute>
         <Route path='/404'>
           <h1>Page Not Found</h1>
         </Route>
@@ -56,12 +56,6 @@ function App() {
           <Redirect to='/404' />
         </Route>
       </Switch>
-      {/* <Route path='/404'>
-        <h1>Page Not Found</h1>
-      </Route>
-      <Route path='*'>
-        <Redirect to='/404' />
-      </Route> */}
 
     </BrowserRouter>
   );

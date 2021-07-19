@@ -25,7 +25,7 @@ const setDailyMovers = (movers) => ({
 
 // ticker containing trending stocks
 export const getTicker = () => async (dispatch) => {
-    
+
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
         "method": "GET",
         "headers": {
@@ -84,6 +84,7 @@ export const getStock = (symbol) => async (dispatch) => {
             about: stock.summaryProfile.longBusinessSummary,
             employees: stock.summaryProfile.fullTimeEmployees,
             headquarters: {
+
                 city: stock.summaryProfile.city, 
                 state: stock.summaryProfile.state,
             },
