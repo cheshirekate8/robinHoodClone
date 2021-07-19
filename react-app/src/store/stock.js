@@ -23,7 +23,7 @@ const setDailyMovers = (movers) => ({
     payload: movers
 })
 
-
+// ticker containing trending stocks
 export const getTicker = () => async (dispatch) => {
     
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
@@ -43,6 +43,7 @@ export const getTicker = () => async (dispatch) => {
     }
 }
 
+// all info we need to populate stock information including sparkline
 export const getStock = (symbol) => async (dispatch) => {
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
@@ -92,6 +93,7 @@ export const getStock = (symbol) => async (dispatch) => {
     }
 }
 
+// Stocks with a lot of action today
 export const getDailyMovers = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
         "method": "GET",
