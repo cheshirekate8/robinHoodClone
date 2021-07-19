@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as watchlistActions from '../store/watchlist'
+import WatchlistGraph from './WatchlistGraph';
 import '../styles/watchlist.css'
 
 // need to add watches from db
@@ -35,10 +36,11 @@ function Watchlist() {
       <h1>My Watchlist</h1>
       <div className="testwatchlist">
         {watches && watches.map((watch) => {
-          return (<p className='watchlist-link' key={watch.id}>{watch.symbol}</p>)
-
-          // < li className='watchlist-link' key={watch.id} > {watch}</li>
+          return (
+            <p className='watchlist-link' key={watch.id}>{watch.symbol}</p>
+          )
         })}
+        <WatchlistGraph />
       </div>
     </div >
   )
