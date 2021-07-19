@@ -9,10 +9,22 @@ def seed_watches():
         userId=2, symbol='MSFT')
     three = Watch(
         userId=1, symbol='TSLA')
+    four = Watch(
+        userId=1, symbol='SNAP')
+    five = Watch(
+        userId=1, symbol='NFLX')
+    six = Watch(
+        userId=1, symbol='FB')
+    seven = Watch(
+        userId=1, symbol='AAPL')
 
     db.session.add(one)
     db.session.add(two)
     db.session.add(three)
+    db.session.add(four)
+    db.session.add(five)
+    db.session.add(six)
+    db.session.add(seven)
 
     db.session.commit()
 
