@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import '../styles/watchlist.css'
 
 function Watchlist() {
-
   
   return (
     <div className='watchlist__container'>
@@ -15,8 +14,5 @@ function Watchlist() {
     </div>
   )
 }
-
-
-
 
 export default Watchlist;
