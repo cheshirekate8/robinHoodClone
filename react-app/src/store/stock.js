@@ -1,5 +1,5 @@
 const SET_STOCK = 'session/SET_STOCK';
-const REMOVE_STOCK= 'session/REMOVE_STOCK';
+// const REMOVE_STOCK= 'session/REMOVE_STOCK';
 const SET_TICKER = 'session/SET_TICKER';
 const SET_MOVERS = 'session/SET_MOVERS';
 
@@ -8,10 +8,10 @@ const setStock = (stock) => ({
   payload: stock
 });
 
-const removeStock = (stock) => ({
-    type: REMOVE_STOCK,
-    payload: stock
-})
+// const removeStock = (stock) => ({
+//     type: REMOVE_STOCK,
+//     payload: stock
+// })
 
 const setTicker = (ticker) => ({
     type: SET_TICKER,
@@ -110,14 +110,14 @@ export const getDailyMovers = () => async (dispatch) => {
 }
 
 
-const initialState = { stock: null, ticker: null, dailyMovers: null};
+const initialState = { currentStock: null, ticker: null, dailyMovers: null};
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
       case SET_STOCK:
-        return { ...state, stock: action.payload }
-      case REMOVE_STOCK:
-        return { ...state, stock: null }
+        return { ...state, currentStock: action.payload }
+    //   case REMOVE_STOCK:
+    //     return { ...state, currentStock: null }
       case SET_TICKER:
           return { ...state, ticker: action.payload }
       case SET_MOVERS:
