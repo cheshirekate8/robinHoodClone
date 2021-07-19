@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../store/session';
 
@@ -14,16 +14,16 @@ function DemoLogin() {
         e.preventDefault();
         const data = await dispatch(login(email, password));
         if (data) {
-        setErrors(data);
+            setErrors(data);
         }
         history.push('/')
     };
 
     return (
         <form onSubmit={onLogin}>
-        <div>
-            <button type='submit'>Demo</button>
-        </div>
+            <div>
+                <button type='submit'>Demo</button>
+            </div>
         </form>
     );
 }

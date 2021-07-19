@@ -9,6 +9,7 @@ import LoggedInRoute from './components/auth/LoggedInRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
+import Watchlist from './components/Watchlist';
 import { authenticate } from './store/session';
 
 function App() {
@@ -48,6 +49,12 @@ function App() {
         <ProtectedRoute path='/home' exact={true} >
           <Portfolio />
         </ProtectedRoute>
+        <Route path='/404'>
+          <h1>Page Not Found</h1>
+        </Route>
+        <Route path='*'>
+          <Redirect to='/404' />
+        </Route>
       </Switch>
       {/* <Route path='/404'>
         <h1>Page Not Found</h1>
@@ -55,6 +62,7 @@ function App() {
       <Route path='*'>
         <Redirect to='/404' />
       </Route> */}
+
     </BrowserRouter>
   );
 }
