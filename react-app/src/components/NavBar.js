@@ -7,7 +7,7 @@ import DemoLogin from './DemoLogin';
 const NavBar = () => {
   return (
     <nav>
-      <ul>
+      <ul >
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
