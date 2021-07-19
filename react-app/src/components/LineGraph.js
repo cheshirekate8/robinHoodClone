@@ -1,35 +1,53 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
+let months = ["January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"]
+
 function LineGraph() {
-    const data = [
-        {
-            x: 10,
-            y: 20
+    const data = {
+        labels: months,
+        datasets: [
+            {
+                data: [10, 25, 45, 100, 250, 225, 400, 300, 350, 450, 500],
+                fill: false,
+                backgroundColor: '#00C807',
+                borderColor: '#00C807',
+            }
+        ]
+    };
+
+    
+
+    const options = {
+        plugins: {
+            legend: {
+                display: false
+            }
         },
-        {
-            x: 15,
-            y: 10
+        tooltips: {
+            mode: 'index',
+            intersect: false
         },
-        {
-            x: 20,
-            y: 15
+        scales: {
+            xAxes: {
+                ticks: {
+                    display: false
+                }
+            },
+            yAxes: {
+                ticks: {
+                    display: false
+                }
+            },
         }
-    ];
+    };
+
 
     return (
         <div className='linegraph'>
             <Line 
-                data={{
-                    datasets: [
-                        {
-                            type: 'line',
-                            data: data,
-                            backgroundColor: '#00C807',
-                            borderColor: '#00C807',
-                        }
-                    ]
-                }}
+                data={data}
+                options={options}
             />
         </div>
     )

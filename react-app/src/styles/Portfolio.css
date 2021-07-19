@@ -15,7 +15,6 @@
 }
 
 .newsfeed__container {
-    border: 1px solid orangered;
     background-color: black;
     flex: 0.7;
 }
