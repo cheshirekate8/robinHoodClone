@@ -1,0 +1,11 @@
+.form-container {
+  background: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 900px;
+}
+
+.signup-label {
+  margin: 5px;
+}

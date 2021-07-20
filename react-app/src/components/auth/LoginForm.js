@@ -34,7 +34,7 @@ const LoginForm = () => {
   return (
     <div className='login-container'>
       <div className='left-login'>
-        <h1>image will go here</h1>
+        <img src='https://lh3.googleusercontent.com/proxy/Po85iLQWalAqj0ibuXzO9ZeZQkFhlTKiy-i8C14qmDEOcwNPFvXEqWUufU7iJzrm_cPbyHOu0iB6M6o3wwyHIfX31HmloWHKsKEywOkrK5Xr6v1TDyfW1Fa2ErFY'></img>
       </div>
       <div className='right-login'>
         <form onSubmit={onLogin}>

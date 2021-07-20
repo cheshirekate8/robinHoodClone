@@ -2,8 +2,8 @@
   display: grid;
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
-  background-color: #AB2330;
-  height: 64px;
+  background-color: rgb(122, 22, 22);
+  height: 71px;
   padding-right: 2rem;
 }
 
