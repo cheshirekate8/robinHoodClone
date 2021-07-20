@@ -34,14 +34,18 @@ function Watchlist() {
   return (
     <div className='watchlist__container'>
       <h1>My Watchlist</h1>
-      <div className="testwatchlist">
-        {watches && watches.map((watch) => {
-          return (
-            <p className='watchlist-link' key={watch.id}>{watch.symbol}</p>
-          )
-        })}
-        <WatchlistGraph />
-      </div>
+      {/* displays symbol for each watch on user's watchlist */}
+      {watches && watches.map((watch) => {
+        return (
+          <div className="single-watch-container">
+            <li className='watchlist-link' key={watch.id}>{watch.symbol}</li>
+            {/* displays a graph for each watch on watchlist */}
+            <WatchlistGraph />
+            <p>Price</p>
+            <button>Delete</button>
+          </div>
+        )
+      })}
     </div >
   )
 }
