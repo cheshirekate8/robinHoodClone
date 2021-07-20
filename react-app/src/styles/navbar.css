@@ -1,13 +1,25 @@
 .navbar-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  background-color: coral;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: #AB2330;
   height: 64px;
   padding-right: 2rem;
 }
 
 .navbar-link {
-  display: inline;
+  display: inline-flex;
   margin-left: 1rem;
+}
+
+.rightNav {
+  grid-column: 3;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.centerNav {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
 }

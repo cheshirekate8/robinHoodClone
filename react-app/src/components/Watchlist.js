@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as watchlistActions from '../store/watchlist'
+import WatchlistGraph from './WatchlistGraph';
 import '../styles/watchlist.css'
 import socket from './websocket'
 
@@ -76,6 +77,7 @@ function Watchlist() {
   return (
     <div className='watchlist__container'>
       <h1>My Watchlist</h1>
+
       <div className="testwatchlist">
         {theWatches && theWatches.map((watch, i) => {
           return (
@@ -85,6 +87,7 @@ function Watchlist() {
           )
         })}
       </div>
+
     </div >
   )
 }
