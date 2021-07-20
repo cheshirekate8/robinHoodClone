@@ -7,9 +7,9 @@ class Stock(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(5), nullable=False)
-    name = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     about = db.Column(db.Text, nullable=False)
-    ceo = db.Column(db.String(30), nullable=False)
+    ceo = db.Column(db.String(50), nullable=False)
     employees = db.Column(db.Integer, nullable=False)
     headquarters = db.Column(db.String(100), nullable=False)
     founded = db.Column(db.Integer, nullable=False)
