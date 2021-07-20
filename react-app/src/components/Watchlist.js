@@ -16,7 +16,7 @@ function Watchlist() {
   if (user) {
     userId = user.id
   }
-  
+
   // Once the user has been grabbed from the store, 
   // update the watches store for that user.
   useEffect(() => {
@@ -53,7 +53,7 @@ function Watchlist() {
   // obj, sift thru the socket data and if one of the stocks in our
   // watches has had a change to its price, update the price in the store.
   useEffect(() => {
-    if (socketData && watches) {
+    if (socketData && socketData.data && watches) {
       socketData.data.forEach( stock => {
         // console.log(stock.s)
         if (watches[stock.s] && watches[stock.s].price !== stock.p) {
