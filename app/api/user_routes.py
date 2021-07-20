@@ -82,7 +82,7 @@ def get_all_transactions(userId):
 
 # get all transaction history for a user
 @user_routes.route('/<int:userId>/transactions')
-# @login_required
+@login_required
 def transactions(userId):
     transactions = get_all_transactions(userId)
     return {'transactions': [transaction.to_dict() for transaction in transactions]}
@@ -90,7 +90,7 @@ def transactions(userId):
 
 # post a new transaction for this user
 @user_routes.route('/<int:userId>/transactions', methods=['POST'])
-# @login_required
+@login_required
 def transactions_post(userId):
     data = request.get_json()
     new_transaction = Transaction(userId=data['userId'], symbol=data['symbol'], shares=data['shares'], time=datetime.datetime.now())
@@ -101,7 +101,7 @@ def transactions_post(userId):
 
 # delete a stock from user's transactions
 @user_routes.route('/<int:userId>/transactions/<int:transactionId>', methods=['DELETE'])
-# @login_required
+@login_required
 def transactions_delete(userId, transactionId):
     transaction = Transaction.query.where(Transaction.id == transactionId).first()
     db.session.delete(transaction)
