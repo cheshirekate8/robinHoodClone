@@ -18,9 +18,15 @@ const NavBar = () => {
         <div className='leftNav'>
           <li className='navbar-link'>
             <NavLink to='/home' exact={true} activeClassName='active'>
-              <img src={logo} height='64px' width='64px'/>
+              <img src={logo} height='64px' width='64px' />
             </NavLink>
           </li>
+        </div>
+        <div className='centerNav'>
+          <div className='search-bar'>
+            <input type='text' placeholder='Search' />
+            <button className='search-button'>Search</button>
+          </div>
         </div>
         <div className='rightNav'>
           <li className='navbar-link'>
@@ -40,7 +46,7 @@ const NavBar = () => {
         <div className='leftNav'>
           <li className='navbar-link'>
             <NavLink to='/' exact={true} activeClassName='active'>
-              <img src={logo} height='64px' width='64px'/>
+              <img src={logo} height='64px' width='64px' />
             </NavLink>
           </li>
         </div>
