@@ -16,6 +16,13 @@ function Watchlist() {
   if (user) {
     userId = user.id
   }
+  
+  // Once the user has been grabbed from the store, 
+  // update the watches store for that user.
+  useEffect(() => {
+    if (userId)
+      dispatch(watchlistActions.getWatches(userId))
+  }, [userId])
 
   // grab the data from the websocket and set 
   // to socketData slice of state.
@@ -58,12 +65,6 @@ function Watchlist() {
 }, [socketData])
 
 
-  // Once the user has been grabbed from the store, 
-  // update the watches store for that user.
-  useEffect(() => {
-    if (userId)
-      dispatch(watchlistActions.getWatches(userId))
-  }, [userId])
 
   // watches is an object with key value pairs of symbol: watchinfo
   // watches = {

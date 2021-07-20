@@ -25,7 +25,7 @@ const updatePrice = (symbol, price) => ({
 // })
 
 
-//
+// Get all watches for a user.
 export const getWatches = (userId) => async (dispatch) => {
 
   const response = await fetch(`/api/users/${userId}/watches`);
@@ -35,12 +35,6 @@ export const getWatches = (userId) => async (dispatch) => {
     if (data.errors) {
       return data.errors;
     }
-    // let detailedWatches = [];
-    // data.watches.forEach(async watch => {
-    //   let detailedWatch = await dispatch(getStock(watch.symbol, true));
-    //   detailedWatches.push(detailedWatch);
-    // })
-    // console.log('detailedWatches', detailedWatches);
     const watches = {};
     data.watches.forEach(watch => {
       watch.price = 0
@@ -51,6 +45,7 @@ export const getWatches = (userId) => async (dispatch) => {
   }
 }
 
+// Update the price for a single stock in the watchlist.
 export const updateWatchPrice = (symbol, price) => async(dispatch) => {
   dispatch(updatePrice(symbol, price))
 }
@@ -65,6 +60,7 @@ export default function reducer(state = initialState, action) {
     //   case REMOVE_STOCK:
     //     return { ...state, currentStock: null }
     case UPDATE_PRICE:
+      // set the price of the stock with the key of the symbol in the payload.
       state.userWatches[action.payload.symbol].price = action.payload.price
       return {...state};
     default:
