@@ -4,6 +4,7 @@ import LogoutButton from './auth/LogoutButton';
 import '../styles/navbar.css'
 import DemoLogin from './DemoLogin';
 import { useSelector } from 'react-redux';
+import logo from '../styles/images/logoIcon.png'
 
 
 const NavBar = () => {
@@ -17,7 +18,7 @@ const NavBar = () => {
         <div className='leftNav'>
           <li className='navbar-link'>
             <NavLink to='/home' exact={true} activeClassName='active'>
-              Home
+              <img src={logo} height='64px' width='64px'/>
             </NavLink>
           </li>
         </div>
@@ -39,7 +40,7 @@ const NavBar = () => {
         <div className='leftNav'>
           <li className='navbar-link'>
             <NavLink to='/' exact={true} activeClassName='active'>
-              Home
+              <img src={logo} height='64px' width='64px'/>
             </NavLink>
           </li>
         </div>
