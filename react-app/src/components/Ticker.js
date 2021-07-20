@@ -41,21 +41,21 @@ function Ticker() {
         },
     ]
 
-    useEffect(() => {
-        const ticker = document.getElementById('ticker')
-        const tickerScrollWidth = ticker?.scrollWidth
+    // useEffect(() => {
+    //     const ticker = document.getElementById('ticker')
+    //     const tickerScrollWidth = ticker?.scrollWidth
         
-        setInterval(() => {
-            if (ticker.scrollLeft !== tickerScrollWidth) {
-                ticker.scrollTo(ticker.scrollLeft + 1, 0)
-            }
-        }, 15)
+    //     setInterval(() => {
+    //         if (ticker.scrollLeft !== tickerScrollWidth) {
+    //             ticker.scrollTo(ticker.scrollLeft + 1, 0)
+    //         }
+    //     }, 15)
 
-    }, [])
+    // }, [])
     
         
         return (
-            <div className='ticker' id='ticker' scroll='auto'>
+            <marquee className='ticker' id='ticker' scroll='auto'>
                 {mockData.map(data => (
                     <span key={data.symbol}>
                         <p className='symbol'>{data.symbol}</p> 
@@ -77,7 +77,7 @@ function Ticker() {
                             }>{data.changePercent}</p>
                     </span>
                 ))}
-            </div>
+            </marquee>
         )
 
     
