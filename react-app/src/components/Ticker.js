@@ -5,6 +5,8 @@ import * as stockActions from '../store/stock';
 
 import '../styles/Ticker.css';
 
+const upArrow = <FontAwesomeIcon icon="fa-solid fa-caret-up" />
+const downArrow = <FontAwesomeIcon icon="fa-solid fa-caret-down" />
 
 
 
@@ -66,7 +68,7 @@ function Ticker() {
                         <p className='change-direction'
                             style={data.changeDirection === 'up'
                             ? {color:'chartreuse'} : {color:'red'}
-                        }>{data.changeDirection}</p>  
+                        }>{data.changeDirection === 'up' ? upArrow : ''}</p>  
                         <p className='change-amount'
                             style={data.changeDirection === 'up'
                             ? {color:'chartreuse'} : {color:'red'}
