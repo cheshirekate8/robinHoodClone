@@ -10,6 +10,7 @@
 
 .watchlist-link {
   color: white;
+  list-style: none;
 }
 
 .single-watch-container {

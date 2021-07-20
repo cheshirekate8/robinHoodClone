@@ -2,7 +2,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
-  background-color: coral;
+  background-color: #AB2330;
   height: 64px;
   padding-right: 2rem;
 }
@@ -16,4 +16,10 @@
   grid-column: 3;
   display: flex;
   justify-content: flex-end;
+}
+
+.centerNav {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
 }
