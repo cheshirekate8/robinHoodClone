@@ -271,3 +271,8 @@ def seed_stocks():
         headquarters="Burbank, California",
         founded="1923"
     )
+
+
+def undo_stocks():
+    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.commit()
