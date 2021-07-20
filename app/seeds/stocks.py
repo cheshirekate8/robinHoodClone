@@ -306,5 +306,5 @@ def seed_stocks():
     db.session.commit()
 
 def undo_stocks():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE stocks RESTART IDENTITY CASCADE;')
     db.session.commit()
