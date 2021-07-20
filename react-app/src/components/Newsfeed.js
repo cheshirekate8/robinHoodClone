@@ -16,7 +16,7 @@ function Newsfeed() {
                 <div className='newsfeed__chart'>
                     <LineGraph />
                 </div>
-                <div className='ticker-container'>
+                <div className='ticker__container'>
                     <Ticker/>
                 </div>
             </div>

@@ -11,8 +11,14 @@
 }
 
 .ticker > span {
+    white-space: nowrap;
     padding-right: 10px;
     color: chartreuse;
+    display: inline-block;
+}
+
+.ticker > span > p {
+    padding-right: 10px;
     display: inline-block;
 }
 
@@ -20,6 +26,17 @@
     display: none
 }
 
+.symbol {
+    color: white;
+}
+
+.change-direction {
+    color: chartreuse;
+}
+
+.price-traded {
+    
+}
 
 
 
