@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import '../styles/Newsfeed.css';
 import LineGraph from './LineGraph';
+import Ticker from './Ticker';
 
 function Newsfeed() {
     const user = useSelector(state => state.session.user)
@@ -14,6 +15,9 @@ function Newsfeed() {
                 </div>
                 <div className='newsfeed__chart'>
                     <LineGraph />
+                </div>
+                <div className='ticker__container'>
+                    <Ticker/>
                 </div>
             </div>
         </div>
