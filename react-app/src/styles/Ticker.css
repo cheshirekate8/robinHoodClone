@@ -1,0 +1,25 @@
+.ticker__container {
+    display: flex;
+    width: 100%
+}
+
+.ticker {
+    width: 300px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.ticker > span {
+    padding-right: 10px;
+    color: chartreuse;
+    display: inline-block;
+}
+
+.ticker::-webkit-scrollbar {
+    display: none
+}
+
+
+
+
