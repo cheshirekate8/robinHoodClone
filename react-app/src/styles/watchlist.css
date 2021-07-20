@@ -1,10 +1,19 @@
 .watchlist__container {
     flex: 0.3;
     color: white;
-    padding-left: 48px;
+    background-color: rgb(32, 29, 29);
+    height: 100%;
+    width: 500px;
+    padding-left: 2rem;
 }
 
 
 .watchlist-link {
   color: white;
+}
+
+.single-watch-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
