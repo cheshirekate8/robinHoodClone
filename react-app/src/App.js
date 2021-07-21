@@ -55,17 +55,14 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-
         <ProtectedRoute path='/search' exact={true}>
           <SearchBar />
         </ProtectedRoute>
         <ProtectedRoute path='/:symbol' >
           <AssetPage />
-        <LoggedOutRoute path='/home' exact={true} >
+        </ProtectedRoute>
+        <ProtectedRoute path='/home' exact={true} >
           <Portfolio />
-        </LoggedOutRoute>
-        {/* <ProtectedRoute path='/:symbol' >
-          <AssetPage />
         </ProtectedRoute>
         <Route path='/404'>
           <h1>Page Not Found</h1>
@@ -76,6 +73,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-} */}
+}
 
 export default App;

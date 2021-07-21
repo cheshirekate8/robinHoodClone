@@ -7,11 +7,12 @@ import * as stockActions from '../store/stock'
 
 function Portfolio() {
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         dispatch(stockActions.getTicker())
         dispatch(stockActions.getDailyMovers())
     })
+    
     return (
         <div className='app__body'>
             <div className='app__container'>
