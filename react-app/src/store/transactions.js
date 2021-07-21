@@ -1,3 +1,5 @@
+import * as sessionActions from './session';
+
 const GET_TRANSACTIONS = 'transactions/GET_TRANSACTIONS';
 
 
@@ -18,6 +20,35 @@ export const getTransactions = (userId) => async (dispatch) => {
         }
 
         dispatch(getAllTransactions(data));
+    }
+}
+
+export const postTransactions = (req) => async (dispatch) => {
+    const { userId, symbol, shares, total } = req
+    const time = new Date()
+    const response = await fetch(`/api/users/${userId}/transactions`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: {
+            userId, 
+            symbol, 
+            shares,
+            total,
+            time,
+        }
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        if (data.errors) {
+            return data.errors
+        }
+        dispatch(sessionActions.updateUser(userId, req.balance))
+        dispatch(getAllTransactions(data));
+
     }
 }
 
