@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import '../styles/navbar.css'
 import DemoLogin from './DemoLogin';
 import { useSelector } from 'react-redux';
-import logo from '../media/zorro_logo_RED.png'
+import logo from '../media/zorro_logo_RED.png';
+// import data from 'data_file';
 
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
-
+  const [searchTerm, setSearchTerm] = useState('')
   let sessionLinks;
 
   if (sessionUser) {
@@ -24,8 +25,19 @@ const NavBar = () => {
         </div>
         <div className='centerNav'>
           <div className='search-bar'>
-            <input type='text' placeholder='Search' />
-            <button className='search-button'>Search</button>
+            <input type='text' placeholder='Search...' className='search-input' onChange={event => { setSearchTerm(event.target.value) }} />
+            {/* {data.filter((val) => {
+              if (searchTerm == '') {
+                return val
+              } else if (val.symbol.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return val
+              }
+            }).map((val, symbol) => {
+              return <div className='search-stock' key={symbol}>
+                <p>{val.key}</p>
+              </div>
+            })} */}
+            {/* <button className='search-button'>Search</button> */}
           </div>
         </div>
         <div className='rightNav'>

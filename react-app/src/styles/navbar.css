@@ -25,6 +25,13 @@
   justify-content: center;
 }
 
+.search-input {
+  width: 300px;
+  height: 35px;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
 button {
   background: none!important;
   border: none;
