@@ -11,6 +11,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
 import { authenticate } from './store/session';
+import SplashPage from './components/SplashPage'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +33,7 @@ function App() {
       <NavBar />
       <Switch>
         <LoggedInRoute path='/' exact={true}>
-          <h1>Splash Page</h1>
+          <SplashPage />
         </LoggedInRoute>
         <Route path='/login' exact={true}>
           <LoginForm />
