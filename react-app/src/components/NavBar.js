@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import '../styles/navbar.css'
 import DemoLogin from './DemoLogin';
 import { useSelector } from 'react-redux';
-import logo from '../media/zorro_logo_RED.png'
+import logo from '../media/zorro_logo_RED.png';
+// import data from './MOCK_DATA.json';
 
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
-
+  // const [searchTerm, setSearchTerm] = useState('')
   let sessionLinks;
 
   if (sessionUser) {
@@ -23,12 +24,28 @@ const NavBar = () => {
           </li>
         </div>
         <div className='centerNav'>
-          <div className='search-bar'>
-            <input type='text' placeholder='Search' />
+          {/* <div className='search-bar'>
+            <input type='text' placeholder='Search...' className='search-input' onChange={event => { setSearchTerm(event.target.value) }} />
+            {data.filter((val) => {
+              if (searchTerm == '') {
+                return val
+              } else if (val.first_name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return val
+              }
+            }).map((val, key) => {
+              return <div className='search-stock' key={key}>
+                <p>{val.first_name}</p>
+              </div>
+            })}
             <button className='search-button'>Search</button>
-          </div>
+          </div> */}
         </div>
         <div className='rightNav'>
+          <li className='navbar-link'>
+            <NavLink to='/search' exact={true} activeClassName='active'>
+              Search
+            </NavLink>
+          </li>
           <li className='navbar-link'>
             <NavLink to='/users' exact={true} activeClassName='active'>
               Users

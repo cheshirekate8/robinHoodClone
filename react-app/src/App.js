@@ -10,7 +10,11 @@ import LoggedOutRoute from './components/auth/LoggedOutRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
+
+import SearchBar from './components/Search';
+
 import AssetPage from './components/AssetPage'
+
 import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
 import SplashPage from './components/SplashPage'
@@ -51,7 +55,14 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
+
+        <ProtectedRoute path='/search' exact={true}>
+          <SearchBar />
+        </ProtectedRoute>
+        <LoggedOutRoute path='/home' exact={true} >
+
         <ProtectedRoute path='/home' exact={true} >
+
           <Portfolio />
         </ProtectedRoute>
         {/* <ProtectedRoute path='/:symbol' >
