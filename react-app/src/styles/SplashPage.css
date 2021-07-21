@@ -1,4 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: black;
     color: white;
+    box-sizing: border-box;
+}
+
+.splashDiv {
+    box-sizing: border-box;
+    /* margin: 100px; */
+    position:relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 10rem 0 10rem;
+}
+
+.splashWords {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 1;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.splashTitle {
+    font-family: 'Trade Winds', sans-serif;
+    font-size: 5rem;
+    color: #C80815;
 }
