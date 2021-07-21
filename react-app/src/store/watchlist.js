@@ -4,8 +4,7 @@ import { getStock } from './stock'
 const SET_WATCH = 'watchlist/SET_WATCH';
 const UPDATE_PRICE = 'watchlist/UPDATE_PRICE';
 const ADD_WATCH = 'watchlist/ADD_WATCH';
-// const REMOVE_STOCK= 'session/REMOVE_STOCK';
-
+const REMOVE_WATCH = 'watchlist/REMOVE_WATCH';
 
 const setWatch = (watch) => ({
   type: SET_WATCH,
@@ -26,10 +25,10 @@ const addOneWatch = (watch) => ({
 })
 
 
-// const removeStock = (stock) => ({
-//     type: REMOVE_STOCK,
-//     payload: stock
-// })
+const removeOneWatch = (watch) => ({
+    type: REMOVE_WATCH,
+    payload: watch
+})
 
 
 // Get all watches for a user.
@@ -99,6 +98,29 @@ export const addWatch = (userId, stockId, watch) => async(dispatch) => {
   }
 }
 
+export const removeWatch = (userId, watchId) => async(dispatch) => {
+  const response = await fetch(`/api/users/${userId}/watches`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId,
+      watchId
+    })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if(data.errors) {
+      return data.errors;
+    }
+
+    dispatch(removeOneWatch(data.watchId))
+  }
+}
+
 
 const initialState = { userWatches: null };
 
@@ -108,8 +130,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, userWatches: action.payload }
     case ADD_WATCH:
       return {...state, userWatches: action.payload}
-    //   case REMOVE_STOCK:
-    //     return { ...state, currentStock: null }
+    case REMOVE_WATCH:
+      return { ...state}
     case UPDATE_PRICE:
       // set the price of the stock with the key of the symbol in the payload.
       state.userWatches[action.payload.symbol].price = action.payload.price
