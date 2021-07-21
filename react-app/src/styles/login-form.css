@@ -9,13 +9,18 @@
   grid-column: 1;
   display: flex;
   justify-content: center;
-  background-color: rgb(122, 22, 22);
+  align-items: center;
+  height: 1000px;
+  flex-grow: 1;
+
+  /* background-color: rgb(122, 22, 22); */
 }
 
 .right-login {
   grid-column: 2;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   background: grey;
   padding-left: 2rem;
 }
