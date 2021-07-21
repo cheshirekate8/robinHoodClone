@@ -10,6 +10,7 @@ import LoggedOutRoute from './components/auth/LoggedOutRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
+import SearchBar from './components/Search';
 import { authenticate } from './store/session';
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/search' exact={true}>
+          <SearchBar />
         </ProtectedRoute>
         <LoggedOutRoute path='/home' exact={true} >
           <Portfolio />
