@@ -6,12 +6,14 @@ import App from './App';
 import configureStore from './store';
 import * as stockActions from './store/stock';
 import * as watchActions from './store/watchlist';
+import * as transActions from './store/transactions';
 
 const store = configureStore();
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   window.stockActions = stockActions;
   window.watchActions = watchActions;
+  window.transActions = transActions;
 }
 
 ReactDOM.render(

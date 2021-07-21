@@ -102,11 +102,8 @@ export const removeWatch = (userId, watchId) => async(dispatch) => {
   const response = await fetch(`/api/users/${userId}/watches/${watchId}`, {method: "DELETE"})
   if (response.ok) {
     const data = response.json()
-    console.log(data)
   }
-
-    dispatch(removeOneWatch(watchId))
-  
+    dispatch(removeOneWatch(watchId))  
 }
 
 
