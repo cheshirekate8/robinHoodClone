@@ -2,7 +2,8 @@
   display: grid;
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
-  background-color: rgb(122, 22, 22);
+  background-color: #202125;
+  border-bottom: 1px solid #7f848b;
   height: 71px;
   padding-right: 2rem;
 }
@@ -23,3 +24,18 @@
   display: flex;
   justify-content: center;
 }
+
+button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  cursor: pointer;
+}
+
+button, a {
+  color: white;
+  text-decoration: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+
+ }

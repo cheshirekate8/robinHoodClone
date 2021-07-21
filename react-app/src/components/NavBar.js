@@ -4,7 +4,7 @@ import LogoutButton from './auth/LogoutButton';
 import '../styles/navbar.css'
 import DemoLogin from './DemoLogin';
 import { useSelector } from 'react-redux';
-import logo from '../styles/images/logoIcon.png'
+import logo from '../media/zorro_logo_RED.png'
 
 
 const NavBar = () => {
@@ -57,7 +57,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li className='navbar-link'>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
+            <NavLink to='/sign-up' exact={true} activeClassName='active' className='button'>
               Sign Up
             </NavLink>
           </li>
