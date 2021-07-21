@@ -57,7 +57,7 @@ def watches(userId):
 @login_required
 def watches_post(userId):
     data = request.get_json()
-    new_watch = Watch(userId=data['userId'], symbol=data['symbol'])
+    new_watch = Watch(userId=data['userId'], stockId=data['stockId'], symbol=data['watch'])
     db.session.add(new_watch)
     db.session.commit()
     watches = get_all_watches(userId)

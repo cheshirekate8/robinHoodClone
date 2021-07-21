@@ -83,7 +83,7 @@ function Watchlist() {
         {theWatches?.map((watch) => {
           return (
           <>
-            <p className='watchlist-link' key={watch.id}>{watch.symbol}, {watch.price}</p>
+            <p className='watchlist-link' key={watch.stockId}>{watch.symbol}, {watch.price}</p>
           </>
           )
         })}
