@@ -38,6 +38,23 @@ socket.addEventListener('open', function (event) {
     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'FB'}))
 });
 
+// socket data comes back in this format
+  // its an object, and socket.data is an array of objects.
+  // {
+  //   "data": [{
+  //   "c":["1","8"],
+  //   "p":280.09,
+  //   "s":"MSFT",
+  //   "t":1626805040397,
+  //   "v":100
+  // },{
+  //   "c":["12"],
+  //   "p":280.09,
+  //   "s":"MSFT",
+  //   "t":1626805040411,
+  //   "v":14
+  // }],"type":"trade"}
+
 // Listen for messages
 // socket.onmessage = function(event) {
 //     console.debug("WebSocket message received:", event);

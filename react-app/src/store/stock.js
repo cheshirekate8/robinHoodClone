@@ -53,7 +53,7 @@ export const getTicker = () => async (dispatch) => {
 
 // all info we need to populate stock information including sparkline - should get called once when the asset page loads.
 export const getStock = (symbol) => async (dispatch) => {
-
+    console.log('symbol in store', symbol)
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {

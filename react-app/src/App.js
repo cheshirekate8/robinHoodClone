@@ -10,6 +10,7 @@ import LoggedOutRoute from './components/auth/LoggedOutRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
+import AssetPage from './components/AssetPage'
 import { authenticate } from './store/session';
 
 function App() {
@@ -46,9 +47,12 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <LoggedOutRoute path='/home' exact={true} >
+        <ProtectedRoute path='/home' exact={true} >
           <Portfolio />
-        </LoggedOutRoute>
+        </ProtectedRoute>
+        <ProtectedRoute path='/:symbol' >
+          <AssetPage />
+        </ProtectedRoute>
         <Route path='/404'>
           <h1>Page Not Found</h1>
         </Route>
