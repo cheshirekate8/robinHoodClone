@@ -6,6 +6,8 @@
   border-bottom: 1px solid #7f848b;
   height: 71px;
   padding-right: 2rem;
+  position:relative;
+  z-index: 1;
 }
 
 .navbar-link {

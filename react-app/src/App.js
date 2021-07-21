@@ -13,6 +13,8 @@ import Portfolio from './components/Portfolio';
 import AssetPage from './components/AssetPage'
 import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
+import SplashPage from './components/SplashPage'
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,7 +37,7 @@ function App() {
       <NavBar />
       <Switch>
         <LoggedInRoute path='/' exact={true}>
-          <h1>Splash Page</h1>
+          <SplashPage />
         </LoggedInRoute>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -52,9 +54,9 @@ function App() {
         <ProtectedRoute path='/home' exact={true} >
           <Portfolio />
         </ProtectedRoute>
-        <ProtectedRoute path='/:symbol' >
+        {/* <ProtectedRoute path='/:symbol' >
           <AssetPage />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <Route path='/404'>
           <h1>Page Not Found</h1>
         </Route>
