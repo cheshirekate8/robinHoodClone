@@ -4,6 +4,7 @@ const UPDATE_SPARK = 'stock/UPDATE_SPARK'
 const SET_TICKER = 'stock/SET_TICKER';
 const SET_MOVERS = 'stock/SET_MOVERS';
 const GET_STOCKS = 'stock/GET_STOCKS';
+const UPDATE_PRICE = 'stock/UPDATE_PRICE'
 
 
 const setStock = (stock) => ({
@@ -35,6 +36,11 @@ const setDailyMovers = (movers) => ({
     type: SET_MOVERS,
     payload: movers
 })
+
+const updatePrice = (price) => ({
+    type: UPDATE_PRICE,
+    payload: price
+  });
 
 
 
@@ -83,6 +89,11 @@ export const getStock = (symbol) => async (dispatch) => {
             }
             return spark.errors;
         }
+        
+        const sparkPrices = spark[`${symbol}`].close.map((num) => {
+            return num.toFixed(2)
+        })
+
         // building my own stock object to show only relevant info needed
         // in the store.
         const currentStock = {
@@ -95,7 +106,7 @@ export const getStock = (symbol) => async (dispatch) => {
             recommendations: stock.recommendationTrend.trend,
             earnings: stock.earnings,
             // sparkline data is here
-            spark: spark[`${symbol}`]
+            spark: sparkPrices
         }
         // if(isWatch === true) {
         //     return currentStock;
@@ -154,6 +165,10 @@ export const addAllStocks = () => async (dispatch) => {
     }
 }
 
+export const updateStockPrice = (price) => async (dispatch) => {
+    dispatch(updatePrice(price))
+}
+
 
 const initialState = { allStocks: null, currentStock: null, ticker: null, dailyMovers: null};
 
@@ -171,6 +186,9 @@ export default function reducer(state = initialState, action) {
           return { ...state, dailyMovers: action.payload }
       case UPDATE_SPARK:
           state.currentStock.spark = action.payload
+          return { ...state }
+      case UPDATE_PRICE:
+          state.currentStock.price = action.payload
           return { ...state }
       default:
         return state;
