@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import '../styles/Search.css'
 
 
 function SearchBar() {
@@ -7,8 +8,8 @@ function SearchBar() {
   const data = useSelector(state => state.stock.allStocks.stocks)
 
   return (
-    <div className='search-bar'>
-      <input type='text' placeholder='Search...' className='search-input' onChange={event => { setSearchTerm(event.target.value) }} />
+    <div className='search-container'>
+      <input type='text' placeholder='Search' className='search-input' onChange={event => { setSearchTerm(event.target.value) }} />
       {data.filter((val) => {
         if (searchTerm == '') {
           return val
@@ -17,9 +18,9 @@ function SearchBar() {
         }
       }).map((val, key) => {
         return <div className='search-stock' key={key}>
-          <ul>
-            <li>{val.name}</li>
-            <li>{val.symbol}</li>
+          <ul className='search-item-container'>
+            <li className='search-link'>{val.name} ({val.symbol})</li>
+            {/* <li className='search-link'>{(val.symbol)}</li> */}
           </ul>
         </div>
       })}
