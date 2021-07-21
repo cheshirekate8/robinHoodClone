@@ -23,14 +23,18 @@ export const getTransactions = (userId) => async (dispatch) => {
     }
 }
 
+
 export const postTransactions = ({userId, symbol, shares, total, balance}) => async (dispatch) => {
        
+
     const response = await fetch(`/api/users/${userId}/transactions`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
+
         body: JSON.stringify({symbol, total, shares})
+
     });
 
     if (response.ok) {

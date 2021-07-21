@@ -8,7 +8,8 @@ def seed_stocks():
         ceo="Michael F. Roman",
         employees="94987",
         headquarters="St. Paul, Minnesota",
-        founded="1902"
+        founded="1902",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/1/15/3M_wordmark.svg"
     )
     two = Stock(
         symbol="AXP",
@@ -17,7 +18,8 @@ def seed_stocks():
         ceo="Stephen J. Squeri",
         employees="63700",
         headquarters="New York, New York",
-        founded="1850"
+        founded="1850",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png"
     )
     three = Stock(
         symbol="AMGN",
@@ -26,7 +28,8 @@ def seed_stocks():
         ceo="Robert A. Bradway",
         employees="24300",
         headquarters="Thousand Oaks, California",
-        founded="1980"
+        founded="1980",
+        imgUrl="https://americanbonehealth.org/wp-content/uploads/2016/08/Amgen-logo.png"
     )
     four = Stock(
         symbol="AAPL",
@@ -35,7 +38,8 @@ def seed_stocks():
         ceo="Timothy Donald Cook",
         employees="147000",
         headquarters="Cupertino, California",
-        founded="1976"
+        founded="1976",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/842px-Apple_logo_black.svg.png"
     )
     five = Stock(
         symbol="BA",
@@ -44,7 +48,8 @@ def seed_stocks():
         ceo="David L. Calhoun",
         employees="141000",
         headquarters="Chicago, Illinois",
-        founded="1916"
+        founded="1916",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Boeing_full_logo.svg/2560px-Boeing_full_logo.svg.png"
     )
     six = Stock(
         symbol="CAT",
@@ -53,7 +58,8 @@ def seed_stocks():
         ceo="Donald James Umpleby",
         employees="97300",
         headquarters="Deerfield, Illinois",
-        founded="1925"
+        founded="1925",
+        imgUrl="https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ACaterpillar-shortened.svg&psig=AOvVaw2jh7QCM4VWuSNe4rDtsJPh&ust=1626885806902000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCODXn4eM8vECFQAAAAAdAAAAABAD"
     )
     seven = Stock(
         symbol="CVX",
@@ -62,7 +68,8 @@ def seed_stocks():
         ceo="Michael K. Wirth",
         employees="47736",
         headquarters="San Ramon, California",
-        founded="1906"
+        founded="1906",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Chevron_Logo.svg/1200px-Chevron_Logo.svg.png"
     )
     eight = Stock(
         symbol="CSCO",
@@ -71,7 +78,8 @@ def seed_stocks():
         ceo="Charles H. Robbins",
         employees="77500",
         headquarters="San Jose, California",
-        founded="1984"
+        founded="1984",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png"
     )
     nine = Stock(
         symbol="KO",
@@ -80,7 +88,8 @@ def seed_stocks():
         ceo="James Quincey",
         employees="80300",
         headquarters="Atlanta, Georgia",
-        founded="1886"
+        founded="1886",
+        imgUrl="https://www.coca-cola.com/content/dam/brands/tw/coca-cola/image/coke-logo.png"
     )
     ten = Stock(
         symbol="DOW",
@@ -89,7 +98,8 @@ def seed_stocks():
         ceo="James R. Fitterling",
         employees="35700",
         headquarters="Midland, Michigan",
-        founded="1897"
+        founded="1897",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Dow_Chemical_Company_logo.svg/1200px-Dow_Chemical_Company_logo.svg.png"
     )
     eleven = Stock(
         symbol="GS",
@@ -98,7 +108,8 @@ def seed_stocks():
         ceo="David Michael Solomon",
         employees="40500",
         headquarters="New York, New York",
-        founded="1869"
+        founded="1869",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Goldman_Sachs.svg/2048px-Goldman_Sachs.svg.png"
     )
     twelve = Stock(
         symbol="HD",
@@ -107,7 +118,8 @@ def seed_stocks():
         ceo="Craig A. Menear",
         employees="504800",
         headquarters="Atlanta, Georgia",
-        founded="1978"
+        founded="1978",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/TheHomeDepot.svg/1200px-TheHomeDepot.svg.png"
     )
     thirteen = Stock(
         symbol="HON",
@@ -116,7 +128,8 @@ def seed_stocks():
         ceo="Darius Adamczyk",
         employees="103000",
         headquarters="Charlotte, North Carolina",
-        founded="1906"
+        founded="1906",
+        imgUrl="https://pbs.twimg.com/profile_images/746373313698603008/pxHBeDZv.jpg"
     )
     fourteen = Stock(
         symbol="IBM",
@@ -125,7 +138,8 @@ def seed_stocks():
         ceo="Arvind Krishna",
         employees="375300",
         headquarters="Armonk, New York",
-        founded="1911"
+        founded="1911",
+        imgUrl="https://www.graphis.com/media/uploads/cache/e4/08/e408c55f7cc2a638e44e2343460ff5ce.jpg"
     )
     fifteen = Stock(
         symbol="INTC",
@@ -134,7 +148,8 @@ def seed_stocks():
         ceo="Patrick P. Gelsinger",
         employees="110600",
         headquarters="Santa Clara, California",
-        founded="1968"
+        founded="1968",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Intel_logo_%282006-2020%29.svg/1005px-Intel_logo_%282006-2020%29.svg.png"
     )
     sixteen = Stock(
         symbol="JNJ",
@@ -143,7 +158,8 @@ def seed_stocks():
         ceo="Alex Gorsky",
         employees="134500",
         headquarters="New Brunswick, New Jersey",
-        founded="1887"
+        founded="1887",
+        imgUrl="https://jnj-content-lab.brightspotcdn.com/dims4/default/d2f0c92/2147483647/strip/true/crop/1582x732+0+147/resize/1440x666!/quality/90/?url=http%3A%2F%2Fjnj-brightspot.s3.amazonaws.com%2F56%2F24%2F4ff7ecca4df6abb4559038a3ea89%2Flede-agletter-06.02.20.png"
     )
     seventeen = Stock(
         symbol="JPM",
@@ -152,7 +168,8 @@ def seed_stocks():
         ceo="James Dimon",
         employees="255351",
         headquarters="New York, New York",
-        founded="1968"
+        founded="1968",
+        imgUrl="https://static.jopwell.com/pro/Ydv4202e1b2c102f0df8b50f695b5a861/JPMC-C0_stacked_400x400.jpg"
     )
     eighteen = Stock(
         symbol="MCD",
@@ -161,7 +178,8 @@ def seed_stocks():
         ceo="Christopher J. Kempczinski",
         employees="200000",
         headquarters="Chicago, Illinois",
-        founded="1955"
+        founded="1955",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/McDonald%27s_logo.svg/220px-McDonald%27s_logo.svg.png"
     )
     nineteen = Stock(
         symbol="MRK",
@@ -170,7 +188,8 @@ def seed_stocks():
         ceo="Robert M. Davis",
         employees="74000",
         headquarters="Kenilworth, New Jersey",
-        founded="1891"
+        founded="1891",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Merck_%26_Co.svg/1280px-Merck_%26_Co.svg.png"
     )
     twenty = Stock(
         symbol="MSFT",
@@ -179,7 +198,8 @@ def seed_stocks():
         ceo="Satya Nadella",
         employees="163000",
         headquarters="Redmond, Washington",
-        founded="1975"
+        founded="1975",
+        imgUrl="https://e7.pngegg.com/pngimages/757/1023/png-clipart-microsoft-corporation-microsoft-software-assurance-client-access-license-logo-product-windows-8-1-text-rectangle.png"
     )
     twentyone = Stock(
         symbol="NKE",
@@ -188,7 +208,8 @@ def seed_stocks():
         ceo="John J. Donahoe",
         employees="75400",
         headquarters="Beaverton, Oregon",
-        founded="1964"
+        founded="1964",
+        imgUrl="https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo-1978.jpg"
     )
     twentytwo = Stock(
         symbol="PG",
@@ -197,7 +218,8 @@ def seed_stocks():
         ceo="David S. Taylor",
         employees="99000",
         headquarters="Cincinnati, Ohio",
-        founded="1837"
+        founded="1837",
+        imgUrl="https://images.ctfassets.net/oggad6svuzkv/4JSezOuLv9CCXfHEBpfGxp/528d1ca0496e3401cd60467235b6441f/P_G_Logo_RGB.png"
     )
     twentythree = Stock(
         symbol="CRM",
@@ -206,7 +228,8 @@ def seed_stocks():
         ceo="Marc Russell Benioff",
         employees="56606",
         headquarters="San Francisco, California",
-        founded="1999"
+        founded="1999",
+        imgUrl="data:image/png;base64,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"
     )
     twentyfour = Stock(
         symbol="TRV",
@@ -215,7 +238,8 @@ def seed_stocks():
         ceo="Alan D. Schnitzer",
         employees="30600",
         headquarters="New York, New York",
-        founded="1853"
+        founded="1853",
+        imgUrl="https://paperless-insurance.com/personal/wp-content/uploads/2020/04/travelers-logo.jpg"
     )
     twentyfive = Stock(
         symbol="UNH",
@@ -224,7 +248,8 @@ def seed_stocks():
         ceo="Sir Andrew Philip Witty",
         employees="330000",
         headquarters="Minnetonka, Minnesota",
-        founded="1977"
+        founded="1977",
+        imgUrl="https://media-thumbs.golden.com/d1DUqmZT5w2lb_Z53RBAohcytLY=/200x200/smart/golden-storage-production.s3.amazonaws.com%2Ftopic_images%2F5a5e758e33d94329a174cca085d74c43.png"
     )
     twentysix = Stock(
         symbol="VZ",
@@ -233,7 +258,8 @@ def seed_stocks():
         ceo="Hans Erik Vestberg",
         employees="132200",
         headquarters="New York, New York",
-        founded="1983"
+        founded="1983",
+        imgUrl="data:image/png;base64,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"
     )
     twentyseven = Stock(
         symbol="V",
@@ -242,7 +268,8 @@ def seed_stocks():
         ceo="Alfred F. Kelly",
         employees="20500",
         headquarters="San Francisco, California",
-        founded="1958"
+        founded="1958",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png"
     )
     twentyeight = Stock(
         symbol="WMT",
@@ -251,7 +278,8 @@ def seed_stocks():
         ceo="C. Douglas McMillon",
         employees="2300000",
         headquarters="Bentonville, Arkansas",
-        founded="1945"
+        founded="1945",
+        imgUrl="data:image/jpeg;base64,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"
     )
     twentynine = Stock(
         symbol="WBA",
@@ -260,7 +288,8 @@ def seed_stocks():
         ceo="Rosalind Gates Brewer",
         employees="331000",
         headquarters="Deerfield, Illinois",
-        founded="1901"
+        founded="1901",
+        imgUrl="https://media-exp1.licdn.com/dms/image/C4D0BAQFHfJyWYriokw/company-logo_200_200/0/1625137193933?e=2159024400&v=beta&t=tQ_eqgA-8PnMaHlFILwObEKBsOS8acSC_3awP47AtRs"
     )
     thirty = Stock(
         symbol="DIS",
@@ -269,7 +298,8 @@ def seed_stocks():
         ceo="Robert A. Chapek",
         employees="203000",
         headquarters="Burbank, California",
-        founded="1923"
+        founded="1923",
+        imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/The_WaltDisney_Company-Logo.svg/1280px-The_WaltDisney_Company-Logo.svg.png"
     )
 
     db.session.add(one)

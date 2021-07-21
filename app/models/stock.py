@@ -11,6 +11,7 @@ class Stock(db.Model):
     employees = db.Column(db.Integer, nullable=False)
     headquarters = db.Column(db.String(100), nullable=False)
     founded = db.Column(db.Integer, nullable=False)
+    imgUrl = db.Column(db.String, nullable=False)
 
 
 
@@ -23,5 +24,6 @@ class Stock(db.Model):
             'ceo': self.ceo,
             'employees': self.employees,
             'headquarters': self.headquarters,
-            'founded': self.founded
+            'founded': self.founded,
+            'imgUrl': self.imgUrl
         }

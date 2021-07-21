@@ -10,7 +10,11 @@ import LoggedOutRoute from './components/auth/LoggedOutRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
+
+import SearchBar from './components/Search';
+
 import AssetPage from './components/AssetPage'
+
 import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
 import SplashPage from './components/SplashPage'
@@ -51,12 +55,18 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/home' exact={true} >
-          <Portfolio />
+
+        <ProtectedRoute path='/search' exact={true}>
+          <SearchBar />
         </ProtectedRoute>
+        <ProtectedRoute path='/:symbol' >
+          <AssetPage />
+        <LoggedOutRoute path='/home' exact={true} >
+          <Portfolio />
+        </LoggedOutRoute>
         {/* <ProtectedRoute path='/:symbol' >
           <AssetPage />
-        </ProtectedRoute> */}
+        </ProtectedRoute>
         <Route path='/404'>
           <h1>Page Not Found</h1>
         </Route>
@@ -64,9 +74,8 @@ function App() {
           <Redirect to='/404' />
         </Route>
       </Switch>
-
     </BrowserRouter>
   );
-}
+} */}
 
 export default App;
