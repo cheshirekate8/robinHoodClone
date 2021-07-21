@@ -19,6 +19,8 @@ function SearchBar() {
       }).map((val, key) => {
         return <div className='search-stock' key={key}>
           <ul className='search-item-container'>
+            <img src={val.imgUrl} style={{ width: 40, height: 40, marginRight: 10, backgroundColor: 'white' }}
+            />
             <li className='search-link'>{val.name} ({val.symbol})</li>
             {/* <li className='search-link'>{(val.symbol)}</li> */}
           </ul>
