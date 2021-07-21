@@ -23,9 +23,9 @@ export const getTransactions = (userId) => async (dispatch) => {
     }
 }
 
-export const postTransactions = (req) => async (dispatch) => {
-    const { userId, symbol, shares, total } = req
-    const time = new Date()
+export const postTransactions = (userId, req) => async (dispatch) => {
+    const { symbol, shares, total } = req
+    console.log(req)
     const response = await fetch(`/api/users/${userId}/transactions`, {
         method: 'POST',
         headers: {
@@ -36,7 +36,6 @@ export const postTransactions = (req) => async (dispatch) => {
             symbol, 
             shares,
             total,
-            time,
         }
     });
 

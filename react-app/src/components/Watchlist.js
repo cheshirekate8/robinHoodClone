@@ -67,7 +67,7 @@ function Watchlist() {
           return (
           <>
             <p className='watchlist-link' key={watch.stockId}>
-            <Link className='symbol-link' to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
+            <Link className='symbol-link' key={watch.symbol} to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
           </>
           )
         })}

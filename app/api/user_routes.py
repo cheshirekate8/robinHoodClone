@@ -93,7 +93,7 @@ def transactions(userId):
 @login_required
 def transactions_post(userId):
     data = request.get_json()
-    new_transaction = Transaction(userId=data['userId'], symbol=data['symbol'], shares=data['shares'], time=datetime.datetime.now())
+    new_transaction = Transaction(userId=data['userId'], symbol=data['symbol'], shares=data['shares'], total=data['total'], time=datetime.datetime.now())
     db.session.add(new_transaction)
     db.session.commit()
     transactions = get_all_transactions(userId)

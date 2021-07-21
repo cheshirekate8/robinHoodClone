@@ -5,7 +5,8 @@ import LineGraph from './LineGraph';
 import Ticker from './Ticker';
 
 function Newsfeed() {
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user);
+    // const tickerData = useSelector(state =>)
     return (
         <div className='newsfeed__container'>
             <div className='newsfeed__chartSection'>

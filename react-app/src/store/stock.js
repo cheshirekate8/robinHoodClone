@@ -50,7 +50,7 @@ export const getTicker = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
+            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -69,14 +69,14 @@ export const getStock = (symbol) => async (dispatch) => {
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
+            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=5m&range=1d`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
+            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -120,7 +120,7 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=${int}&range=${range}`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
+            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -138,7 +138,7 @@ export const getDailyMovers = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
+            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })

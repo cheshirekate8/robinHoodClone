@@ -54,9 +54,9 @@ function App() {
         <ProtectedRoute path='/home' exact={true} >
           <Portfolio />
         </ProtectedRoute>
-        {/* <ProtectedRoute path='/:symbol' >
+        <ProtectedRoute path='/:symbol' >
           <AssetPage />
-        </ProtectedRoute> */}
+        </ProtectedRoute>
         <Route path='/404'>
           <h1>Page Not Found</h1>
         </Route>
