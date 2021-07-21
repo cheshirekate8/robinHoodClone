@@ -23,21 +23,14 @@ export const getTransactions = (userId) => async (dispatch) => {
     }
 }
 
-export const postTransactions = (req) => async (dispatch) => {
-    const { userId, symbol, shares, total } = req
-    const time = new Date()
+export const postTransactions = ({userId, symbol, shares, total, balance}) => async (dispatch) => {
+       
     const response = await fetch(`/api/users/${userId}/transactions`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: {
-            userId, 
-            symbol, 
-            shares,
-            total,
-            time,
-        }
+        body: JSON.stringify({symbol, total, shares})
     });
 
     if (response.ok) {
@@ -46,11 +39,15 @@ export const postTransactions = (req) => async (dispatch) => {
         if (data.errors) {
             return data.errors
         }
-        dispatch(sessionActions.updateUser(userId, req.balance))
+
+        const newBalance = balance - total;
+        dispatch(sessionActions.updateUser(userId, newBalance))
         dispatch(getAllTransactions(data));
 
     }
 }
+
+
 
 const initialState = [];
 
@@ -62,3 +59,13 @@ export default function reducer(state = initialState, action) {
             return state;
     }
 }
+
+// const req = {
+//     userId: 1,
+//     symbol: "AAPL",
+//     shares: 1,
+//     total: 389.46,
+//     balance: 10000   
+// }
+
+// window.store.dispatch(window.transActions.postTransactions(req));
