@@ -99,26 +99,14 @@ export const addWatch = (userId, stockId, watch) => async(dispatch) => {
 }
 
 export const removeWatch = (userId, watchId) => async(dispatch) => {
-  const response = await fetch(`/api/users/${userId}/watches`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      userId,
-      watchId
-    })
-  });
-
+  const response = await fetch(`/api/users/${userId}/watches/${watchId}`, {method: "DELETE"})
   if (response.ok) {
-    const data = await response.json();
-
-    if(data.errors) {
-      return data.errors;
-    }
-
-    dispatch(removeOneWatch(data.watchId))
+    const data = response.json()
+    console.log(data)
   }
+
+    dispatch(removeOneWatch(watchId))
+  
 }
 
 
