@@ -31,8 +31,9 @@ def user(userId):
 @login_required
 def user_patch(userId):
     data = request.get_json()
+    newBalance = float(data)
     user = User.query.get(userId)
-    user.balance = data['balance']
+    user.balance = newBalance
     db.session.commit()
     return user.to_dict()
 
@@ -56,7 +57,9 @@ def watches(userId):
 @user_routes.route('/<int:userId>/watches', methods=['POST'])
 @login_required
 def watches_post(userId):
+    
     data = request.get_json()
+    
     new_watch = Watch(userId=data['userId'], stockId=data['stockId'], symbol=data['watch'])
     db.session.add(new_watch)
     db.session.commit()
@@ -90,14 +93,18 @@ def transactions(userId):
 
 # post a new transaction for this user
 @user_routes.route('/<int:userId>/transactions', methods=['POST'])
-@login_required
+# @login_required
 def transactions_post(userId):
     data = request.get_json()
-    new_transaction = Transaction(userId=data['userId'], symbol=data['symbol'], shares=data['shares'], total=data['total'], time=datetime.datetime.now())
+
+    new_transaction = Transaction(userId=userId, symbol=data['symbol'], shares=data['shares'], total=data['total'], time=datetime.datetime.now())
+
     db.session.add(new_transaction)
     db.session.commit()
     transactions = get_all_transactions(userId)
     return {'transactions': [transaction.to_dict() for transaction in transactions]}
+
+
 
 # delete a stock from user's transactions
 @user_routes.route('/<int:userId>/transactions/<int:transactionId>', methods=['DELETE'])

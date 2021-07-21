@@ -70,9 +70,14 @@ export const logout = () => async (dispatch) => {
 };
 
 export const updateUser = (userId, balance) => async (dispatch) => {
+  const newBalance = balance.toString();
   const response = await fetch(`/api/users/${userId}`, {
+  
     method: 'PATCH',
-    body: balance
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newBalance)
   })
 
   if (response.ok) {
@@ -84,6 +89,14 @@ export const updateUser = (userId, balance) => async (dispatch) => {
     dispatch(setUser(data))
   }
 }
+
+// {
+//   userId: 1,
+//   symbol: "AAPL",
+//   shares: 1,
+//   total: 389.46, 
+//   balance: 9700.00
+// }
 
 export const signUp = (username, email, password, firstName, lastName, balance) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
