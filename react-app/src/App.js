@@ -58,9 +58,9 @@ function App() {
         <ProtectedRoute path='/search' exact={true}>
           <SearchBar />
         </ProtectedRoute>
-        <ProtectedRoute path='/:symbol' >
+        {/* <ProtectedRoute path='/:symbol' exact={true}>
           <AssetPage />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/home' exact={true} >
           <Portfolio />
         </ProtectedRoute>

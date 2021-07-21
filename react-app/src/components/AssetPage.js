@@ -19,15 +19,15 @@ function AssetPage() {
         dispatch(stockActions.getStock(param.symbol))
     },[])
 
-    // grab the data from the websocket and set 
+    // grab the data from the websocket and set
     // to socketData slice of state.
     let data;
     socket.onmessage = function(event) {
-    data = JSON.parse(event.data) 
+    data = JSON.parse(event.data)
         setSocketData(data)
     }
 
-    // if socketData has been updated and there are watches in the watches 
+    // if socketData has been updated and there are watches in the watches
     // obj, sift thru the socket data and if one of the stocks in our
     // watches has had a change to its price, update the price in the store.
     useEffect(() => {
@@ -45,7 +45,7 @@ function AssetPage() {
     return (
         <div className='app__body'>
             <div className='app__container'>
-                
+
                 <AssetLineGraph />
             </div>
         </div>
@@ -57,15 +57,15 @@ function AssetPage() {
 //         dispatch(stockActions.getStock(param.symbol))
 //     })
 
-//       // grab the data from the websocket and set 
+//       // grab the data from the websocket and set
 //   // to socketData slice of state.
 //   let data;
 //   socket.onmessage = function(event) {
-//   data = JSON.parse(event.data) 
+//   data = JSON.parse(event.data)
 //     setSocketData(data)
 //   }
 
-//   // if socketData has been updated and there are watches in the watches 
+//   // if socketData has been updated and there are watches in the watches
 //   // obj, sift thru the socket data and if one of the stocks in our
 //   // watches has had a change to its price, update the price in the store.
 //   useEffect(() => {
