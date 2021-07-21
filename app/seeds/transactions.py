@@ -5,11 +5,11 @@ from datetime import datetime
 # Adds a demo user, you can add other users here if you want
 def seed_transactions():
     one = Transaction(
-        userId=3, symbol='AAPL', shares=100, time=datetime.now())
+        userId=3, symbol='AAPL', shares=100, total=389.46, time=datetime.now())
     two = Transaction(
-        userId=2, symbol='MSFT', shares=50, time=datetime.now())
+        userId=2, symbol='MSFT', shares=50, total=115.09, time=datetime.now())
     three = Transaction(
-        userId=1, symbol='TSLA', shares=75, time=datetime.now())
+        userId=1, symbol='TSLA', shares=75, total=246.10, time=datetime.now())
 
     db.session.add(one)
     db.session.add(two)

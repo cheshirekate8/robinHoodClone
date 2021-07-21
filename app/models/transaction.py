@@ -9,6 +9,7 @@ class Transaction(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
     symbol = db.Column(db.String(5), nullable=False)
     shares = db.Column(db.Integer, nullable=False)
+    total = db.Column(db.Float, nullable=False)
     time = db.Column(db.DateTime, nullable=False)
     user = db.relationship("User", back_populates="transactions")
 
@@ -19,5 +20,6 @@ class Transaction(db.Model):
             'userId': self.userId,
             'symbol': self.symbol,
             'shares': self.shares,
+            'total': self.total,
             'time': self.time
         }
