@@ -26,21 +26,37 @@ const updatePrice = (symbol, price) => ({
 
 
 // Get all watches for a user.
+// NEED TO FIND OUT IF THAT PERCENTAGE IN THE WATCHLIST ELEMENT IS THE PERCENT CHANGE FROM YESTERDAYS CLOSE?
+// if it is then we can just calculate that percentage here with the candle's info instead of making another fetch call for one thing.
+// the candle is only getting the data for the sparkline in the watchlist sidebar (every 5 min update for 24 hours).
 export const getWatches = (userId) => async (dispatch) => {
 
   const response = await fetch(`/api/users/${userId}/watches`);
 
+  
   if (response.ok) {
     const data = await response.json();
+    
     if (data.errors) {
       return data.errors;
     }
-    const watches = {};
-    data.watches.forEach(watch => {
-      watch.price = 0
-      watches[watch.symbol] = watch;
+    
+    // get current unix timestamp
+    let today = Math.floor(Date.now() / 1000);
+    // get yesterday's unix timestamp
+    let yesterday = today - 86400;
 
+    const watches = {};
+    data.watches.forEach(async watch => {
+      // get daily stats (resolution=(the number of minutes between quotes, or d w m for day week and month))
+      const candleRes = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${watch.symbol}&resolution=5&from=${yesterday}&to=${today}&token=c3rh4jaad3i88nmlrk7g`)
+      const candle = await candleRes.json();
+      watch.spark = candle
+      // set the price to default to the most recent close price. (will update dynamically if market is open)
+      watch.price = watch.spark.c[0];
+      watches[watch.symbol] = watch;
     })
+
     dispatch(setWatch(watches));
   }
 }
