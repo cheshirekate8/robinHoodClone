@@ -3,6 +3,7 @@ const UPDATE_SPARK = 'stock/UPDATE_SPARK'
 // const REMOVE_STOCK= 'stock/REMOVE_STOCK';
 const SET_TICKER = 'stock/SET_TICKER';
 const SET_MOVERS = 'stock/SET_MOVERS';
+const GET_STOCKS = 'stock/GET_STOCKS';
 
 
 const setStock = (stock) => ({
@@ -13,6 +14,11 @@ const setStock = (stock) => ({
 const sparkUpdate = (spark) => ({
     type: UPDATE_SPARK,
     payload: spark
+})
+
+const getAllStocks = (stocks) => ({
+    type: GET_STOCKS,
+    payload: stocks
 })
 
 // const removeStock = (stock) => ({
@@ -134,13 +140,29 @@ export const getDailyMovers = () => async (dispatch) => {
     }
 }
 
+export const addAllStocks = () => async (dispatch) => {
+    const response = await fetch('/api/stocks')
 
-const initialState = { currentStock: null, ticker: null, dailyMovers: null};
+    if (response.ok) {
+        const data = await response.json();
+        console.log(data)
+        // if(data.errors) {
+            //     return data.errors;
+            // }
+            
+        dispatch(getAllStocks(data))
+    }
+}
+
+
+const initialState = { allStocks: null, currentStock: null, ticker: null, dailyMovers: null};
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
       case SET_STOCK:
         return { ...state, currentStock: action.payload }
+      case GET_STOCKS:
+        return { ...state, allStocks: action.payload}
     //   case REMOVE_STOCK:
     //     return { ...state, currentStock: null }
       case SET_TICKER:
