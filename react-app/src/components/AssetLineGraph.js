@@ -1,14 +1,15 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import { useSelector } from 'react-redux'
 
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 function LineGraph() {
+    const stock = useSelector(state => state.stock.currentStock)
+
     const data = {
-        labels: months,
         datasets: [
             {
-                data: [10, 25, 45, 100,  250, 225, 100, 400, 300, 350, 450, 500],
+                data: stock.spark.close,
                 fill: false,
                 backgroundColor: '#00C807',
                 borderColor: '#00C807',
@@ -45,6 +46,7 @@ function LineGraph() {
 
     return (
         <div className='linegraph'>
+            <h3>{stock.name}</h3>
             <Line 
                 data={data}
                 options={options}

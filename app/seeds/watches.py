@@ -4,19 +4,19 @@ from app.models import db, Watch
 # Adds a demo user, you can add other users here if you want
 def seed_watches():
     one = Watch(
-        userId=3, symbol='AAPL')
+        userId=3, symbol='AAPL', stockId=4)
     two = Watch(
-        userId=2, symbol='MSFT')
+        userId=2, symbol='MSFT', stockId=20)
     three = Watch(
-        userId=1, symbol='TSLA')
+        userId=1, symbol='NKE', stockId=21)
     four = Watch(
-        userId=1, symbol='SNAP')
+        userId=1, symbol='V', stockId=27)
     five = Watch(
-        userId=1, symbol='NFLX')
+        userId=1, symbol='WMT', stockId=28)
     six = Watch(
-        userId=1, symbol='FB')
+        userId=1, symbol='DIS', stockId=30)
     seven = Watch(
-        userId=1, symbol='AAPL')
+        userId=1, symbol='AAPL', stockId=4)
 
     db.session.add(one)
     db.session.add(two)

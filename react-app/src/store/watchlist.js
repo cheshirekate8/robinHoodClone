@@ -2,7 +2,8 @@ import { getStock } from './stock'
 
 
 const SET_WATCH = 'watchlist/SET_WATCH';
-const UPDATE_PRICE = 'watchlist/UPDATE_PRICE'
+const UPDATE_PRICE = 'watchlist/UPDATE_PRICE';
+const ADD_WATCH = 'watchlist/ADD_WATCH';
 // const REMOVE_STOCK= 'session/REMOVE_STOCK';
 
 
@@ -17,7 +18,13 @@ const updatePrice = (symbol, price) => ({
     symbol,
     price
   }
+});
+
+const addOneWatch = (watch) => ({
+  type: ADD_WATCH,
+  payload: watch
 })
+
 
 // const removeStock = (stock) => ({
 //     type: REMOVE_STOCK,
@@ -25,34 +32,71 @@ const updatePrice = (symbol, price) => ({
 // })
 
 
-//
+// Get all watches for a user.
+// NEED TO FIND OUT IF THAT PERCENTAGE IN THE WATCHLIST ELEMENT IS THE PERCENT CHANGE FROM YESTERDAYS CLOSE?
+// if it is then we can just calculate that percentage here with the candle's info instead of making another fetch call for one thing.
+// the candle is only getting the data for the sparkline in the watchlist sidebar (every 5 min update for 24 hours).
 export const getWatches = (userId) => async (dispatch) => {
 
   const response = await fetch(`/api/users/${userId}/watches`);
 
+  
   if (response.ok) {
     const data = await response.json();
+    
     if (data.errors) {
       return data.errors;
     }
-    // let detailedWatches = [];
-    // data.watches.forEach(async watch => {
-    //   let detailedWatch = await dispatch(getStock(watch.symbol, true));
-    //   detailedWatches.push(detailedWatch);
-    // })
-    // console.log('detailedWatches', detailedWatches);
-    const watches = {};
-    data.watches.forEach(watch => {
-      watch.price = 0
-      watches[watch.symbol] = watch;
+    
+    // get current unix timestamp
+    let today = Math.floor(Date.now() / 1000);
+    // get yesterday's unix timestamp
+    let yesterday = today - 86400;
 
+    const watches = {};
+    data.watches.forEach(async watch => {
+      // get daily stats (resolution=(the number of minutes between quotes, or d w m for day week and month))
+      const candleRes = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${watch.symbol}&resolution=5&from=${yesterday}&to=${today}&token=c3rh4jaad3i88nmlrk7g`)
+      const candle = await candleRes.json();
+      watch.spark = candle
+      // set the price to default to the most recent close price. (will update dynamically if market is open)
+      watch.price = watch.spark.c[0];
+      watches[watch.symbol] = watch;
     })
+
     dispatch(setWatch(watches));
   }
 }
 
+// Update the price for a single stock in the watchlist.
 export const updateWatchPrice = (symbol, price) => async(dispatch) => {
   dispatch(updatePrice(symbol, price))
+}
+
+export const addWatch = (userId, stockId, watch) => async(dispatch) => {
+  const response = await fetch(`/api/users/${userId}/watches`, {
+    method: 'Post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId,
+      stockId,
+      watch
+    })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addOneWatch(data))
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error ocurred. Please try again']
+  }
 }
 
 
@@ -62,9 +106,12 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_WATCH:
       return { ...state, userWatches: action.payload }
+    case ADD_WATCH:
+      return {...state, userWatches: action.payload}
     //   case REMOVE_STOCK:
     //     return { ...state, currentStock: null }
     case UPDATE_PRICE:
+      // set the price of the stock with the key of the symbol in the payload.
       state.userWatches[action.payload.symbol].price = action.payload.price
       return {...state};
     default:
