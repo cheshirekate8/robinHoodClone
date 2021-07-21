@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import data from './MOCK_DATA.json';
+import { useSelector } from 'react-redux';
 
 
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('')
-
+  const data = useSelector(state => state.stock.allStocks.stocks)
 
   return (
     <div className='search-bar'>
@@ -12,12 +12,15 @@ function SearchBar() {
       {data.filter((val) => {
         if (searchTerm == '') {
           return val
-        } else if (val.first_name.toLowerCase().includes(searchTerm.toLowerCase())) {
+        } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase()) || val.symbol.toLowerCase().includes(searchTerm.toLowerCase())) {
           return val
         }
       }).map((val, key) => {
         return <div className='search-stock' key={key}>
-          <ul>{val.first_name}</ul>
+          <ul>
+            <li>{val.name}</li>
+            <li>{val.symbol}</li>
+          </ul>
         </div>
       })}
     </div>
