@@ -60,11 +60,8 @@ function App() {
           <SearchBar />
         </ProtectedRoute>
         <LoggedOutRoute path='/home' exact={true} >
-
-        <ProtectedRoute path='/home' exact={true} >
-
           <Portfolio />
-        </ProtectedRoute>
+        </LoggedOutRoute>
         {/* <ProtectedRoute path='/:symbol' >
           <AssetPage />
         </ProtectedRoute> */}
@@ -75,7 +72,6 @@ function App() {
           <Redirect to='/404' />
         </Route>
       </Switch>
-
     </BrowserRouter>
   );
 }
