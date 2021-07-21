@@ -1,12 +1,19 @@
-const SET_STOCK = 'session/SET_STOCK';
-// const REMOVE_STOCK= 'session/REMOVE_STOCK';
-const SET_TICKER = 'session/SET_TICKER';
-const SET_MOVERS = 'session/SET_MOVERS';
+const SET_STOCK = 'stock/SET_STOCK';
+const UPDATE_SPARK = 'stock/UPDATE_SPARK'
+// const REMOVE_STOCK= 'stock/REMOVE_STOCK';
+const SET_TICKER = 'stock/SET_TICKER';
+const SET_MOVERS = 'stock/SET_MOVERS';
+
 
 const setStock = (stock) => ({
   type: SET_STOCK,
   payload: stock
 });
+
+const sparkUpdate = (spark) => ({
+    type: UPDATE_SPARK,
+    payload: spark
+})
 
 // const removeStock = (stock) => ({
 //     type: REMOVE_STOCK,
@@ -23,7 +30,9 @@ const setDailyMovers = (movers) => ({
     payload: movers
 })
 
-// ticker containing trending stocks
+
+
+// ticker containing trending stocks - should get called once when portfolio loads
 export const getTicker = () => async (dispatch) => {
 
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
@@ -39,12 +48,12 @@ export const getTicker = () => async (dispatch) => {
             return data.errors;
         }
         dispatch(setTicker(data.finance.result[0]));
-        console.log('successful');
     }
 }
 
-// all info we need to populate stock information including sparkline
+// all info we need to populate stock information including sparkline - should get called once when the asset page loads.
 export const getStock = (symbol) => async (dispatch) => {
+
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
@@ -52,7 +61,7 @@ export const getStock = (symbol) => async (dispatch) => {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
-    const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=1m&range=1d`, {
+    const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=5m&range=1d`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
@@ -71,32 +80,43 @@ export const getStock = (symbol) => async (dispatch) => {
         // building my own stock object to show only relevant info needed
         // in the store.
         const currentStock = {
-            symbol: stock.price.symbol,
-            name: stock.price.shortName,
-            price: stock.price.regularMarketPrice,
             fiftyTwoWeekChange: stock.defaultKeyStatistics['52WeekChange'],
             preMarketChange: stock.price.preMarketChange,
             preMarketChangePercent: stock.price.preMarketChangePercent,
             dayChange: stock.price.regularMarketChange,
             dayChangePercent: stock.price.regularMarketChangePercent,
             marketCap: stock.price.marketCap,
-            averageVolume: stock.price.averageVolume,
-            about: stock.summaryProfile.longBusinessSummary,
-            employees: stock.summaryProfile.fullTimeEmployees,
-            headquarters: {
-                city: stock.summaryProfile.city, 
-                state: stock.summaryProfile.state,
-            },
             recommendations: stock.recommendationTrend.trend,
             earnings: stock.earnings,
             // sparkline data is here
             spark: spark[`${symbol}`]
         }
+        // if(isWatch === true) {
+        //     return currentStock;
+        // }
         dispatch(setStock(currentStock));
     }
 }
 
-// Stocks with a lot of action today
+// to change the interval and range in the sparkline graph 
+export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch => {
+    const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=${int}&range=${range}`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "935514dac0msh27373cb24d245ddp19379cjsncbd1efa902ab",
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+        }
+    })
+    if (sparkRes.ok) {
+        const spark = await sparkRes.json();
+        if (spark.errors) {
+            return spark.errors;
+        }
+        dispatch(sparkUpdate(spark[`${symbol}`]))
+    }
+}
+
+// Stocks with a lot of action today - should get called once when the portfolio page loads
 export const getDailyMovers = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
         "method": "GET",
@@ -110,7 +130,7 @@ export const getDailyMovers = () => async (dispatch) => {
         if (data.errors) {
             return data.errors;
         }
-        dispatch(setDailyMovers(data.finance));
+        dispatch(setDailyMovers(data.finance.result));
     }
 }
 
@@ -127,6 +147,9 @@ export default function reducer(state = initialState, action) {
           return { ...state, ticker: action.payload }
       case SET_MOVERS:
           return { ...state, dailyMovers: action.payload }
+      case UPDATE_SPARK:
+          state.currentStock.spark = action.payload
+          return { ...state }
       default:
         return state;
     }

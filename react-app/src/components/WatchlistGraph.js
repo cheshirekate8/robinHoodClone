@@ -31,12 +31,12 @@ function WatchlistGraph() {
     scales: {
       xAxes: {
         ticks: {
-          display: true
+          display: false
         }
       },
       yAxes: {
         ticks: {
-          display: true
+          display: false
         }
       },
     }
@@ -44,7 +44,10 @@ function WatchlistGraph() {
 
 
   return (
-    <div className='watchlist-graph'>
+    <div className='watchlist-graph' style={{
+      width: '200px',
+      height: '100px'
+    }}>
       <Line
         data={data}
         options={options}

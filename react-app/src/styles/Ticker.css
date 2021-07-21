@@ -1,0 +1,43 @@
+.ticker__container {
+    display: flex;
+    width: 100%
+}
+
+.ticker {
+    width: 300px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.ticker > span {
+    white-space: nowrap;
+    padding-right: 10px;
+    color: chartreuse;
+    display: inline-block;
+}
+
+.ticker > span > p {
+    padding-right: 10px;
+    display: inline-block;
+}
+
+.ticker::-webkit-scrollbar {
+    display: none
+}
+
+.symbol {
+    color: white;
+}
+
+.change-direction {
+    font-size: medium;
+    padding-right: 5px;
+}
+
+
+
+
+
+
+
