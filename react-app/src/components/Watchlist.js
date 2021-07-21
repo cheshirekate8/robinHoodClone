@@ -53,7 +53,7 @@ function Watchlist() {
   // obj, sift thru the socket data and if one of the stocks in our
   // watches has had a change to its price, update the price in the store.
   useEffect(() => {
-    if (socketData && socketData.data && watches) {
+    if (socketData?.data && watches) {
       socketData.data.forEach( stock => {
         // console.log(stock.s)
         if (watches[stock.s] && watches[stock.s].price !== stock.p) {
@@ -71,7 +71,7 @@ function Watchlist() {
   //   MSFT: {id: 1, symbol: 'MSFT', userid: 1, price:0}
   // }
 
-  // Turns watches into an array of the watchinfo
+  // Turn watches into an array of the watchinfo
   let theWatches;
   if (watches) theWatches = Object.values(watches)
 
@@ -80,7 +80,7 @@ function Watchlist() {
       <h1>My Watchlist</h1>
 
       <div className="testwatchlist">
-        {theWatches && theWatches.map((watch, i) => {
+        {theWatches?.map((watch) => {
           return (
           <>
             <p className='watchlist-link' key={watch.id}>{watch.symbol}, {watch.price}</p>

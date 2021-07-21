@@ -6,12 +6,14 @@ class Watch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
     stockId = db.Column(db.Integer, db.ForeignKey("Stocks.id"), nullable=False)
-    user = db.relationship("Users", back_populates="watches")
+    symbol = db.Column(db.String(5), nullable=False)
+    user = db.relationship("User", back_populates="watches")
 
 
     def to_dict(self):
         return {
             "id": self.id,
             "userId": self.userId,
-            "stockId": self.stockId
+            "stockId": self.stockId,
+            "symbol": self.symbol
         }

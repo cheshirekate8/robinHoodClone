@@ -12,10 +12,10 @@ seed_commands = AppGroup('seed')
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():
+    seed_stocks()
     seed_users()
     seed_watches()
     seed_transactions()
-    seed_stocks()
     # Add other seed functions here
 
 
