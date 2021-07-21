@@ -1,8 +1,8 @@
 """all_migrations_one_file
 
-Revision ID: 8ab3f0f9fc70
+Revision ID: e21fcb7ed6a4
 Revises: 
-Create Date: 2021-07-20 19:56:48.981076
+Create Date: 2021-07-21 15:25:56.409794
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8ab3f0f9fc70'
+revision = 'e21fcb7ed6a4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,6 +46,7 @@ def upgrade():
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=5), nullable=False),
     sa.Column('shares', sa.Integer(), nullable=False),
+    sa.Column('total', sa.Float(), nullable=False),
     sa.Column('time', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['userId'], ['Users.id'], ),
     sa.PrimaryKeyConstraint('id')

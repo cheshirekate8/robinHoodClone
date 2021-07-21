@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as watchlistActions from '../store/watchlist'
 import WatchlistGraph from './WatchlistGraph';
@@ -31,23 +31,6 @@ function Watchlist() {
   data = JSON.parse(event.data) 
     setSocketData(data)
   }
-
-  // socket data comes back in this format
-  // its an object, and socket.data is an array of objects.
-  // {
-  //   "data": [{
-  //   "c":["1","8"],
-  //   "p":280.09,
-  //   "s":"MSFT",
-  //   "t":1626805040397,
-  //   "v":100
-  // },{
-  //   "c":["12"],
-  //   "p":280.09,
-  //   "s":"MSFT",
-  //   "t":1626805040411,
-  //   "v":14
-  // }],"type":"trade"}
 
   // if socketData has been updated and there are watches in the watches 
   // obj, sift thru the socket data and if one of the stocks in our
@@ -83,7 +66,8 @@ function Watchlist() {
         {theWatches?.map((watch) => {
           return (
           <>
-            <p className='watchlist-link' key={watch.id}>{watch.symbol}, {watch.price}</p>
+            <p className='watchlist-link' key={watch.stockId}>
+            <Link className='symbol-link' to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
           </>
           )
         })}

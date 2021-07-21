@@ -2,9 +2,9 @@ import { getStock } from './stock'
 
 
 const SET_WATCH = 'watchlist/SET_WATCH';
-const UPDATE_PRICE = 'watchlist/UPDATE_PRICE'
-// const REMOVE_STOCK= 'session/REMOVE_STOCK';
-
+const UPDATE_PRICE = 'watchlist/UPDATE_PRICE';
+const ADD_WATCH = 'watchlist/ADD_WATCH';
+const REMOVE_WATCH = 'watchlist/REMOVE_WATCH';
 
 const setWatch = (watch) => ({
   type: SET_WATCH,
@@ -17,12 +17,18 @@ const updatePrice = (symbol, price) => ({
     symbol,
     price
   }
+});
+
+const addOneWatch = (watch) => ({
+  type: ADD_WATCH,
+  payload: watch
 })
 
-// const removeStock = (stock) => ({
-//     type: REMOVE_STOCK,
-//     payload: stock
-// })
+
+const removeOneWatch = (watch) => ({
+    type: REMOVE_WATCH,
+    payload: watch
+})
 
 
 // Get all watches for a user.
@@ -66,6 +72,40 @@ export const updateWatchPrice = (symbol, price) => async(dispatch) => {
   dispatch(updatePrice(symbol, price))
 }
 
+export const addWatch = (userId, stockId, watch) => async(dispatch) => {
+  const response = await fetch(`/api/users/${userId}/watches`, {
+    method: 'Post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId,
+      stockId,
+      watch
+    })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addOneWatch(data))
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error ocurred. Please try again']
+  }
+}
+
+export const removeWatch = (userId, watchId) => async(dispatch) => {
+  const response = await fetch(`/api/users/${userId}/watches/${watchId}`, {method: "DELETE"})
+  if (response.ok) {
+    const data = response.json()
+  }
+    dispatch(removeOneWatch(watchId))  
+}
+
 
 const initialState = { userWatches: null };
 
@@ -73,8 +113,10 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_WATCH:
       return { ...state, userWatches: action.payload }
-    //   case REMOVE_STOCK:
-    //     return { ...state, currentStock: null }
+    case ADD_WATCH:
+      return {...state, userWatches: action.payload}
+    case REMOVE_WATCH:
+      return { ...state}
     case UPDATE_PRICE:
       // set the price of the stock with the key of the symbol in the payload.
       state.userWatches[action.payload.symbol].price = action.payload.price

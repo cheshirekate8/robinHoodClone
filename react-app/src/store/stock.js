@@ -3,6 +3,8 @@ const UPDATE_SPARK = 'stock/UPDATE_SPARK'
 // const REMOVE_STOCK= 'stock/REMOVE_STOCK';
 const SET_TICKER = 'stock/SET_TICKER';
 const SET_MOVERS = 'stock/SET_MOVERS';
+const GET_STOCKS = 'stock/GET_STOCKS';
+const UPDATE_PRICE = 'stock/UPDATE_PRICE'
 
 
 const setStock = (stock) => ({
@@ -13,6 +15,11 @@ const setStock = (stock) => ({
 const sparkUpdate = (spark) => ({
     type: UPDATE_SPARK,
     payload: spark
+})
+
+const getAllStocks = (stocks) => ({
+    type: GET_STOCKS,
+    payload: stocks
 })
 
 // const removeStock = (stock) => ({
@@ -29,6 +36,11 @@ const setDailyMovers = (movers) => ({
     type: SET_MOVERS,
     payload: movers
 })
+
+const updatePrice = (price) => ({
+    type: UPDATE_PRICE,
+    payload: price
+  });
 
 
 
@@ -53,7 +65,7 @@ export const getTicker = () => async (dispatch) => {
 
 // all info we need to populate stock information including sparkline - should get called once when the asset page loads.
 export const getStock = (symbol) => async (dispatch) => {
-
+    console.log('symbol in store', symbol)
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
@@ -77,6 +89,11 @@ export const getStock = (symbol) => async (dispatch) => {
             }
             return spark.errors;
         }
+        
+        const sparkPrices = spark[`${symbol}`].close.map((num) => {
+            return num.toFixed(2)
+        })
+
         // building my own stock object to show only relevant info needed
         // in the store.
         const currentStock = {
@@ -89,7 +106,7 @@ export const getStock = (symbol) => async (dispatch) => {
             recommendations: stock.recommendationTrend.trend,
             earnings: stock.earnings,
             // sparkline data is here
-            spark: spark[`${symbol}`]
+            spark: sparkPrices
         }
         // if(isWatch === true) {
         //     return currentStock;
@@ -134,13 +151,33 @@ export const getDailyMovers = () => async (dispatch) => {
     }
 }
 
+export const addAllStocks = () => async (dispatch) => {
+    const response = await fetch('/api/stocks')
 
-const initialState = { currentStock: null, ticker: null, dailyMovers: null};
+    if (response.ok) {
+        const data = await response.json();
+        console.log(data)
+        if(data.errors) {
+                return data.errors;
+            }
+            
+        dispatch(getAllStocks(data))
+    }
+}
+
+export const updateStockPrice = (price) => async (dispatch) => {
+    dispatch(updatePrice(price))
+}
+
+
+const initialState = { allStocks: null, currentStock: null, ticker: null, dailyMovers: null};
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
       case SET_STOCK:
         return { ...state, currentStock: action.payload }
+      case GET_STOCKS:
+        return { ...state, allStocks: action.payload}
     //   case REMOVE_STOCK:
     //     return { ...state, currentStock: null }
       case SET_TICKER:
@@ -149,6 +186,9 @@ export default function reducer(state = initialState, action) {
           return { ...state, dailyMovers: action.payload }
       case UPDATE_SPARK:
           state.currentStock.spark = action.payload
+          return { ...state }
+      case UPDATE_PRICE:
+          state.currentStock.price = action.payload
           return { ...state }
       default:
         return state;

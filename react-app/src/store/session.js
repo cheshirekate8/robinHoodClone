@@ -69,6 +69,21 @@ export const logout = () => async (dispatch) => {
   }
 };
 
+export const updateUser = (userId, balance) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}`, {
+    method: 'PATCH',
+    body: balance
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+
+    if (data.errors) {
+      return data.errors
+    }
+    dispatch(setUser(data))
+  }
+}
 
 export const signUp = (username, email, password, firstName, lastName, balance) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
@@ -110,3 +125,6 @@ export default function reducer(state = initialState, action) {
       return state;
   }
 }
+
+
+
