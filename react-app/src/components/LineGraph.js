@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-function LineGraph() {
+function LineGraph(props) {
     const data = {
         labels: months,
         datasets: [

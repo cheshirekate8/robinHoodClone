@@ -59,12 +59,14 @@ function App() {
         <ProtectedRoute path='/search' exact={true}>
           <SearchBar />
         </ProtectedRoute>
+        <ProtectedRoute path='/:symbol' >
+          <AssetPage />
         <LoggedOutRoute path='/home' exact={true} >
           <Portfolio />
         </LoggedOutRoute>
         {/* <ProtectedRoute path='/:symbol' >
           <AssetPage />
-        </ProtectedRoute> */}
+        </ProtectedRoute>
         <Route path='/404'>
           <h1>Page Not Found</h1>
         </Route>
@@ -74,6 +76,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-}
+} */}
 
 export default App;
