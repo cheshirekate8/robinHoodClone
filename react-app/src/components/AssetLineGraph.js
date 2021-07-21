@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Line } from 'react-chartjs-2';
 import { useSelector } from 'react-redux'
 
 
-function LineGraph() {
+function AssetLineGraph() {
+    const [count, setCount] = useState(0);
     const stock = useSelector(state => state.stock.currentStock)
+    const sparkData = useSelector(state => state.stock.currentStock?.spark)
 
-    const data = {
+    
+    const config = {
         datasets: [
-            {
-                data: stock.spark.close,
+            {   // sparkData is what it doesn't like, i dont know
+                // why it's not liking this array?
+                data: sparkData,
                 fill: false,
                 backgroundColor: '#00C807',
                 borderColor: '#00C807',
@@ -46,13 +50,12 @@ function LineGraph() {
 
     return (
         <div className='linegraph'>
-            <h3>{stock.name}</h3>
             <Line 
-                data={data}
+                data={config}
                 options={options}
             />
         </div>
     )
 }
 
-export default LineGraph;
+export default AssetLineGraph;
