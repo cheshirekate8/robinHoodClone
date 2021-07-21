@@ -5,6 +5,8 @@ import * as stockActions from '../store/stock';
 
 import '../styles/Ticker.css';
 
+const upArrow = '\ue5c7'
+const downArrow = '\ue5c5'
 
 
 
@@ -41,21 +43,21 @@ function Ticker() {
         },
     ]
 
-    useEffect(() => {
-        const ticker = document.getElementById('ticker')
-        const tickerScrollWidth = ticker?.scrollWidth
+    // useEffect(() => {
+    //     const ticker = document.getElementById('ticker')
+    //     const tickerScrollWidth = ticker?.scrollWidth
         
-        setInterval(() => {
-            if (ticker.scrollLeft !== tickerScrollWidth) {
-                ticker.scrollTo(ticker.scrollLeft + 1, 0)
-            }
-        }, 15)
+    //     setInterval(() => {
+    //         if (ticker.scrollLeft !== tickerScrollWidth) {
+    //             ticker.scrollTo(ticker.scrollLeft + 1, 0)
+    //         }
+    //     }, 15)
 
-    }, [])
+    // }, [])
     
         
         return (
-            <div className='ticker' id='ticker' scroll='auto'>
+            <marquee className='ticker' id='ticker' scroll='auto'>
                 {mockData.map(data => (
                     <span key={data.symbol}>
                         <p className='symbol'>{data.symbol}</p> 
@@ -63,10 +65,10 @@ function Ticker() {
                             style={data.changeDirection === 'up'
                             ? {color:'chartreuse'} : {color:'red'}
                         }>{data.priceTraded}</p>   
-                        <p className='change-direction'
+                        <span className='change-direction material-icons'
                             style={data.changeDirection === 'up'
                             ? {color:'chartreuse'} : {color:'red'}
-                        }>{data.changeDirection}</p>  
+                        }>{data.changeDirection === 'up' ? upArrow : downArrow}</span>  
                         <p className='change-amount'
                             style={data.changeDirection === 'up'
                             ? {color:'chartreuse'} : {color:'red'}
@@ -77,7 +79,7 @@ function Ticker() {
                             }>{data.changePercent}</p>
                     </span>
                 ))}
-            </div>
+            </marquee>
         )
 
     
