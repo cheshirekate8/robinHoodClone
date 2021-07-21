@@ -10,7 +10,7 @@ class Transaction(db.Model):
     symbol = db.Column(db.String(5), nullable=False)
     shares = db.Column(db.Integer, nullable=False)
     time = db.Column(db.DateTime, nullable=False)
-    user = db.relationship("Users", back_populates="transactions")
+    user = db.relationship("User", back_populates="transactions")
 
 
     def to_dict(self):

@@ -17,6 +17,13 @@ function Watchlist() {
     userId = user.id
   }
 
+  // Once the user has been grabbed from the store, 
+  // update the watches store for that user.
+  useEffect(() => {
+    if (userId)
+      dispatch(watchlistActions.getWatches(userId))
+  }, [userId])
+
   // grab the data from the websocket and set 
   // to socketData slice of state.
   let data;
@@ -46,7 +53,7 @@ function Watchlist() {
   // obj, sift thru the socket data and if one of the stocks in our
   // watches has had a change to its price, update the price in the store.
   useEffect(() => {
-    if (socketData && watches) {
+    if (socketData?.data && watches) {
       socketData.data.forEach( stock => {
         // console.log(stock.s)
         if (watches[stock.s] && watches[stock.s].price !== stock.p) {
@@ -58,19 +65,13 @@ function Watchlist() {
 }, [socketData])
 
 
-  // Once the user has been grabbed from the store, 
-  // update the watches store for that user.
-  useEffect(() => {
-    if (userId)
-      dispatch(watchlistActions.getWatches(userId))
-  }, [userId])
 
   // watches is an object with key value pairs of symbol: watchinfo
   // watches = {
   //   MSFT: {id: 1, symbol: 'MSFT', userid: 1, price:0}
   // }
 
-  // Turns watches into an array of the watchinfo
+  // Turn watches into an array of the watchinfo
   let theWatches;
   if (watches) theWatches = Object.values(watches)
 
@@ -79,7 +80,7 @@ function Watchlist() {
       <h1>My Watchlist</h1>
 
       <div className="testwatchlist">
-        {theWatches && theWatches.map((watch, i) => {
+        {theWatches?.map((watch) => {
           return (
           <>
             <p className='watchlist-link' key={watch.id}>{watch.symbol}, {watch.price}</p>

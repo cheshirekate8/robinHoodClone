@@ -14,8 +14,8 @@ class User(db.Model, UserMixin):
     firstName = db.Column(db.String(50), nullable=False)
     lastName = db.Column(db.String(50), nullable=False)
     balance = db.Column(db.Float, nullable=False)
-    watches = db.relationship("Watches", back_populates="user")
-    transactions = db.relationship("Transactions", back_populates="user")
+    watches = db.relationship("Watch", back_populates="user")
+    transactions = db.relationship("Transaction", back_populates="user")
 
     @property
     def password(self):

@@ -11,7 +11,6 @@ class Stock(db.Model):
     employees = db.Column(db.Integer, nullable=False)
     headquarters = db.Column(db.String(100), nullable=False)
     founded = db.Column(db.Integer, nullable=False)
-    watchId = db.Column(db.Integer, db.ForeignKey("Watches.id"), nullable=False)
 
 
 

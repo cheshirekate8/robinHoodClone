@@ -33,6 +33,9 @@ socket.addEventListener('open', function (event) {
     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'DIS'}))
     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'DOW'}))
     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'TSLA'}))
+    socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'SNAP'}))
+    socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'NFLX'}))
+    socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'FB'}))
 });
 
 // Listen for messages
