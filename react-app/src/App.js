@@ -17,21 +17,28 @@ import AssetPage from './components/AssetPage'
 
 import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
-import * as transActions from './store/transactions'
+import * as transActions from './store/transactions';
+import * as newsActions from './store/news';
 import SplashPage from './components/SplashPage'
 
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user)
+  const username = useSelector(state => state.session.user?.username);
 
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(stockActions.addAllStocks())
+      if (username) {
+        await dispatch(stockActions.addAllStocks())
+        await dispatch(transActions.getTransactions(user.id))
+        await dispatch(newsActions.getNews())
+      }
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch, username]);
 
   if (!loaded) {
     return null;

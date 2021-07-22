@@ -3,14 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import Newsfeed from './Newsfeed';
 import '../styles/Portfolio.css'
 import Watchlist from './Watchlist';
+import DailyMover from './DailyMover'
+import NewsStories from './NewsStories'
 import * as stockActions from '../store/stock'
+const moment = require('moment')
 
 function Portfolio() {
     const dispatch = useDispatch()
 
+    const date = moment().format('YYYY-MM-DD')
+    console.log('THE DATE IS ', date)
+
     useEffect(() => {
         dispatch(stockActions.getTicker())
-        dispatch(stockActions.getDailyMovers())
         dispatch(stockActions.clearCurrentStock())
     })
 
@@ -19,9 +24,13 @@ function Portfolio() {
             <div className='app__container'>
                 <Newsfeed />
                 <Watchlist />
+                <DailyMover />
+                <NewsStories />
             </div>
         </div>
     )
 }
 
 export default Portfolio;
+
+

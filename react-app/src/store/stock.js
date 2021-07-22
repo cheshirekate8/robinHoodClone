@@ -1,6 +1,7 @@
 const SET_STOCK = 'stock/SET_STOCK';
 const UPDATE_SPARK = 'stock/UPDATE_SPARK'
 const REMOVE_STOCK= 'stock/REMOVE_STOCK';
+
 const SET_TICKER = 'stock/SET_TICKER';
 const SET_MOVERS = 'stock/SET_MOVERS';
 const GET_STOCKS = 'stock/GET_STOCKS';
@@ -31,11 +32,6 @@ const setTicker = (ticker) => ({
     payload: ticker
 })
 
-const setDailyMovers = (movers) => ({
-    type: SET_MOVERS,
-    payload: movers
-})
-
 const updatePrice = (price) => ({
     type: UPDATE_PRICE,
     payload: price
@@ -49,7 +45,7 @@ export const getTicker = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -68,14 +64,14 @@ export const getStock = (symbol) => async (dispatch) => {
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=5m&range=1d`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -134,7 +130,7 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=${int}&range=${range}`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -147,23 +143,6 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     }
 }
 
-// Stocks with a lot of action today - should get called once when the portfolio page loads
-export const getDailyMovers = () => async (dispatch) => {
-    const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
-            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
-        }
-    })
-    if (response.ok) {
-        const data = await response.json();
-        if (data.errors) {
-            return data.errors;
-        }
-        dispatch(setDailyMovers(data.finance.result));
-    }
-}
 
 export const addAllStocks = () => async (dispatch) => {
     const response = await fetch('/api/stocks')
@@ -188,7 +167,7 @@ export const clearCurrentStock = () => async (dispatch) => {
 }
 
 
-const initialState = { allStocks: null, currentStock: null, ticker: null, dailyMovers: null };
+const initialState = { allStocks: null, currentStock: null, ticker: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -200,8 +179,6 @@ export default function reducer(state = initialState, action) {
             return { ...state, currentStock: null }
         case SET_TICKER:
             return { ...state, ticker: action.payload }
-        case SET_MOVERS:
-            return { ...state, dailyMovers: action.payload }
         case UPDATE_SPARK:
             state.currentStock.spark = action.payload
             return { ...state }

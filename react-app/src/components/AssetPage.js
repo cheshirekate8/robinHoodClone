@@ -11,14 +11,17 @@ import '../styles/AssetPage.css'
 function AssetPage() {
     const [socketData, setSocketData] = useState(null)
     const dispatch = useDispatch()
+    // param is the symbol in the path, i just didn't like typing symbol.symbol to access it.
     const param = useParams();
+
+
 
     useEffect(() => {
         dispatch(stockActions.getStock(param.symbol))
     },[dispatch, param])
 
 
-    const stockData = useSelector(state => state.stock.currentStock)
+    const stockData = useSelector(state => state?.stock?.currentStock)
 
     if (stockData) {
         return (
@@ -43,6 +46,7 @@ function AssetPage() {
             <h1>Loading...</h1>
         )
     }
+
 
 }
 

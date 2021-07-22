@@ -11,7 +11,7 @@ function Watchlist() {
   const dispatch = useDispatch();
   // const history = useHistory();
   let user = useSelector(state => state.session.user)
-  let watches = useSelector(state => state.watch.userWatches)
+  let watches = useSelector(state => state.watches.userWatches)
   let userId;
   if (user) {
     userId = user.id
@@ -39,8 +39,8 @@ function Watchlist() {
     if (socketData?.data && watches) {
       socketData.data.forEach( stock => {
         // console.log(stock.s)
-        if (watches[stock.s] && watches[stock.s].price !== stock.p) {
-          dispatch(watchlistActions.updateWatchPrice(stock.s, stock.p))
+        if (watches[stock.s] && watches[stock.s].price !== (stock.p).toFixed(2)) {
+          // dispatch(watchlistActions.updateWatchPrice(stock.s, (stock.p).toFixed(2)))
         }
       })
     }
