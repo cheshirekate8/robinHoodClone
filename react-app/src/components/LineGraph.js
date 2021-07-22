@@ -9,7 +9,6 @@ import 'chartjs-adapter-date-fns';
 
 
 function LineGraph(props) {
-    console.log(props.balance)
 
     const data = {
         labels: props.dates,

@@ -11,9 +11,9 @@ const downArrow = '\ue5c5'
 
 
 function Ticker() {
-    const tickerData = useSelector(state => state.stock.ticker.quotes);
+    const stock = useSelector(state => state?.stock);
     
-    const [ticker, setTicker] = useState();
+    const [ticker, setTicker] = useState([]);
 
     
     const mockData = [
@@ -47,31 +47,24 @@ function Ticker() {
         },
     ]
 
-    // useEffect(() => {
-    //     const ticker = document.getElementById('ticker')
-    //     const tickerScrollWidth = ticker?.scrollWidth
-        
-    //     setInterval(() => {
-    //         if (ticker.scrollLeft !== tickerScrollWidth) {
-    //             ticker.scrollTo(ticker.scrollLeft + 1, 0)
-    //         }
-    //     }, 15)
+    useEffect(() => {
+        setTicker(stock?.ticker?.quotes)
 
-    // }, [])
+    }, [stock])
     
     
 
 
-         
+       
         return (
             <marquee className='ticker' id='ticker' scroll='auto'>
-                {tickerData.map(data => (
+                {ticker?.map(data => (
                     <span key={data.symbol}>
                         <p className='symbol'>{data.symbol}</p> 
                         <p className='price-traded'
                             style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
-                        }>{data.regularMarketPrice}</p>   
+                        }>${data.regularMarketPrice.toFixed(2)}</p>   
                         <span className='change-direction material-icons'
                             style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
@@ -79,44 +72,18 @@ function Ticker() {
                         <p className='change-amount'
                             style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
-                            }>{data.regularMarketChange}</p> 
+                            }>${data.regularMarketChange.toFixed(2)}</p> 
                         <p className='change-percent' 
                             style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
-                            }>{data.regularMarketChangePercent}</p>
+                            }>{data.regularMarketChangePercent.toFixed(2)}%</p>
                     </span>
                 ))}
             </marquee>
         )
+       
         
 
-    
-    
-    
-    // const dispatch = useDispatch()
-    // let tickerContainer = useRef([])
-    
-    // useEffect(() => {
-    //     async function getTicker() {
-    //         tickerContainer.current = await dispatch(stockActions.getTicker())
-    //     }
-    //     getTicker()
-    // }, [dispatch])
-    // // return (
-    // //     <div></div>
-    // // )
-    // const tickerData = useSelector(state => state.stock.ticker?.quotes)
-    // if(tickerData) {
-    //     return (
-    //         <div>
-    //             {tickerData.map(ticker => (
-    //               <li key={tickerData.symbol}>{tickerData.symbol}</li>  
-    //             ))}
-    //         </div>
-    //     )
-    // } else {
-    //     return null;
-    // }
 }
 
 export default Ticker;
