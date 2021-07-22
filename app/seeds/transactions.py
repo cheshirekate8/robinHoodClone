@@ -9,7 +9,7 @@ def seed_transactions():
     two = Transaction(
         userId=2, symbol='MSFT', shares=50, total=115.09, time=datetime.now())
     three = Transaction(
-        userId=1, symbol='TSLA', shares=75, total=246.10, time=datetime.now())
+        userId=1, symbol='V', shares=75, total=246.10, time=datetime.now())
 
     db.session.add(one)
     db.session.add(two)

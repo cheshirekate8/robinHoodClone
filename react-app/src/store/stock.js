@@ -1,6 +1,7 @@
 const SET_STOCK = 'stock/SET_STOCK';
 const UPDATE_SPARK = 'stock/UPDATE_SPARK'
 const REMOVE_STOCK= 'stock/REMOVE_STOCK';
+
 const SET_TICKER = 'stock/SET_TICKER';
 const SET_MOVERS = 'stock/SET_MOVERS';
 const GET_STOCKS = 'stock/GET_STOCKS';
@@ -29,11 +30,6 @@ const removeStock = () => ({
 const setTicker = (ticker) => ({
     type: SET_TICKER,
     payload: ticker
-})
-
-const setDailyMovers = (movers) => ({
-    type: SET_MOVERS,
-    payload: movers
 })
 
 const updatePrice = (price) => ({
@@ -147,6 +143,7 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     }
 }
 
+
 // Stocks with a lot of action today - should get called once when the portfolio page loads
 export const getDailyMovers = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
@@ -164,6 +161,7 @@ export const getDailyMovers = () => async (dispatch) => {
         dispatch(setDailyMovers(data.finance.result));
     }
 }
+
 
 export const addAllStocks = () => async (dispatch) => {
     const response = await fetch('/api/stocks')
@@ -188,7 +186,7 @@ export const clearCurrentStock = () => async (dispatch) => {
 }
 
 
-const initialState = { allStocks: null, currentStock: null, ticker: null, dailyMovers: null };
+const initialState = { allStocks: null, currentStock: null, ticker: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -200,8 +198,6 @@ export default function reducer(state = initialState, action) {
             return { ...state, currentStock: null }
         case SET_TICKER:
             return { ...state, ticker: action.payload }
-        case SET_MOVERS:
-            return { ...state, dailyMovers: action.payload }
         case UPDATE_SPARK:
             state.currentStock.spark = action.payload
             return { ...state }
