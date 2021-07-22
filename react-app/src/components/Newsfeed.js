@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../styles/Newsfeed.css';
 import LineGraph from './LineGraph';
 import Ticker from './Ticker';
+import * as transActions from './store/transactions'
+
 
 function Newsfeed() {
+    const dispatch = useDispatch()
     const user = useSelector(state => state.session.user);
     const [dates, setDates] = useState();
     const [balance, setBalance] = useState()
     
-    
+
 
     const createUserBalanceHistory = () => {
         let balances = [];
@@ -35,9 +38,10 @@ function Newsfeed() {
     }
 
     useEffect(() => {
+        dispatch(transActions.getTransactions(user.id))
         createDates()
         createUserBalanceHistory()
-    }, [])
+    }, [dispatch])
 
 
     return (
