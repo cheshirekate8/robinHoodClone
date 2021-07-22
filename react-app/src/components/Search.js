@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
 import '../styles/Search.css'
+import * as stockActions from '../store/stock'
 
 
 function SearchBar() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(stockActions.clearCurrentStock())
+})
+
   const [searchTerm, setSearchTerm] = useState('')
   const data = useSelector(state => state.stock.allStocks.stocks)
 
