@@ -34,6 +34,7 @@ function App() {
         await dispatch(stockActions.addAllStocks())
         await dispatch(transActions.getTransactions())
         await dispatch(newsActions.getNews())
+        await dispatch(stockActions.getTicker())
       }
       setLoaded(true);
     })();
