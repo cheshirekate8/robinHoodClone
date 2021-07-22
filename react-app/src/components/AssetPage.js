@@ -17,76 +17,28 @@ function AssetPage() {
     useEffect(() => {
         if(param)
         dispatch(stockActions.getStock(param.symbol))
-    },[])
+    },[dispatch, param])
 
-    // grab the data from the websocket and set
-    // to socketData slice of state.
-    let data;
-    socket.onmessage = function(event) {
-    data = JSON.parse(event.data)
-        setSocketData(data)
-    }
-
-    // if socketData has been updated and there are watches in the watches
-    // obj, sift thru the socket data and if one of the stocks in our
-    // watches has had a change to its price, update the price in the store.
-    useEffect(() => {
-        if (socketData?.data && stock) {
-        socketData.data.forEach( socketStock => {
-            // console.log(stock.s)
-            if (socketStock.s === stock.symbol && stock.price !== socketStock.p) {
-            //   dispatch(stockActions.updateStockPrice(socketStock.p))
-            }
-        })
-        }
-
-    }, [socketData])
+    const stockData = useSelector(state => state.stock.currentStock)
+    console.log(stockData)
 
     return (
-        <div className='app__body'>
-            <div className='app__container'>
-
-                <AssetLineGraph />
+        <div className='stockDiv'>
+            {/* <div> */}
+                {/* <AssetLineGraph /> */}
+                {/* <h1>{stockData.name} ({stockData.symbol})</h1>
+                <div> | Graph will go here? |</div>
+                <div>{stockData.ceo}</div>
+                <div>{stockData.employees}</div>
+                <div>{stockData.headquarters}</div>
+                <div>{stockData.founded}</div>
             </div>
+            <div className='stockButtonsDiv'>
+                <button>Buy</button>
+                <button>Sell</button>
+            </div> */}
         </div>
     )
 }
-
-//     useEffect(() => {
-//         if(param)
-//         dispatch(stockActions.getStock(param.symbol))
-//     })
-
-//       // grab the data from the websocket and set
-//   // to socketData slice of state.
-//   let data;
-//   socket.onmessage = function(event) {
-//   data = JSON.parse(event.data)
-//     setSocketData(data)
-//   }
-
-//   // if socketData has been updated and there are watches in the watches
-//   // obj, sift thru the socket data and if one of the stocks in our
-//   // watches has had a change to its price, update the price in the store.
-//   useEffect(() => {
-//     if (socketData?.data && stock) {
-//       socketData.data.forEach( socketStock => {
-//         // console.log(stock.s)
-//         if (socketStock.s === stock.symbol && stock.price !== socketStock.p) {
-//           dispatch(stockActions.updateStockPrice(socketStock.p))
-//         }
-//       })
-//     }
-
-// }, [socketData])
-
-//     return (
-//         <div className='app__body'>
-//             <div className='app__container'>
-//                 <AssetLineGraph />
-//             </div>
-//         </div>
-//     )
-// }
 
 export default AssetPage;

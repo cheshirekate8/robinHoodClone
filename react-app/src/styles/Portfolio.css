@@ -8,10 +8,10 @@
     background-color: black;
     flex: 0.70;
     height: 100%;
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
-    padding-left: 48px;
-    padding-right: 48px;
+    /* padding-left: 48px; */
+    /* padding-right: 48px; */
 }
 
 .newsfeed__container {
