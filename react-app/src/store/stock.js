@@ -1,6 +1,6 @@
 const SET_STOCK = 'stock/SET_STOCK';
 const UPDATE_SPARK = 'stock/UPDATE_SPARK'
-// const REMOVE_STOCK= 'stock/REMOVE_STOCK';
+const REMOVE_STOCK= 'stock/REMOVE_STOCK';
 const SET_TICKER = 'stock/SET_TICKER';
 const SET_MOVERS = 'stock/SET_MOVERS';
 const GET_STOCKS = 'stock/GET_STOCKS';
@@ -22,10 +22,9 @@ const getAllStocks = (stocks) => ({
     payload: stocks
 })
 
-// const removeStock = (stock) => ({
-//     type: REMOVE_STOCK,
-//     payload: stock
-// })
+const removeStock = () => ({
+    type: REMOVE_STOCK,
+})
 
 const setTicker = (ticker) => ({
     type: SET_TICKER,
@@ -184,6 +183,10 @@ export const updateStockPrice = (price) => async (dispatch) => {
     dispatch(updatePrice(price))
 }
 
+export const clearCurrentStock = () => async (dispatch) => {
+    dispatch(removeStock())
+}
+
 
 const initialState = { allStocks: null, currentStock: null, ticker: null, dailyMovers: null };
 
@@ -193,8 +196,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, currentStock: action.payload }
         case GET_STOCKS:
             return { ...state, allStocks: action.payload }
-        //   case REMOVE_STOCK:
-        //     return { ...state, currentStock: null }
+        case REMOVE_STOCK:
+            return { ...state, currentStock: null }
         case SET_TICKER:
             return { ...state, ticker: action.payload }
         case SET_MOVERS:

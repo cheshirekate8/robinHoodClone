@@ -11,8 +11,9 @@ function Portfolio() {
     useEffect(() => {
         dispatch(stockActions.getTicker())
         dispatch(stockActions.getDailyMovers())
+        dispatch(stockActions.clearCurrentStock())
     })
-    
+
     return (
         <div className='app__body'>
             <div className='app__container'>
