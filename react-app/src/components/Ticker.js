@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-// import { FontAwesomeIcon } from '@fontawesome/react-fontawesome';
-import * as stockActions from '../store/stock';
+import { useSelector } from 'react-redux';
+
+
 
 import '../styles/Ticker.css';
 
@@ -11,6 +11,11 @@ const downArrow = '\ue5c5'
 
 
 function Ticker() {
+    const stock = useSelector(state => state.stock)
+    // const tickerData = useSelector(state => state.stock.ticker.quotes);
+    
+    const [ticker, setTicker] = useState();
+
     
     const mockData = [
         {
@@ -55,7 +60,10 @@ function Ticker() {
 
     // }, [])
     
-        
+    
+
+
+         
         return (
             <marquee className='ticker' id='ticker' scroll='auto'>
                 {mockData.map(data => (
@@ -81,6 +89,7 @@ function Ticker() {
                 ))}
             </marquee>
         )
+        
 
     
     
