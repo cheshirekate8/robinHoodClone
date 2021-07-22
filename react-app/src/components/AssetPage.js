@@ -12,31 +12,31 @@ function AssetPage() {
     const [socketData, setSocketData] = useState(null)
     const dispatch = useDispatch()
     const param = useParams();
-    const stock = useSelector(state => state.stock.currentStock)
 
     useEffect(() => {
-        if(param)
         dispatch(stockActions.getStock(param.symbol))
     },[dispatch, param])
 
+
     const stockData = useSelector(state => state.stock.currentStock)
     console.log(stockData)
+    const stock = useSelector(state => state.stock.currentStock)
 
     return (
         <div className='stockDiv'>
-            {/* <div> */}
+            <div>
                 {/* <AssetLineGraph /> */}
-                {/* <h1>{stockData.name} ({stockData.symbol})</h1>
+                <h1>{stockData?.name} ({stockData?.symbol})</h1>
                 <div> | Graph will go here? |</div>
-                <div>{stockData.ceo}</div>
-                <div>{stockData.employees}</div>
-                <div>{stockData.headquarters}</div>
-                <div>{stockData.founded}</div>
+                <div>{stockData?.ceo}</div>
+                <div>{stockData?.employees}</div>
+                <div>{stockData?.headquarters}</div>
+                <div>{stockData?.founded}</div>
             </div>
             <div className='stockButtonsDiv'>
                 <button>Buy</button>
                 <button>Sell</button>
-            </div> */}
+            </div>
         </div>
     )
 }
