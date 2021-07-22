@@ -84,36 +84,6 @@ function Ticker() {
        
         
 
-<<<<<<< HEAD
-    
-    
-    
-    // const dispatch = useDispatch()
-    // let tickerContainer = useRef([])
-    
-    // useEffect(() => {
-    //     async function getTicker() {
-    //         tickerContainer.current = await dispatch(stockActions.getTicker())
-    //     }
-    //     getTicker()
-    // }, [dispatch])
-    // // return (
-    // //     <div></div>
-    // // )
-    // const tickerData = useSelector(state => state.stocks.ticker?.quotes)
-    // if(tickerData) {
-    //     return (
-    //         <div>
-    //             {tickerData.map(ticker => (
-    //               <li key={tickerData.symbol}>{tickerData.symbol}</li>  
-    //             ))}
-    //         </div>
-    //     )
-    // } else {
-    //     return null;
-    // }
-=======
->>>>>>> e5cf244c4913d1485d48bf0c1b947dd9407d8a38
 }
 
 export default Ticker;

@@ -4,11 +4,7 @@ import { useSelector } from 'react-redux';
 
 const DailyMover = () => {
     const [quotes, setQuotes] = useState([]);
-<<<<<<< HEAD
     const tickerQuotes = useSelector(state => state.stocks.ticker?.quotes);
-=======
-    const tickerQuotes = useSelector(state => state.stock.ticker?.quotes);
->>>>>>> e5cf244c4913d1485d48bf0c1b947dd9407d8a38
 
     useEffect(() => {
         setQuotes(tickerQuotes);
