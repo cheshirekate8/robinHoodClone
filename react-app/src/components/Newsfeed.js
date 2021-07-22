@@ -5,11 +5,22 @@ import LineGraph from './LineGraph';
 import Ticker from './Ticker';
 
 function Newsfeed() {
-    const [dates, setDates] = useState();
-    const [balance, setBalance] = useState([])
-
     const user = useSelector(state => state.session.user);
+    console.log(user.balance)
+    const [dates, setDates] = useState();
+    const [balance, setBalance] = useState()
     
+    
+
+    const createUserBalanceHistory = () => {
+        let balances = [];
+        for(let i = 30; i > 0; i--) {
+            let balance = Math.floor(user.balance/i);
+            balances.push(balance)
+        }
+        balances.push(user.balance)
+        setBalance(balances)
+    }
 
 
 
@@ -26,6 +37,7 @@ function Newsfeed() {
 
     useEffect(() => {
         createDates()
+        createUserBalanceHistory()
     }, [])
 
 
