@@ -11,8 +11,7 @@ const downArrow = '\ue5c5'
 
 
 function Ticker() {
-    const stock = useSelector(state => state.stock)
-    // const tickerData = useSelector(state => state.stock.ticker.quotes);
+    const tickerData = useSelector(state => state.stock.ticker.quotes);
     
     const [ticker, setTicker] = useState();
 
@@ -66,25 +65,25 @@ function Ticker() {
          
         return (
             <marquee className='ticker' id='ticker' scroll='auto'>
-                {mockData.map(data => (
+                {tickerData.map(data => (
                     <span key={data.symbol}>
                         <p className='symbol'>{data.symbol}</p> 
                         <p className='price-traded'
-                            style={data.changeDirection === 'up'
+                            style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
-                        }>{data.priceTraded}</p>   
+                        }>{data.regularMarketPrice}</p>   
                         <span className='change-direction material-icons'
-                            style={data.changeDirection === 'up'
+                            style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
-                        }>{data.changeDirection === 'up' ? upArrow : downArrow}</span>  
+                        }>{data.regularMarketChange > 0 ? upArrow : downArrow}</span>  
                         <p className='change-amount'
-                            style={data.changeDirection === 'up'
+                            style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
-                            }>{data.changeAmount}</p> 
+                            }>{data.regularMarketChange}</p> 
                         <p className='change-percent' 
-                            style={data.changeDirection === 'up'
+                            style={data.regularMarketChange > 0
                             ? {color:'chartreuse'} : {color:'red'}
-                            }>{data.changePercent}</p>
+                            }>{data.regularMarketChangePercent}</p>
                     </span>
                 ))}
             </marquee>

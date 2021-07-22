@@ -6,7 +6,6 @@ import Ticker from './Ticker';
 
 function Newsfeed() {
     const user = useSelector(state => state.session.user);
-    console.log(user.balance)
     const [dates, setDates] = useState();
     const [balance, setBalance] = useState()
     
