@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 
 const DailyMover = () => {
-    const movers = useSelector(state => state.stock.dailyMovers[2].quotes);
+    const [quotes, setQuotes] = useState([]);
+    const tickerQuotes = useSelector(state => state.stocks.ticker?.quotes);
 
     return (
         <div className="daily-movers">

@@ -11,7 +11,7 @@ function Watchlist() {
   const dispatch = useDispatch();
   // const history = useHistory();
   let user = useSelector(state => state.session.user)
-  let watches = useSelector(state => state.watch.userWatches)
+  let watches = useSelector(state => state.watches.userWatches)
   let userId;
   if (user) {
     userId = user.id

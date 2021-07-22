@@ -4,9 +4,13 @@ import Newsfeed from './Newsfeed';
 import '../styles/Portfolio.css'
 import Watchlist from './Watchlist';
 import * as stockActions from '../store/stock'
+const moment = require('moment')
 
 function Portfolio() {
     const dispatch = useDispatch()
+
+    const date = moment().format('YYYY-MM-DD')
+    console.log('THE DATE IS ', date)
 
     useEffect(() => {
         dispatch(stockActions.getTicker())
@@ -23,3 +27,5 @@ function Portfolio() {
 }
 
 export default Portfolio;
+
+

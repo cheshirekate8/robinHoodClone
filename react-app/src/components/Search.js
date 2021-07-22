@@ -6,7 +6,7 @@ import '../styles/Search.css'
 
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('')
-  const data = useSelector(state => state.stock.allStocks.stocks)
+  const data = useSelector(state => state.stocks.allStocks.stocks)
 
   return (
     <div className='search-container'>

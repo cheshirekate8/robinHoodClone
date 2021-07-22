@@ -4,9 +4,10 @@ import sessionReducer from './session'
 import stockReducer from './stock'
 import watchReducer from './watchlist'
 import transReducer from './transactions'
+import newsReducer from './news'
 
 const rootReducer = combineReducers({
-  session: sessionReducer, stock: stockReducer, watch: watchReducer, transactions: transReducer
+  session: sessionReducer, stocks: stockReducer, watches: watchReducer, transactions: transReducer, news: newsReducer
 });
 
 

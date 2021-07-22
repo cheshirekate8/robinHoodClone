@@ -15,7 +15,9 @@ function AssetPage() {
     const param = useParams();
     useEffect(() => {
         dispatch(stockActions.getStock(param.symbol))
-    },[dispatch, param])
+    },[])
+    
+    const stock = useSelector(state => state.stocks.currentStock)
 
 
     const stockData = useSelector(state => state.stock.currentStock)

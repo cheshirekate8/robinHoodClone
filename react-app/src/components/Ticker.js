@@ -97,7 +97,7 @@ function Ticker() {
     // // return (
     // //     <div></div>
     // // )
-    // const tickerData = useSelector(state => state.stock.ticker?.quotes)
+    // const tickerData = useSelector(state => state.stocks.ticker?.quotes)
     // if(tickerData) {
     //     return (
     //         <div>

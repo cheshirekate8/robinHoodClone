@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux'
 
 
 function AssetLineGraph() {
+    
     const [count, setCount] = useState(0);
-    const stock = useSelector(state => state.stock.currentStock)
-    const sparkData = useSelector(state => state.stock.currentStock?.spark)
+    const stock = useSelector(state => state.stocks.currentStock)
+    const sparkData = useSelector(state => state.stocks.currentStock?.spark)
 
     
     const config = {
