@@ -70,14 +70,14 @@ const SignUpForm = () => {
   return (
     <div className='form-container'>
       <form onSubmit={onSignUp}>
-      <h1>Signup</h1>
+        <h1>Signup</h1>
         <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
         <div>
-          <label className='signup-label'>User Name</label>
+          <label className='signup-label'>Username</label>
           <input
             type='text'
             name='username'
