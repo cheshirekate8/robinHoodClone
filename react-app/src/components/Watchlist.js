@@ -40,7 +40,7 @@ function Watchlist() {
       socketData.data.forEach( stock => {
         // console.log(stock.s)
         if (watches[stock.s] && watches[stock.s].price !== (stock.p).toFixed(2)) {
-          dispatch(watchlistActions.updateWatchPrice(stock.s, (stock.p).toFixed(2)))
+          // dispatch(watchlistActions.updateWatchPrice(stock.s, (stock.p).toFixed(2)))
         }
       })
     }
