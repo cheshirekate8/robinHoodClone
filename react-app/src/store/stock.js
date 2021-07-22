@@ -45,7 +45,7 @@ export const getTicker = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -63,14 +63,14 @@ export const getStock = (symbol) => async (dispatch) => {
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=5m&range=1d`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -106,7 +106,6 @@ export const getStock = (symbol) => async (dispatch) => {
             ceo: db.ceo,
             employees: db.employees,
             about: db.about,
-            fiftyTwoWeekChange: stock.defaultKeyStatistics['52WeekChange'],
             preMarketChange: stock.price.preMarketChange,
             preMarketChangePercent: stock.price.preMarketChangePercent,
             dayChange: stock.price.regularMarketChange,
@@ -129,7 +128,7 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=${int}&range=${range}`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-key": "c697235c6fmshc0dbaa199bc115ep12cb5djsn654f10157574",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })

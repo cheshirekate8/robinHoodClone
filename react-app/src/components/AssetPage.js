@@ -10,18 +10,18 @@ import '../styles/AssetPage.css'
 
 function AssetPage() {
     const [socketData, setSocketData] = useState(null)
+    const [stockData, setStockData] = useState(null)
     const dispatch = useDispatch()
     // param is the symbol in the path, i just didn't like typing symbol.symbol to access it.
     const param = useParams();
-
-
+    const stock = useSelector(state => state.stock?.currentStock)
 
     useEffect(() => {
         dispatch(stockActions.getStock(param.symbol))
-    },[dispatch, param])
+        setStockData(stock)
+    },[dispatch, param, stock])
 
 
-    const stockData = useSelector(state => state.stock.currentStock)
 
     if (stockData) {
         return (

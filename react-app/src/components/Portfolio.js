@@ -12,7 +12,6 @@ function Portfolio() {
 
 
     useEffect(() => {
-        dispatch(stockActions.getTicker())
         dispatch(stockActions.clearCurrentStock())
     })
 
@@ -22,7 +21,7 @@ function Portfolio() {
                 <Newsfeed />
                 {/* <Watchlist /> */}
                 {/* <DailyMover /> */}
-                <NewsStories />
+                {/* <NewsStories /> */}
             </div>
         </div>
     )
