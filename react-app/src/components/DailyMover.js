@@ -19,7 +19,6 @@ const DailyMover = () => {
             <h2>Daily Movers</h2>
             {movers && movers.map( quote => (
                 <div className="daily-mover" key={quote.symbol}>
-                    {console.log(quote)}
                 <p className="symbol">{quote.symbol}</p>
                 <p className="price">{quote.regularMarketPrice}</p>
                 <p className="change">{quote.regularMarketChange}</p>

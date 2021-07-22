@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import AssetLineGraph from './AssetLineGraph';
@@ -10,34 +10,54 @@ import '../styles/AssetPage.css'
 
 function AssetPage() {
     const [socketData, setSocketData] = useState(null)
+    const [stockData, setStockData] = useState(null)
     const dispatch = useDispatch()
     // param is the symbol in the path, i just didn't like typing symbol.symbol to access it.
     const param = useParams();
-
-
+    const stock = useSelector(state => state.stock?.currentStock)
 
     useEffect(() => {
         dispatch(stockActions.getStock(param.symbol))
-    },[dispatch, param])
+        setStockData(stock)
+    },[dispatch, param, stock])
 
 
+<<<<<<< HEAD
     const stockData = useSelector(state => state?.stock?.currentStock)
+=======
+    const stockData = useSelector(state => state.stock?.currentStock)
+>>>>>>> main
 
+    let btnVal;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(btnVal)
+    }
+    
     if (stockData) {
         return (
             <div className='stockDiv'>
                 <div>
-                    {/* <AssetLineGraph /> */}
                     <h1>{stockData?.name} ({stockData?.symbol})</h1>
-                    <div> | Graph will go here? |</div>
+                    {/* <div> <AssetLineGraph /> </div> */}
                     <div>{stockData?.ceo}</div>
                     <div>{stockData?.employees}</div>
                     <div>{stockData?.headquarters}</div>
                     <div>{stockData?.founded}</div>
                 </div>
                 <div className='stockButtonsDiv'>
-                    <button>Buy</button>
-                    <button>Sell</button>
+                    <form
+                        className='transactionForm'
+                        onSubmit={handleSubmit}>
+                        <input placeholder="How much?" type="number" min="0" step="1" fixed="2"></input>
+                        <select >
+                            <option>Stock</option>
+                            <option>Money</option>
+                        </select>
+                        <button value='buy' onClick={() => btnVal='BUY'}>Buy</button>
+                        <button value='sell'onClick={() => btnVal='SELL'}>Sell</button>
+                    </form>
                 </div>
             </div>
         )
