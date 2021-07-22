@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import '../styles/Search.css'
 
@@ -21,8 +22,7 @@ function SearchBar() {
           <ul className='search-item-container'>
             <img src={val.imgUrl} style={{ width: 40, height: 40, marginRight: 10, backgroundColor: 'white' }}
             />
-            <li className='search-link'>{val.name} ({val.symbol})</li>
-            {/* <li className='search-link'>{(val.symbol)}</li> */}
+            <Link to={`${val.symbol}`} className='search-link'>{val.name} ({val.symbol})</Link>
           </ul>
         </div>
       })}

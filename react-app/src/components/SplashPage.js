@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/SplashPage.css'
 import Lottie from 'react-lottie-player'
-import animation from "../media/Drawkit/DrawKit - Animation Pack - Watermelon/PRODUCT/Animation 10/watermelon-pack-animation-10.json"
+import animation from "../media/splashAnimation"
 
 function SplashPage() {
     return (

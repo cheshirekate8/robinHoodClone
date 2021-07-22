@@ -80,14 +80,21 @@ export const getStock = (symbol) => async (dispatch) => {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
-    if (response.ok && sparkRes.ok) {
+    const databaseInfo = await fetch(`api/stocks/${symbol}`)
+
+    if (response.ok && sparkRes.ok && databaseInfo.ok) {
         const stock = await response.json();
         const spark = await sparkRes.json();
-        if (stock.errors || spark.errors) {
+        const db = await databaseInfo.json();
+
+        if (stock.errors || spark.errors || db.errors) {
             if (stock.errors) {
                 return stock.errors;
+            } else if (spark.errors) {
+                return spark.errors;
+            } else {
+                return db.errors;
             }
-            return spark.errors;
         }
 
         const sparkPrices = spark[`${symbol}`].close.map((num) => {
@@ -97,6 +104,14 @@ export const getStock = (symbol) => async (dispatch) => {
         // building my own stock object to show only relevant info needed
         // in the store.
         const currentStock = {
+            symbol: db.symbol,
+            name: db.name,
+            imgUrl: db.imgUrl,
+            headquarters: db.headquarters,
+            founded: db.founded,
+            ceo: db.ceo,
+            employees: db.employees,
+            about: db.about,
             fiftyTwoWeekChange: stock.defaultKeyStatistics['52WeekChange'],
             preMarketChange: stock.price.preMarketChange,
             preMarketChangePercent: stock.price.preMarketChangePercent,

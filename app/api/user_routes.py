@@ -57,9 +57,9 @@ def watches(userId):
 @user_routes.route('/<int:userId>/watches', methods=['POST'])
 @login_required
 def watches_post(userId):
-    
+
     data = request.get_json()
-    
+
     new_watch = Watch(userId=data['userId'], stockId=data['stockId'], symbol=data['watch'])
     db.session.add(new_watch)
     db.session.commit()
