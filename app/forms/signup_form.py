@@ -19,6 +19,14 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
+def first_name(form, field):
+    first_name = field.data
+    if len(first_name) > 50:
+        raise ValidationError('First Name cannot be greater than 50 characters.')
+    elif not len(first_name):
+        raise ValidationError('First Name is required')
+
+
 
 class SignUpForm(FlaskForm):
     username = StringField(
