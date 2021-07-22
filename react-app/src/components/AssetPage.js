@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import AssetLineGraph from './AssetLineGraph';
@@ -22,22 +22,38 @@ function AssetPage() {
     },[dispatch, param, stock])
 
 
+    const stockData = useSelector(state => state.stock?.currentStock)
 
+    let btnVal;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(btnVal)
+    }
+    
     if (stockData) {
         return (
             <div className='stockDiv'>
                 <div>
-                    {/* <AssetLineGraph /> */}
                     <h1>{stockData?.name} ({stockData?.symbol})</h1>
-                    <div> | Graph will go here? |</div>
+                    {/* <div> <AssetLineGraph /> </div> */}
                     <div>{stockData?.ceo}</div>
                     <div>{stockData?.employees}</div>
                     <div>{stockData?.headquarters}</div>
                     <div>{stockData?.founded}</div>
                 </div>
                 <div className='stockButtonsDiv'>
-                    <button>Buy</button>
-                    <button>Sell</button>
+                    <form
+                        className='transactionForm'
+                        onSubmit={handleSubmit}>
+                        <input placeholder="How much?" type="number" min="0" step="1" fixed="2"></input>
+                        <select >
+                            <option>Stock</option>
+                            <option>Money</option>
+                        </select>
+                        <button value='buy' onClick={() => btnVal='BUY'}>Buy</button>
+                        <button value='sell'onClick={() => btnVal='SELL'}>Sell</button>
+                    </form>
                 </div>
             </div>
         )
