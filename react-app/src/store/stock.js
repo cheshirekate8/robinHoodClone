@@ -141,7 +141,7 @@ export const updateStockPrice = (price) => async (dispatch) => {
 }
 
 
-const initialState = { allStocks: null, currentStock: null, ticker: null, dailyMovers: null };
+const initialState = { allStocks: null, currentStock: null, ticker: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {

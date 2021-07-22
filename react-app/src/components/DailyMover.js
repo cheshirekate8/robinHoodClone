@@ -1,20 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+
 
 const DailyMover = () => {
-    const movers = useSelector(state => state.stock.dailyMovers[2].quotes);
+    const [quotes, setQuotes] = useState([]);
+    const tickerQuotes = useSelector(state => state.stock.ticker?.quotes);
 
+    useEffect(() => {
+        setQuotes(tickerQuotes);
+    }, [tickerQuotes])
+    
+    const movers = quotes?.filter((quote) => {
+        return quote.regularMarketChange > 2 || quote.regularMarketChange < -2;
+    })
+    
     return (
         <div className="daily-movers">
             <h2>Daily Movers</h2>
-            {movers?.map( quote => {
+            {movers && movers.map( quote => (
                 <div className="daily-mover" key={quote.symbol}>
-                {/* <div className="symbol">{quote.symbol}</div>
-                <div className="price">{mover.price}</div>
-                <div className="change">{mover.change}</div> */}
+                    {console.log(quote)}
+                <p className="symbol">{quote.symbol}</p>
+                <p className="price">{quote.regularMarketPrice}</p>
+                <p className="change">{quote.regularMarketChange}</p>
                 </div>
-            })}
+            ))}
+            <p>movers go here</p>
         </div>
     )
 }
