@@ -144,25 +144,6 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
 }
 
 
-// // Stocks with a lot of action today - should get called once when the portfolio page loads
-// export const getDailyMovers = () => async (dispatch) => {
-//     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
-//         "method": "GET",
-//         "headers": {
-//             "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
-//             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
-//         }
-//     })
-//     if (response.ok) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return data.errors;
-//         }
-//         // dispatch(setDailyMovers(data.finance.result));
-//     }
-// }
-
-
 export const addAllStocks = () => async (dispatch) => {
     const response = await fetch('/api/stocks')
 

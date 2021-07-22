@@ -7,6 +7,7 @@ import configureStore from './store';
 import * as stockActions from './store/stock';
 import * as watchActions from './store/watchlist';
 import * as transActions from './store/transactions';
+import * as newsActions from './store/news';
 
 const store = configureStore();
 if (process.env.NODE_ENV !== 'production') {
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.stockActions = stockActions;
   window.watchActions = watchActions;
   window.transActions = transActions;
+  window.newsActions = newsActions;
 }
 
 ReactDOM.render(
