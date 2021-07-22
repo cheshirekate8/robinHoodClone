@@ -8,6 +8,8 @@ class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
     symbol = db.Column(db.String(5), nullable=False)
+    buy = db.Column(db.String, nullable=False)
+    sell = db.Column(db.String, nullable=False)
     shares = db.Column(db.Integer, nullable=False)
     total = db.Column(db.Float, nullable=False)
     time = db.Column(db.DateTime, nullable=False)
@@ -19,6 +21,8 @@ class Transaction(db.Model):
             'id': self.id,
             'userId': self.userId,
             'symbol': self.symbol,
+            'buy': self.buy,
+            'sell': self.sell,
             'shares': self.shares,
             'total': self.total,
             'time': self.time
