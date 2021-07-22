@@ -21,7 +21,7 @@ function AssetPage() {
     }, [dispatch, param])
 
 
-    const stockData = useSelector(state => state.stock.currentStock)
+    const stockData = useSelector(state => state.stock?.currentStock)
 
     let btnVal;
 
