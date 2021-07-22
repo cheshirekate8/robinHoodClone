@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -17,20 +17,25 @@ import AssetPage from './components/AssetPage'
 
 import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
+import * as transActions from './store/transactions';
 import SplashPage from './components/SplashPage'
 
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const username = useSelector(state => state.session.user?.username);
 
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(stockActions.addAllStocks())
+      if (username) {
+        await dispatch(stockActions.addAllStocks())
+        await dispatch(transActions.getTransactions())
+      }
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch, username]);
 
   if (!loaded) {
     return null;

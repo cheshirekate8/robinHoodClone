@@ -1,6 +1,5 @@
 const SET_STOCK = 'stock/SET_STOCK';
 const UPDATE_SPARK = 'stock/UPDATE_SPARK'
-// const REMOVE_STOCK= 'stock/REMOVE_STOCK';
 const SET_TICKER = 'stock/SET_TICKER';
 const SET_MOVERS = 'stock/SET_MOVERS';
 const GET_STOCKS = 'stock/GET_STOCKS';
@@ -22,19 +21,9 @@ const getAllStocks = (stocks) => ({
     payload: stocks
 })
 
-// const removeStock = (stock) => ({
-//     type: REMOVE_STOCK,
-//     payload: stock
-// })
-
 const setTicker = (ticker) => ({
     type: SET_TICKER,
     payload: ticker
-})
-
-const setDailyMovers = (movers) => ({
-    type: SET_MOVERS,
-    payload: movers
 })
 
 const updatePrice = (price) => ({
@@ -133,24 +122,6 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     }
 }
 
-// Stocks with a lot of action today - should get called once when the portfolio page loads
-export const getDailyMovers = () => async (dispatch) => {
-    const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
-            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
-        }
-    })
-    if (response.ok) {
-        const data = await response.json();
-        if (data.errors) {
-            return data.errors;
-        }
-        dispatch(setDailyMovers(data.finance.result));
-    }
-}
-
 export const addAllStocks = () => async (dispatch) => {
     const response = await fetch('/api/stocks')
 
@@ -178,12 +149,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, currentStock: action.payload }
         case GET_STOCKS:
             return { ...state, allStocks: action.payload }
-        //   case REMOVE_STOCK:
-        //     return { ...state, currentStock: null }
         case SET_TICKER:
             return { ...state, ticker: action.payload }
-        case SET_MOVERS:
-            return { ...state, dailyMovers: action.payload }
         case UPDATE_SPARK:
             state.currentStock.spark = action.payload
             return { ...state }

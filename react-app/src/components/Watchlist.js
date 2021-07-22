@@ -39,8 +39,8 @@ function Watchlist() {
     if (socketData?.data && watches) {
       socketData.data.forEach( stock => {
         // console.log(stock.s)
-        if (watches[stock.s] && watches[stock.s].price !== stock.p) {
-          dispatch(watchlistActions.updateWatchPrice(stock.s, stock.p))
+        if (watches[stock.s] && watches[stock.s].price !== (stock.p).toFixed(2)) {
+          dispatch(watchlistActions.updateWatchPrice(stock.s, (stock.p).toFixed(2)))
         }
       })
     }
@@ -65,10 +65,10 @@ function Watchlist() {
       <div className="testwatchlist">
         {theWatches?.map((watch) => {
           return (
-          <>
-            <p className='watchlist-link' key={watch.stockId}>
-            <Link className='symbol-link' key={watch.symbol} to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
-          </>
+          <div className='watch-wrapper' key={watch.id}>
+            <p className='watchlist-link'>
+            <Link className='symbol-link' to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
+          </div>
           )
         })}
       </div>

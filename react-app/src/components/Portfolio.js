@@ -10,7 +10,6 @@ function Portfolio() {
 
     useEffect(() => {
         dispatch(stockActions.getTicker())
-        dispatch(stockActions.getDailyMovers())
     })
     
     return (
