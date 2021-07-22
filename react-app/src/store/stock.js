@@ -39,7 +39,7 @@ export const getTicker = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
+            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -58,25 +58,32 @@ export const getStock = (symbol) => async (dispatch) => {
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
+            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=5m&range=1d`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
+            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
-    if (response.ok && sparkRes.ok) {
+    const databaseInfo = await fetch(`api/stocks/${symbol}`)
+
+    if (response.ok && sparkRes.ok && databaseInfo.ok) {
         const stock = await response.json();
         const spark = await sparkRes.json();
-        if (stock.errors || spark.errors) {
+        const db = await databaseInfo.json();
+
+        if (stock.errors || spark.errors || db.errors) {
             if (stock.errors) {
                 return stock.errors;
+            } else if (spark.errors) {
+                return spark.errors;
+            } else {
+                return db.errors;
             }
-            return spark.errors;
         }
 
         const sparkPrices = spark[`${symbol}`].close.map((num) => {
@@ -86,6 +93,14 @@ export const getStock = (symbol) => async (dispatch) => {
         // building my own stock object to show only relevant info needed
         // in the store.
         const currentStock = {
+            symbol: db.symbol,
+            name: db.name,
+            imgUrl: db.imgUrl,
+            headquarters: db.headquarters,
+            founded: db.founded,
+            ceo: db.ceo,
+            employees: db.employees,
+            about: db.about,
             fiftyTwoWeekChange: stock.defaultKeyStatistics['52WeekChange'],
             preMarketChange: stock.price.preMarketChange,
             preMarketChangePercent: stock.price.preMarketChangePercent,
@@ -109,7 +124,7 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=${int}&range=${range}`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "02847c9b10mshed5419f6b890469p1a8693jsnb7cfb8f30077",
+            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -119,6 +134,24 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
             return spark.errors;
         }
         dispatch(sparkUpdate(spark[`${symbol}`]))
+    }
+}
+
+// Stocks with a lot of action today - should get called once when the portfolio page loads
+export const getDailyMovers = () => async (dispatch) => {
+    const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-movers?region=US&lang=en-US&count=4&start=0", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "a0c6c8ab9fmshba41ada2a0f0c54p12e76fjsne915b3f2131e",
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+        }
+    })
+    if (response.ok) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+        dispatch(setDailyMovers(data.finance.result));
     }
 }
 
