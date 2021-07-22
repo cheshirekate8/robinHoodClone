@@ -65,9 +65,9 @@ function Watchlist() {
       <div className="testwatchlist">
         {theWatches?.map((watch) => {
           return (
-          <div className='watch-wrapper' key={watch.id}>
-            <p className='watchlist-link'>
-            <Link className='symbol-link' to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
+          <div key={watch.stockId}>
+            <p className='watchlist-link' key={watch.stockId}>
+            <Link className='symbol-link' key={watch.symbol} to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
           </div>
           )
         })}

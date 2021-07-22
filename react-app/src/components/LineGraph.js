@@ -1,14 +1,20 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import 'chartjs-adapter-date-fns';
 
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
+
+
+
 
 function LineGraph(props) {
+
     const data = {
-        labels: months,
+        labels: props.dates,
         datasets: [
             {
-                data: [10, 25, 45, 100,  250, 225, 100, 400, 300, 350, 450, 500],
+                data: [props.balance],
                 fill: false,
                 backgroundColor: '#00C807',
                 borderColor: '#00C807',
@@ -32,6 +38,16 @@ function LineGraph(props) {
             xAxes: {
                 ticks: {
                     display: true
+                },
+                type: 'time',
+                time: {
+                    parser: 'MM/dd/yyyy HH:mm',
+                    tooltipFormat: '11 HH:mm',
+                    unit: 'day',
+                    unitStepSize: 1,
+                    displayFormats: {
+                        'day': 'MM/dd/yyyy'
+                    }
                 }
             },
             yAxes: {
