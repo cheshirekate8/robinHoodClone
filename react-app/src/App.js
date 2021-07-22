@@ -18,6 +18,7 @@ import AssetPage from './components/AssetPage'
 import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
 import * as transActions from './store/transactions';
+import * as newsActions from './store/news';
 import SplashPage from './components/SplashPage'
 
 
@@ -32,6 +33,7 @@ function App() {
       if (username) {
         await dispatch(stockActions.addAllStocks())
         await dispatch(transActions.getTransactions())
+        await dispatch(newsActions.getNews())
       }
       setLoaded(true);
     })();

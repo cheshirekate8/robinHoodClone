@@ -4,6 +4,7 @@ import Newsfeed from './Newsfeed';
 import '../styles/Portfolio.css'
 import Watchlist from './Watchlist';
 import DailyMover from './DailyMover'
+import NewsStories from './NewsStories'
 import * as stockActions from '../store/stock'
 const moment = require('moment')
 
@@ -24,6 +25,7 @@ function Portfolio() {
                 <Newsfeed />
                 <Watchlist />
                 <DailyMover />
+                <NewsStories />
             </div>
         </div>
     )
