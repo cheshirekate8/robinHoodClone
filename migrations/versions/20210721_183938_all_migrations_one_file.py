@@ -1,7 +1,7 @@
 """all migrations one file
 
 Revision ID: 2f4d4ac09029
-Revises: 
+Revises:
 Create Date: 2021-07-21 18:39:38.859010
 
 """
@@ -46,6 +46,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=5), nullable=False),
+    sa.Column('buy', sa.String(length=5)),
+    sa.Column('sell', sa.String(length=5)),
     sa.Column('shares', sa.Integer(), nullable=False),
     sa.Column('total', sa.Float(), nullable=False),
     sa.Column('time', sa.DateTime(), nullable=False),
