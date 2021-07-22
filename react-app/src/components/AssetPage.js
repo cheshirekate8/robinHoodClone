@@ -19,26 +19,31 @@ function AssetPage() {
 
 
     const stockData = useSelector(state => state.stock.currentStock)
-    console.log(stockData)
-    const stock = useSelector(state => state.stock.currentStock)
 
-    return (
-        <div className='stockDiv'>
-            <div>
-                {/* <AssetLineGraph /> */}
-                <h1>{stockData?.name} ({stockData?.symbol})</h1>
-                <div> | Graph will go here? |</div>
-                <div>{stockData?.ceo}</div>
-                <div>{stockData?.employees}</div>
-                <div>{stockData?.headquarters}</div>
-                <div>{stockData?.founded}</div>
+    if (stockData) {
+        return (
+            <div className='stockDiv'>
+                <div>
+                    {/* <AssetLineGraph /> */}
+                    <h1>{stockData?.name} ({stockData?.symbol})</h1>
+                    <div> | Graph will go here? |</div>
+                    <div>{stockData?.ceo}</div>
+                    <div>{stockData?.employees}</div>
+                    <div>{stockData?.headquarters}</div>
+                    <div>{stockData?.founded}</div>
+                </div>
+                <div className='stockButtonsDiv'>
+                    <button>Buy</button>
+                    <button>Sell</button>
+                </div>
             </div>
-            <div className='stockButtonsDiv'>
-                <button>Buy</button>
-                <button>Sell</button>
-            </div>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <h1>Loading...</h1>
+        )
+    }
+
 }
 
 export default AssetPage;
