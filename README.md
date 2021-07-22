@@ -88,20 +88,20 @@ hurt to run it again.
    This will build the Dockerfile and push the image to your heroku container registry.
 
    ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
+   heroku container:push web -a zorro-investing
    ```
 
 9. Release your docker container to heroku
 
       ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
+      heroku container:release web -a zorro-investing
       ```
 
 10. set up your database
 
       ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
+      heroku run -a zorro-investing flask db upgrade
+      heroku run -a zorro-investing flask seed all
       ```
 
 11. Under Settings find "Config Vars" and add any additional/secret .env
@@ -114,22 +114,22 @@ variables.
 (Replaces **Step 8**)
 
 1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
+zorro-investing with your own tag:
 
    ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
+   docker buildx build --platform linux/amd64 -t zorro-investing .
    ```
 
 2. Tag your app with the url for your apps registry. Make sure to use the name
 of your Heroku app in the url and tag name:
 
    ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
+   docker tag zorro-investing registry.heroku.com/zorro-investing/web
    ```
 
 3. Use docker to push the image to the Heroku container registry:
 
    ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
+   docker push registry.heroku.com/zorro-investing/web
    ```
 # robinHoodClone

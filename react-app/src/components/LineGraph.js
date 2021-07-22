@@ -14,7 +14,7 @@ function LineGraph(props) {
         labels: props.dates,
         datasets: [
             {
-                data: [props.balance],
+                data: props.balance,
                 fill: false,
                 backgroundColor: '#00C807',
                 borderColor: '#00C807',

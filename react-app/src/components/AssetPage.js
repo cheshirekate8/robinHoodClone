@@ -13,24 +13,41 @@ function AssetPage() {
     const dispatch = useDispatch()
     // param is the symbol in the path, i just didn't like typing symbol.symbol to access it.
     const param = useParams();
-    
+
+
+
     useEffect(() => {
-        if(param)
         dispatch(stockActions.getStock(param.symbol))
-    },[])
-    
-    const stock = useSelector(state => state.stock.currentStock)
+    },[dispatch, param])
 
-    
 
-    return (
-        <div className='app__body'>
-            <div className='app__container'>
+    const stockData = useSelector(state => state.stock.currentStock)
 
-                <AssetLineGraph />
+    if (stockData) {
+        return (
+            <div className='stockDiv'>
+                <div>
+                    {/* <AssetLineGraph /> */}
+                    <h1>{stockData?.name} ({stockData?.symbol})</h1>
+                    <div> | Graph will go here? |</div>
+                    <div>{stockData?.ceo}</div>
+                    <div>{stockData?.employees}</div>
+                    <div>{stockData?.headquarters}</div>
+                    <div>{stockData?.founded}</div>
+                </div>
+                <div className='stockButtonsDiv'>
+                    <button>Buy</button>
+                    <button>Sell</button>
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <h1>Loading...</h1>
+        )
+    }
+
+
 }
 
 export default AssetPage;

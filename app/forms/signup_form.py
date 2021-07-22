@@ -26,6 +26,14 @@ def first_name(form, field):
     elif not len(first_name):
         raise ValidationError('First Name is required')
 
+def last_name(form, field):
+    last_name = field.data
+    if len(last_name) > 50:
+        raise ValidationError('Last Name cannot be greater than 50 characters.')
+    elif not len(last_name):
+        raise ValidationError('Last Name is required')
+
+
 
 
 class SignUpForm(FlaskForm):
@@ -33,6 +41,6 @@ class SignUpForm(FlaskForm):
         'username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
     password = StringField('password', validators=[DataRequired()])
-    firstName = StringField('firstName', validators=[DataRequired(), first_name])
-    lastName = StringField('lastName', validators=[DataRequired()])
+    firstName = StringField('First Name', validators=[DataRequired(), first_name])
+    lastName = StringField('Last Name', validators=[DataRequired(), last_name])
     balance = SelectField('balance', validators=[DataRequired()], choices=[100000.00,10000.00,1000.00], coerce=float)

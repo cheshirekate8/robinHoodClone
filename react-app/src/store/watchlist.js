@@ -39,14 +39,14 @@ export const getWatches = (userId) => async (dispatch) => {
 
   const response = await fetch(`/api/users/${userId}/watches`);
 
-  
+
   if (response.ok) {
     const data = await response.json();
-    
+
     if (data.errors) {
       return data.errors;
     }
-    
+
     // get current unix timestamp
     let today = Math.floor(Date.now() / 1000);
     // get yesterday's unix timestamp
@@ -103,7 +103,7 @@ export const removeWatch = (userId, watchId) => async(dispatch) => {
   if (response.ok) {
     const data = response.json()
   }
-    dispatch(removeOneWatch(watchId))  
+    dispatch(removeOneWatch(watchId))
 }
 
 
