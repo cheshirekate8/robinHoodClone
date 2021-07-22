@@ -55,7 +55,7 @@ export const getWatches = (userId) => async (dispatch) => {
     const watches = {};
     data.watches.forEach(async watch => {
       // get daily stats (resolution=(the number of minutes between quotes, or d w m for day week and month))
-      const candleRes = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${watch.symbol}&resolution=5&from=${yesterday}&to=${today}&token=c3rh4jaad3i88nmlrk7g`)
+      const candleRes = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${watch.symbol}&resolution=5&from=${yesterday}&to=${today}&token=c3st2naad3ide69e8pk0`)
       const candle = await candleRes.json();
       watch.spark = candle
       // set the price to default to the most recent close price. (will update dynamically if market is open)

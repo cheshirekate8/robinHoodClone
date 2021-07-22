@@ -18,7 +18,7 @@ function Portfolio() {
             <div className='app__container'>
                 <Newsfeed />
                 <Watchlist />
-                {/* <DailyMover /> */}
+                <DailyMover />
             </div>
         </div>
     )
