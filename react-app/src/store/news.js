@@ -51,7 +51,7 @@ export const getNews = (symbol) => async(dispatch) => {
     // }
 }
 
-const initialState = { market: null, company: null };
+const initialState = { market: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
