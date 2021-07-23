@@ -18,14 +18,14 @@ const NewsStories = () => {
 
     return (
         <div className='news-wrapper'>
-            <h2>Top Stories</h2>
+            <h2 className='news-header'>Top Stories</h2>
         <div className="news-stories">
             {/* make either the whole div or just the img a link to the story
                 the pictures need to be sized, just a warning!
             */}
             {topStories?.map(story => (
                 <div to={story.url} className="news-story" key={story.id}>
-                    <h5 className="news-story-source">{story.source}</h5>
+                    <h2 className="news-story-source">{story.source}</h2>
                     <p className="news-story-headline">{story.headline}</p>
                     <img src={story.image} alt={story.headline} className="news-story-image" />
                     <p className="news-story-summary">{story.summary}</p>
