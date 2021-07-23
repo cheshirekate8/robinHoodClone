@@ -22,27 +22,17 @@ function AssetPage() {
     const [shares, setShares] = useState(0);
 
     let btnVal;
-    let total;
-    let price;
-
-    socket.onmessage = function (event) {
-        JSON.parse(event.data).data.forEach(stock => {
-            if (stock.s === param.symbol) {
-                price = stock.p
-                console.log(price)
-            }
-        })
-        // console.debug("WebSocket message received:", JSON.parse(event.data).data);
-    };
-
+    let price = currentStock?.spark[0];
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (btnVal === 'BUY') {
-            console.log(typeof price)
+            let total = price * shares
+            console.log(currentUser.balance - total)
         }
         if (btnVal === 'SELL') {
-            console.log(price)
+            let total = price * shares
+            console.log(currentUser.balance + total)
         }
     }
 
