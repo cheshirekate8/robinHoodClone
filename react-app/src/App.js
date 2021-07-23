@@ -23,6 +23,8 @@ import SplashPage from './components/SplashPage'
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user)
+  console.log(user)
   const username = useSelector(state => state.session.user?.username);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ function App() {
       await dispatch(authenticate());
       if (username) {
         await dispatch(stockActions.addAllStocks())
-        await dispatch(transActions.getTransactions())
+        await dispatch(transActions.getTransactions(user.id))
         await dispatch(newsActions.getNews())
         await dispatch(stockActions.getTicker())
       }
