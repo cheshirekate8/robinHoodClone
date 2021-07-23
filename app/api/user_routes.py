@@ -31,15 +31,12 @@ def user(userId):
 @user_routes.route('/<int:userId>', methods=['PATCH'])
 @login_required
 def user_patch(userId):
-    form = TransactionForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        data = request.get_json()
-        newBalance = float(data)
-        user = User.query.get(userId)
-        user.balance = newBalance
-        db.session.commit()
-        return user.to_dict()
+    data = request.get_json()
+    newBalance = float(data)
+    user = User.query.get(userId)
+    user.balance = newBalance
+    db.session.commit()
+    return user.to_dict()
 
 
 # <<<<<<<<User Watches>>>>>>>>>

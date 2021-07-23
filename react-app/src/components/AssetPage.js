@@ -53,7 +53,8 @@ function AssetPage() {
             <div className='stockDiv'>
                 <div>
                     <h1>{currentStock?.name} ({currentStock?.symbol})</h1>
-                    <div> <AssetLineGraph /> </div>
+                    {/* <div> <AssetLineGraph /> </div> */}
+                    <img max-width="500px" src={currentStock.imgUrl} />
                     <div>{currentStock?.ceo}</div>
                     <div>{currentStock?.employees}</div>
                     <div>{currentStock?.headquarters}</div>
