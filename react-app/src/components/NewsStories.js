@@ -13,12 +13,13 @@ const NewsStories = () => {
         setStories(theStories)
     }, [theStories])
     
-    const topStories = stories?.slice(0, 6);
+    const topStories = stories?.slice(0, 25);
 
 
     return (
-        <div className="news-stories">
+        <div className='news-wrapper'>
             <h2>Top Stories</h2>
+        <div className="news-stories">
             {/* make either the whole div or just the img a link to the story
                 the pictures need to be sized, just a warning!
             */}
@@ -30,6 +31,7 @@ const NewsStories = () => {
                     <p className="news-story-summary">{story.summary}</p>
                 </div>
             ))}
+        </div>
         </div>
     )
 }

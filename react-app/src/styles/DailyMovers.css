@@ -1,11 +1,45 @@
 .daily-movers-container {
-    grid-area: leftMid;
-    margin-left: 10%;
+    border-top: 1px solid #e5e5e5;
+    margin-left: 5%;
     padding: 2.5%;
-    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 40vh;
+    width: 90%;
+}
+
+.movers-wrapper {
+    grid-area: leftMid;
+
 }
 
 .daily-mover {
-    background-color: teal;
+    border: 1px solid white;
+    margin: 2%;
+    height: fit-content;
+    width: 15%;
+    display: flex;
+    border-radius: 5px;
+    padding: 1%;
+    box-sizing: border-box;
+    flex-direction: column;
 }
 
+.mover-prices {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1%;
+}
+
+.movers-header {
+    margin-left: 5%;
+    margin-bottom: 3%;
+    
+}
+
+.mover-symbol {
+    text-align: center;
+    width: 100%;
+}
