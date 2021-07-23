@@ -8,11 +8,13 @@ import * as stockActions from '../store/stock'
 import socket from './websocket'
 import '../styles/AssetPage.css'
 import * as transActions from '../store/transactions'
+import { useHistory } from "react-router";
 
 function AssetPage() {
     const dispatch = useDispatch()
     // param is the symbol in the path, i just didn't like typing symbol.symbol to access it.
     const param = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(stockActions.getStock(param.symbol))
@@ -30,13 +32,17 @@ function AssetPage() {
         if (btnVal === 'BUY') {
             let total = price * shares
             let newBalance = currentUser.balance - total
-            dispatch(transActions.postTransactions({userId:currentUser.id, symbol:currentStock.symbol, shares:shares, total:total, balance:newBalance, buy:'yes', sell:null}))
+            dispatch(transActions.postTransactions({ userId: currentUser.id, symbol: currentStock.symbol, shares: shares, total: total, balance: newBalance, buy: 'yes', sell: null }))
+
             //Add validator where if newBalance < 0 return error
+            history.push(`/transactions`)
         }
         if (btnVal === 'SELL') {
             let total = price * shares
             let newBalance = currentUser.balance + total
-            dispatch(transActions.postTransactions({userId:currentUser.id, symbol:currentStock.symbol, shares:shares, total:total, balance:newBalance, buy: null, sell:'yes'}))
+
+            dispatch(transActions.postTransactions({ userId: currentUser.id, symbol: currentStock.symbol, shares: shares, total: total, balance: newBalance, buy: null, sell: 'yes' }))
+            history.push(`/transactions`)
         }
     }
 
@@ -49,24 +55,25 @@ function AssetPage() {
     } else {
         return (
             <div className='stockDiv'>
-                <div>
-                    <h1>{currentStock?.name} ({currentStock?.symbol})</h1>
-                    {/* <div> <AssetLineGraph /> </div> */}
-                    <img max-width="500px" src={currentStock.imgUrl} />
-                    <div>{currentStock?.ceo}</div>
-                    <div>{currentStock?.employees}</div>
-                    <div>{currentStock?.headquarters}</div>
-                    <div>{currentStock?.founded}</div>
-                </div>
-                <div className='stockButtonsDiv'>
-                    <form
-                        className='transactionForm'
-                        onSubmit={handleSubmit}>
-                        <input placeholder="How much stock to buy?" type="number" step="1" onChange={(e)=>setShares(e.target.value)}></input>
-                        <button value='buy' onClick={() => btnVal = 'BUY'}>Buy</button>
-                        <button value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
-                    </form>
-                </div>
+                <h1 className='stockTitle'>{currentStock?.name} ({currentStock?.symbol})</h1>
+                <div className='lineGraphDiv'> <AssetLineGraph /> </div>
+                {/* <img className='imgDiv' src={currentStock.imgUrl} /> */}
+                <div className='ceoLabel'>CEO</div>
+                <div className='ceoInfo'>{currentStock?.ceo}</div>
+                <div className='employeedLabel'>Employees</div>
+                <div className='employeesInfo'>{currentStock?.employees}</div>
+                <div className='headquartersLabel'>Headquarters</div>
+                <div className='headquartersInfo'>{currentStock?.headquarters}</div>
+                <div className='foundedLabel'>Founded</div>
+                <div className='foundedInfo'>{currentStock?.founded}</div>
+                <form
+                    className='transactionForm'
+                    onSubmit={handleSubmit}>
+                    <div for='stockInput'> Buy or Sell ({currentStock?.symbol})!</div>
+                    <input name="stockInput" placeholder="Please enter an amount" type="number" step="1" onChange={(e) => setShares(e.target.value)}></input>
+                    <button value='buy' onClick={() => btnVal = 'BUY'}>Buy</button>
+                    <button value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
+                </form>
             </div>
         )
     }
