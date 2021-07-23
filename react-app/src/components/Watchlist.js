@@ -13,6 +13,10 @@ function Watchlist() {
   // const history = useHistory();
   let user = useSelector(state => state.session.user)
   let watches = useSelector(state => state.watches.userWatches)
+  let closes;
+  if (watches) {
+    closes = watches.spark?.c;
+  }
   let userId;
   if (user) {
     userId = user.id
@@ -47,6 +51,16 @@ function Watchlist() {
 
 }, [socketData])
 
+  
+
+  const graphProps = {
+    dates: closes, // array of dates if you want that to show, otherwise just the same length as balance.
+    balance: closes, // array of prices
+    xdisplay: false,
+    ydisplay: false,
+    timeFormat: 'MM/dd/yyyy HH:mm',
+  }
+
 
 
   // watches is an object with key value pairs of symbol: watchinfo
@@ -70,7 +84,7 @@ function Watchlist() {
           return (
           <div className='watch-wrapper' key={watch.stockId}>
             <h4 className='watchlist-link' key={watch.stockId}>{watch.symbol}</h4>
-            <LineGraph />
+            <LineGraph props={graphProps} />
             <div>
               <h4>{watch.price}</h4>
               <h4>{diffPercent}%</h4>

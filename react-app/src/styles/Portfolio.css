@@ -33,9 +33,9 @@
     display: inline-grid;
     grid-template-columns: 3fr 1fr;
     grid-template-areas:
-    'leftTop leftTop .'
-    'leftMid leftMid .'
-    'leftBottom leftBottom .';
+    'leftTop .'
+    'leftMid .'
+    'leftBottom .';
 
     /* padding-left: 48px; */
     /* padding-right: 48px; */
