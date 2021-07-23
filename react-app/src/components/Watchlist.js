@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as watchlistActions from '../store/watchlist'
@@ -12,12 +12,19 @@ function Watchlist() {
   const dispatch = useDispatch();
   // const history = useHistory();
   let user = useSelector(state => state.session.user)
-  let watches = useSelector(state => state.watches.userWatches)
+  let watches = useSelector(state => state?.watches?.userWatches)
+  
+ 
+
+
+
   let userId;
   if (user) {
     userId = user.id
   }
 
+
+ 
   // Once the user has been grabbed from the store, 
   // update the watches store for that user.
   useEffect(() => {
@@ -28,12 +35,14 @@ function Watchlist() {
   // grab the data from the websocket and set 
   // to socketData slice of state.
 
-  
   let data;
   socket.onmessage = function(event) {
   data = JSON.parse(event.data)
     setSocketData(data)
   }
+
+
+  
 
   // if socketData has been updated and there are watches in the watches 
   // obj, sift thru the socket data and if one of the stocks in our
@@ -47,7 +56,7 @@ function Watchlist() {
       })
     }
 
-}, [socketData])
+}, [])
 
   
 
@@ -68,6 +77,7 @@ function Watchlist() {
 
   // Turn watches into an array of the watchinfo
   let theWatches;
+  // console.log(theWatches)
   if (watches) theWatches = Object.values(watches)
 
   return (
