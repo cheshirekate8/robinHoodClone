@@ -13,21 +13,30 @@ const DailyMover = () => {
         setQuotes(tickerQuotes);
     }, [tickerQuotes])
     
-    const movers = quotes?.filter((quote) => {
+    const movers = (quotes?.filter((quote) => {
         return quote.regularMarketChange > 2 || quote.regularMarketChange < -2;
-    })
-    
+    }))?.slice(0, 10)
+    console.log('TICKERQUOTES!!!!!!!!!!!!!!!!!!', tickerQuotes)
     return (
+        <div className="movers-wrapper">
+        <h2 className='movers-header'>Daily Movers</h2>
         <div className="daily-movers-container">
-            <h2>Daily Movers</h2>
-            {movers && movers.map( quote => (
+            {movers && movers.map( quote => {
+                const price = (quote.regularMarketPrice).toFixed(2)
+                const change = (quote.regularMarketChange).toFixed(2)
+                console.log('MOVER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', quote)
+             return (
+                
                 <div className="daily-mover" key={quote.symbol}>
-                <p className="symbol">{quote.symbol}</p>
-                <p className="price">{quote.regularMarketPrice}</p>
-                <p className="change">{quote.regularMarketChange}</p>
+                <p className="mover-symbol">{quote.symbol}</p>
+                <div className='mover-prices'>
+                <p className="mover-price">{price}</p>
+                <p className="mover-change">{change}</p>
                 </div>
-            ))}
-            <p>movers go here</p>
+                </div>
+                )})}
+                
+        </div>
         </div>
     )
 }
