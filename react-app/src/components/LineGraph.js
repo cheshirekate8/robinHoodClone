@@ -27,11 +27,17 @@ function LineGraph({props, watch}) {
                 fill: false,
                 backgroundColor: '#00C807',
                 borderColor: '#00C807',
+                borderWidth: 1
             }
         ]
     };
 
     const options = {
+        elements: {
+            point: {
+                radius: 0
+            }
+        },
         plugins: {
             legend: {
                 display: false
@@ -62,6 +68,7 @@ function LineGraph({props, watch}) {
                     display: props?.ydisplay
                 }
             },
+            
         }
     };
 

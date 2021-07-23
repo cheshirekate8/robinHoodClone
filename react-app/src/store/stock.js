@@ -45,6 +45,7 @@ export const getTicker = () => async (dispatch) => {
     const response = await fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers?region=US", {
         "method": "GET",
         "headers": {
+
             "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
@@ -63,6 +64,7 @@ export const getStock = (symbol) => async (dispatch) => {
     const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
+
             "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
@@ -70,6 +72,7 @@ export const getStock = (symbol) => async (dispatch) => {
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=5m&range=1d`, {
         "method": "GET",
         "headers": {
+
             "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
@@ -128,6 +131,7 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
     const sparkRes = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-spark?symbols=${symbol}&interval=${int}&range=${range}`, {
         "method": "GET",
         "headers": {
+
             "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
