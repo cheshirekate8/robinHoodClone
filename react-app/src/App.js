@@ -26,6 +26,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
+  console.log(user)
   const username = useSelector(state => state.session.user?.username);
 
   useEffect(() => {
