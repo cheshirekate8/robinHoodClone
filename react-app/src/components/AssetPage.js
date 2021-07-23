@@ -28,11 +28,14 @@ function AssetPage() {
         e.preventDefault()
         if (btnVal === 'BUY') {
             let total = price * shares
-            console.log(currentUser.balance - total)
+            let newBalance = currentUser.balance - total
+            console.log(newBalance)
+            //Add validator where if newBalance < 0 return error
         }
         if (btnVal === 'SELL') {
             let total = price * shares
-            console.log(currentUser.balance + total)
+            let newBalance = currentUser.balance + total
+            console.log(newBalance)
         }
     }
 
