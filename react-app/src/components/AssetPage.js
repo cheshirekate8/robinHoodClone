@@ -14,7 +14,7 @@ function AssetPage() {
     const dispatch = useDispatch()
     // param is the symbol in the path, i just didn't like typing symbol.symbol to access it.
     const param = useParams();
-    const stock = useSelector(state => state.stock?.currentStock)
+    const stock = useSelector(state => state.stocks?.currentStock)
 
     useEffect(() => {
         dispatch(stockActions.getStock(param.symbol))
@@ -22,11 +22,7 @@ function AssetPage() {
     },[dispatch, param, stock])
 
 
-<<<<<<< HEAD
-    const stockData = useSelector(state => state?.stock?.currentStock)
-=======
-    const stockData = useSelector(state => state.stock?.currentStock)
->>>>>>> main
+    // const stockData = useSelector(state => state.stock?.currentStock)
 
     let btnVal;
 
