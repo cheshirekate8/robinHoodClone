@@ -24,7 +24,7 @@ export const getTransactions = (userId) => async (dispatch) => {
 
 
 export const postTransactions = ({userId, symbol, shares, total, balance}) => async (dispatch) => {
-       
+
 
     const response = await fetch(`/api/users/${userId}/transactions`, {
         method: 'POST',
@@ -68,7 +68,7 @@ export default function reducer(state = initialState, action) {
 //     symbol: "AAPL",
 //     shares: 1,
 //     total: 389.46,
-//     balance: 10000   
+//     balance: 10000
 // }
 
 // window.store.dispatch(window.transActions.postTransactions(req));
