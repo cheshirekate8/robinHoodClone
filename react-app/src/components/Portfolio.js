@@ -18,10 +18,10 @@ function Portfolio() {
     return (
         <div className='app__body'>
             <div className='app__container'>
-                <Newsfeed />
-                {/* <Watchlist /> */}
-                {/* <DailyMover /> */}
-                {/* <NewsStories /> */}
+                <Newsfeed className='newsfeed' />
+                <Watchlist className='watchlist'/>
+                <DailyMover className='dailymover'/>
+                <NewsStories className='newsstories'/>
             </div>
         </div>
     )

@@ -1,0 +1,11 @@
+.daily-movers-container {
+    grid-area: leftMid;
+    margin-left: 10%;
+    padding: 2.5%;
+    
+}
+
+.daily-mover {
+    background-color: teal;
+}
+

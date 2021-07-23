@@ -4,12 +4,39 @@
     width: 100%;
 }
 
+.newsfeed {
+    grid-area: leftTop;
+}
+
+.dailymover {
+    grid-area: leftMid;
+
+}
+
+.newsstories {
+    grid-area: leftBottom;
+
+}
+
+.watchlist {
+    grid-area: sidebar;
+}
+
 .app__container {
+    grid-area: body;
     background-color: black;
     flex: 0.70;
     height: 100%;
-    /* width: 100vw; */
-    display: flex;
+    width: 100vw;
+    position: relative;
+    overflow-y: scroll;
+    display: inline-grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+    'leftTop .'
+    'leftMid .'
+    'leftBottom .';
+
     /* padding-left: 48px; */
     /* padding-right: 48px; */
 }
