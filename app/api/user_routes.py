@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Watch, Transaction, transaction
 import datetime
+from app.forms import TransactionForm
 
 
 user_routes = Blueprint('users', __name__)
@@ -30,12 +31,15 @@ def user(userId):
 @user_routes.route('/<int:userId>', methods=['PATCH'])
 @login_required
 def user_patch(userId):
-    data = request.get_json()
-    newBalance = float(data)
-    user = User.query.get(userId)
-    user.balance = newBalance
-    db.session.commit()
-    return user.to_dict()
+    form = TransactionForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        data = request.get_json()
+        newBalance = float(data)
+        user = User.query.get(userId)
+        user.balance = newBalance
+        db.session.commit()
+        return user.to_dict()
 
 
 # <<<<<<<<User Watches>>>>>>>>>
@@ -95,14 +99,17 @@ def transactions(userId):
 @user_routes.route('/<int:userId>/transactions', methods=['POST'])
 # @login_required
 def transactions_post(userId):
-    data = request.get_json()
+    form = TransactionForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        data = request.get_json()
 
-    new_transaction = Transaction(userId=userId, symbol=data['symbol'], shares=data['shares'], total=data['total'], time=datetime.datetime.now())
+        new_transaction = Transaction(userId=userId, symbol=data['symbol'], shares=data['shares'], total=data['total'], time=datetime.datetime.now(), buy=data['buy'], sell=data['sell'])
 
-    db.session.add(new_transaction)
-    db.session.commit()
-    transactions = get_all_transactions(userId)
-    return {'transactions': [transaction.to_dict() for transaction in transactions]}
+        db.session.add(new_transaction)
+        db.session.commit()
+        transactions = get_all_transactions(userId)
+        return {'transactions': [transaction.to_dict() for transaction in transactions]}
 
 
 
