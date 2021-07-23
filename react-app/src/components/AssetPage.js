@@ -32,15 +32,15 @@ function AssetPage() {
         if (btnVal === 'BUY') {
             let total = price * shares
             let newBalance = currentUser.balance - total
-            console.log(newBalance)
             dispatch(transActions.postTransactions({ userId: currentUser.id, symbol: currentStock.symbol, shares: shares, total: total, balance: newBalance, buy: 'yes', sell: null }))
+
             //Add validator where if newBalance < 0 return error
             history.push(`/transactions`)
         }
         if (btnVal === 'SELL') {
             let total = price * shares
             let newBalance = currentUser.balance + total
-            console.log(newBalance)
+
             dispatch(transActions.postTransactions({ userId: currentUser.id, symbol: currentStock.symbol, shares: shares, total: total, balance: newBalance, buy: null, sell: 'yes' }))
             history.push(`/transactions`)
         }

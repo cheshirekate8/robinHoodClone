@@ -13,10 +13,6 @@ function Watchlist() {
   // const history = useHistory();
   let user = useSelector(state => state.session.user)
   let watches = useSelector(state => state.watches.userWatches)
-  let closes;
-  if (watches) {
-    closes = watches.spark?.c;
-  }
   let userId;
   if (user) {
     userId = user.id
@@ -27,13 +23,15 @@ function Watchlist() {
   useEffect(() => {
     if (userId)
       dispatch(watchlistActions.getWatches(userId))
-  }, [userId])
+  }, [])
 
   // grab the data from the websocket and set 
   // to socketData slice of state.
+
+  
   let data;
   socket.onmessage = function(event) {
-  data = JSON.parse(event.data) 
+  data = JSON.parse(event.data)
     setSocketData(data)
   }
 
@@ -54,11 +52,11 @@ function Watchlist() {
   
 
   const graphProps = {
-    dates: closes, // array of dates if you want that to show, otherwise just the same length as balance.
-    balance: closes, // array of prices
+    dates: [], // array of dates if you want that to show, otherwise just the same length as balance.
+    balance: [], // array of prices
     xdisplay: false,
     ydisplay: false,
-    timeFormat: 'MM/dd/yyyy HH:mm',
+    timeFormat: null,
   }
 
 
@@ -84,7 +82,9 @@ function Watchlist() {
           return (
           <div className='watch-wrapper' key={watch.stockId}>
             <h4 className='watchlist-link' key={watch.stockId}>{watch.symbol}</h4>
-            <LineGraph props={graphProps} />
+            <div className='watches-graph'>
+            <LineGraph props={graphProps} watch={watch} />
+            </div>
             <div>
               <h4>{watch.price}</h4>
               <h4>{diffPercent}%</h4>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 
-function LineGraph({props}) {
+function LineGraph({props, watch}) {
     // time format for portfolio 'MM/dd/yyyy HH:mm'
     // props = {
     //     dates: [], // array of dates
@@ -11,8 +11,13 @@ function LineGraph({props}) {
     //     ydisplay: true || false,
     //     timeFormat: 'MM/dd/yyyy HH:mm',
     // }
-
-    console.log(props)
+    if (watch && props) {
+        props.balance = watch.spark?.c.slice(0, 10);
+        props.dates = watch.spark?.c.slice(0, 10);
+    }
+    // console.log('THE PROPS ', props);
+    // console.log('THE BALANCE ', props?.balance)
+    // console.log('THE DATES ', props?.dates)
     
     const data = {
         labels: props?.dates,

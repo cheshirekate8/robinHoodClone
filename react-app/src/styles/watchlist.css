@@ -3,6 +3,11 @@
   display: none; /* for Chrome, Safari, and Opera */
 }
 
+.watches-graph {
+  height: 30%;
+  width: 35%;
+}
+
 .watchlist__container {
   grid-area: sidebar;
   position: fixed;
@@ -40,6 +45,12 @@
 }
 
 .single-watch-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.watch-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
