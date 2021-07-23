@@ -29,7 +29,7 @@ function Transactions() {
         </tr>
       </thead>
       <tbody>
-        {transactionData.map((transaction, key) => {
+        {transactionData && transactionData.map((transaction, key) => {
           return <tr key={key} className='active-row'>
             <td>{transaction.id}</td>
             <td>{transaction.symbol}</td>
