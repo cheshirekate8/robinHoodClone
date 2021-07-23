@@ -14,9 +14,9 @@ function Newsfeed() {
     let difference = useRef(0);
     let percentage = useRef(0);
 
-    let balanceArr = [user?.balance]
+    let balanceArr = [startingBalance.current]
     // console.log(startingBalance)
-    console.log(transactions)
+    // console.log(transactions)
     
     
 
@@ -45,17 +45,35 @@ function Newsfeed() {
 
     useEffect(() => {
         transactions?.forEach(transaction => {
-            startingBalance.current -= transaction.total
-            const newBalance = startingBalance.current
-            // console.log(newBalance)
-            balanceArr.push(newBalance)
-            difference.current -= transaction.total
-            percentage.current = transaction.total / user.balance
-            setBalance(balanceArr)
+            if (transaction.buy === 'yes') {
+                startingBalance.current -= transaction.total
+                const newBalance = startingBalance.current
+                balanceArr.push(newBalance)
+                difference.current -= transaction.total
+                percentage.current = newBalance / user.balance
+                setBalance(balanceArr)
+            } else if (transaction.sell === 'yes') {
+                startingBalance.current += transaction.total
+                const newBalance = startingBalance.current
+                balanceArr.push(newBalance)
+                difference.current += transaction.total
+                percentage.current = newBalance / user.balance
+                setBalance(balanceArr)
+            } else {
+                return;
+            }
         });
         createDates()
         // createUserBalanceHistory()
-    }, [transactions])
+    }, [transactions]);
+
+    const graphProps = {
+        dates: dates, // array of dates if you want that to show, otherwise just the same length as balance.
+        balance: balance, // array of prices
+        xdisplay: false,
+        ydisplay: false,
+        timeFormat: 'MM/dd/yyyy HH:mm',
+      }
 
     return (
         <div className='newsfeed__container'>
@@ -66,7 +84,7 @@ function Newsfeed() {
                         {difference.current} {difference.current > 0 ? + percentage.current.toFixed(2) : - percentage.current.toFixed(2)}% Today</p>
                 </div>
                 <div className='newsfeed__chart'>
-                    <LineGraph balance={balance} dates={dates} />
+                    <LineGraph props={graphProps} />
                 </div>
                 <div className='ticker__container'>
                     <Ticker/>

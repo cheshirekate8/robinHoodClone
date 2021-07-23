@@ -69,6 +69,20 @@ export const logout = () => async (dispatch) => {
   }
 };
 
+export const getUser = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}`);
+
+  if (res.ok) {
+    const data = res.json();
+
+    if(data.errors) {
+      return data.errors
+    }
+
+    dispatch(setUser(data))
+  }
+}
+
 export const updateUser = (userId, balance) => async (dispatch) => {
   const newBalance = balance.toString();
   const response = await fetch(`/api/users/${userId}`, {
