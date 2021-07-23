@@ -18,43 +18,55 @@ function AssetPage() {
     }, [dispatch, param])
 
     const currentStock = useSelector(state => state.stocks.currentStock);
+    const currentUser = useSelector(state => state.session.user);
+    const [shares, setShares] = useState(0);
+
     let btnVal;
+    let price = currentStock?.spark[0];
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(btnVal)
+        if (btnVal === 'BUY') {
+            let total = price * shares
+            let newBalance = currentUser.balance - total
+            console.log(newBalance)
+            //Add validator where if newBalance < 0 return error
+        }
+        if (btnVal === 'SELL') {
+            let total = price * shares
+            let newBalance = currentUser.balance + total
+            console.log(newBalance)
+        }
     }
-    console.log(currentStock)
+
+
+
     if (currentStock === null) {
         return (
             <h1>Loading...</h1>
-            )
+        )
     } else {
-            return (
-                <div className='stockDiv'>
-                    <div>
-                        <h1>{currentStock?.name} ({currentStock?.symbol})</h1>
-                        <div> <AssetLineGraph /> </div>
-                        <div>{currentStock?.ceo}</div>
-                        <div>{currentStock?.employees}</div>
-                        <div>{currentStock?.headquarters}</div>
-                        <div>{currentStock?.founded}</div>
-                    </div>
-                    <div className='stockButtonsDiv'>
-                        <form
-                            className='transactionForm'
-                            onSubmit={handleSubmit}>
-                            <input placeholder="How much?" type="number" min="0" step="1" fixed="2"></input>
-                            <select >
-                                <option>Stock</option>
-                                <option>Money</option>
-                            </select>
-                            <button value='buy' onClick={() => btnVal = 'BUY'}>Buy</button>
-                            <button value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
-                        </form>
-                    </div>
+        return (
+            <div className='stockDiv'>
+                <div>
+                    <h1>{currentStock?.name} ({currentStock?.symbol})</h1>
+                    <div> <AssetLineGraph /> </div>
+                    <div>{currentStock?.ceo}</div>
+                    <div>{currentStock?.employees}</div>
+                    <div>{currentStock?.headquarters}</div>
+                    <div>{currentStock?.founded}</div>
                 </div>
-            )
+                <div className='stockButtonsDiv'>
+                    <form
+                        className='transactionForm'
+                        onSubmit={handleSubmit}>
+                        <input placeholder="How much stock to buy?" type="number" step="1" onChange={(e)=>setShares(e.target.value)}></input>
+                        <button value='buy' onClick={() => btnVal = 'BUY'}>Buy</button>
+                        <button value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
+                    </form>
+                </div>
+            </div>
+        )
     }
 }
 

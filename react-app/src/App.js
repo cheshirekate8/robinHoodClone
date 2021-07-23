@@ -7,19 +7,17 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoggedInRoute from './components/auth/LoggedInRoute';
 import LoggedOutRoute from './components/auth/LoggedOutRoute';
-import UsersList from './components/UsersList';
+import Transactions from './components/Transactions';
 import User from './components/User';
 import Portfolio from './components/Portfolio';
-
 import SearchBar from './components/Search';
-
 import AssetPage from './components/AssetPage'
-
 import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
 import * as transActions from './store/transactions';
 import * as newsActions from './store/news';
 import SplashPage from './components/SplashPage'
+
 
 
 function App() {
@@ -57,14 +55,17 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/search' exact={true}>
           <SearchBar />
+        </ProtectedRoute>
+        <ProtectedRoute path='/transactions' exact={true}>
+          <Transactions />
         </ProtectedRoute>
         <ProtectedRoute path='/home' exact={true} >
           <Portfolio />
