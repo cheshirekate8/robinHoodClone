@@ -9,6 +9,7 @@ const getAllTransactions = (transactions) => ({
 });
 
 export const getTransactions = (userId) => async (dispatch) => {
+    console.log('USER ID ======> ', userId)
     const response = await fetch(`/api/users/${userId}/transactions`);
 
     if (response.ok) {
@@ -23,8 +24,7 @@ export const getTransactions = (userId) => async (dispatch) => {
 }
 
 
-export const postTransactions = ({userId, symbol, shares, total, balance}) => async (dispatch) => {
-
+export const postTransactions = ({userId, symbol, shares, total, balance, buy, sell}) => async (dispatch) => {
 
     const response = await fetch(`/api/users/${userId}/transactions`, {
         method: 'POST',
@@ -32,7 +32,7 @@ export const postTransactions = ({userId, symbol, shares, total, balance}) => as
             'Content-Type': 'application/json'
         },
 
-        body: JSON.stringify({symbol, total, shares})
+        body: JSON.stringify({symbol, total, shares, buy, sell})
 
     });
 
@@ -43,8 +43,7 @@ export const postTransactions = ({userId, symbol, shares, total, balance}) => as
             return data.errors
         }
 
-        const newBalance = balance - total;
-        dispatch(sessionActions.updateUser(userId, newBalance))
+        dispatch(sessionActions.updateUser(userId, balance))
         dispatch(getAllTransactions(data));
 
     }

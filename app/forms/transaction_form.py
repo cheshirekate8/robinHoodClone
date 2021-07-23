@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, Email, ValidationError
 # from app.models import User
 
@@ -26,5 +26,4 @@ from wtforms.validators import DataRequired, Email, ValidationError
 class TransactionForm(FlaskForm):
     # userId = StringField('username', validators=[DataRequired(), username_exists])
     # symbol = StringField('email', validators=[DataRequired(), user_exists])
-    shares = StringField('password', validators=[DataRequired()])
-    time = StringField('password', validators=[DataRequired()])
+    shares = IntegerField('password', validators=[DataRequired()])

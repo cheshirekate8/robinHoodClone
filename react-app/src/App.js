@@ -23,22 +23,22 @@ import SplashPage from './components/SplashPage'
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user)
-  console.log(user)
+  const user = useSelector(state => state.session.user);
   const username = useSelector(state => state.session.user?.username);
+
 
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      if (username) {
+      if (user?.username) {
         await dispatch(stockActions.addAllStocks())
-        await dispatch(transActions.getTransactions(user.id))
+        await dispatch(transActions.getTransactions(user?.id))
         await dispatch(newsActions.getNews())
         await dispatch(stockActions.getTicker())
       }
       setLoaded(true);
     })();
-  }, [dispatch, username]);
+  }, [dispatch, user?.username]);
 
   if (!loaded) {
     return null;
