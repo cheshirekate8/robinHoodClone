@@ -26,7 +26,7 @@
   /* below is to hide the scrollbar but still allow scroll */
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
-  padding: 3%;
+  padding: 1%;
   width: 20%;
   padding-left: 2rem;
   display: grid;
@@ -54,4 +54,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.watch-container {
+  border: 1px solid #ccc;
+  width: 100%;
 }
