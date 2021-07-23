@@ -16,7 +16,7 @@ function Newsfeed() {
 
     let balanceArr = [startingBalance.current]
     // console.log(startingBalance)
-    // console.log(transactions)
+
     
     
 

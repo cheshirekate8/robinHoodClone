@@ -1,20 +1,93 @@
-/* .app__body {
-    background-color: black;
-    height: 100vh;
-    width: 100%;
+.stockDiv {
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(9, 1fr);
 }
 
-.app__container {
-    background-color: grey;
-    flex: 0.70;
-    height: 100%;
-    width: 100vw;
+.transactionForm {
+    background-color: lime;
+    display: grid;
+    position: relative;
+    grid-column: 6;
+    grid-row: 2;
+}
+
+.stockTitle {
+    display: grid;
+    grid-column: 3 / 5;
+    justify-content: center;
+}
+
+.lineGraphDiv {
+    grid-row: 2 / span 5;
+    grid-column: 2 / span 4;
+}
+
+.ceoLabel {
+    grid-row: 7;
+    grid-column: 2;
+}
+
+.ceoInfo {
+    grid-row: 8;
+    grid-column: 2;
+}
+
+.employeedLabel {
+    grid-row: 7;
+    grid-column: 3;
+}
+
+.employeesInfo {
+    grid-row: 8;
+    grid-column: 3;
+}
+
+.headquartersLabel {
+    grid-row: 7;
+    grid-column: 4;
+}
+
+.headquartersInfo {
+    grid-row: 8;
+    grid-column: 4;
+}
+
+.foundedLabel {
+    grid-row: 7;
+    grid-column: 5;
+}
+
+.foundedInfo {
+    grid-row: 8;
+    grid-column: 5;
+}
+
+.ceoLabel,
+.ceoInfo,
+.employeedLabel,
+.employeesInfo,
+.headquartersLabel,
+.headquartersInfo,
+.foundedLabel,
+.foundedInfo {
     display: flex;
-    padding-left: 48px;
-    padding-right: 48px;
+    justify-content: center;
 }
 
-.newsfeed__container {
-    background-color: black;
-    flex: 0.7;
-} */
+.ceoLabel,
+.employeedLabel,
+.headquartersLabel,
+.foundedLabel,
+.stockTitle {
+    font-size: 45px;
+    align-items: flex-end;
+}
+
+.ceoInfo,
+.employeesInfo,
+.headquartersInfo,
+.foundedInfo {
+    font-size: 30px;
+}

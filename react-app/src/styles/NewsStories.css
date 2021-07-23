@@ -1,14 +1,24 @@
 .news-stories {
     grid-area: leftBottom;
-    margin-left: 10%;
     padding: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-top: 1px solid #e5e5e5;
+}
+
+.news-wrapper {
+    grid-area: leftBottom;
+    margin-left: 5%;
+    width: 90%;
+
 }
 
 .news-story {
-    width: 50%
+    width: 70%
 }
 
 .news-story-image {
-    height: 50%;
-    width: 100%;
+    height: 70%;
+    width: 85%;
 }
