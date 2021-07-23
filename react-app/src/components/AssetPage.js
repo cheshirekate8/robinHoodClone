@@ -69,10 +69,10 @@ function AssetPage() {
                 <form
                     className='transactionForm'
                     onSubmit={handleSubmit}>
-                    <div for='stockInput'> Buy or Sell ({currentStock?.symbol})!</div>
-                    <input name="stockInput" placeholder="Please enter an amount" type="number" step="1" onChange={(e) => setShares(e.target.value)}></input>
-                    <button value='buy' onClick={() => btnVal = 'BUY'}>Buy</button>
-                    <button value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
+                    <div className='stockFormTitle' for='stockInput'> Buy or Sell ({currentStock?.symbol})!</div>
+                    <input className='stockFormInput' name="stockInput" placeholder="Please enter an amount" type="number" step="1" onChange={(e) => setShares(e.target.value)}></input>
+                    <button className='stockFormBuy' value='buy' onClick={() => btnVal = 'BUY'}>Buy</button>
+                    <button className='stockFormSell'  value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
                 </form>
             </div>
         )
