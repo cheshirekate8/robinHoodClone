@@ -1,6 +1,7 @@
 import React, {useEffect, useState, Link} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as newsActions from '../store/news'
+import '../styles/NewsStories.css'
 
 
 const NewsStories = () => {

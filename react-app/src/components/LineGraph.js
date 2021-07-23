@@ -2,27 +2,29 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 
+function LineGraph({props}) {
+    // time format for portfolio 'MM/dd/yyyy HH:mm'
+    // props = {
+    //     dates: [], // array of dates
+    //     balance: [], // array of prices
+    //     xdisplay: true || false,
+    //     ydisplay: true || false,
+    //     timeFormat: 'MM/dd/yyyy HH:mm',
+    // }
 
-
-
-
-
-
-function LineGraph(props) {
-
+    console.log(props)
+    
     const data = {
-        labels: props.dates,
+        labels: props?.dates,
         datasets: [
             {
-                data: props.balance,
+                data: props?.balance,
                 fill: false,
                 backgroundColor: '#00C807',
                 borderColor: '#00C807',
             }
         ]
     };
-
-    
 
     const options = {
         plugins: {
@@ -37,11 +39,11 @@ function LineGraph(props) {
         scales: {
             xAxes: {
                 ticks: {
-                    display: true
+                    display: props?.xdisplay
                 },
                 type: 'time',
                 time: {
-                    parser: 'MM/dd/yyyy HH:mm',
+                    parser: props?.timeFormat,
                     tooltipFormat: '11 HH:mm',
                     unit: 'day',
                     unitStepSize: 1,
@@ -52,7 +54,7 @@ function LineGraph(props) {
             },
             yAxes: {
                 ticks: {
-                    display: true
+                    display: props?.ydisplay
                 }
             },
         }

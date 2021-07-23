@@ -10,3 +10,8 @@
 .newsfeed__portfolio p {
     margin-top: 0;
 }
+
+.newsfeed__container {
+    height: fit-content;
+    margin-left: 10%;
+}
