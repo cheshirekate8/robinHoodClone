@@ -8,11 +8,13 @@ import * as stockActions from '../store/stock'
 import socket from './websocket'
 import '../styles/AssetPage.css'
 import * as transActions from '../store/transactions'
+import { useHistory } from "react-router";
 
 function AssetPage() {
     const dispatch = useDispatch()
     // param is the symbol in the path, i just didn't like typing symbol.symbol to access it.
     const param = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(stockActions.getStock(param.symbol))
@@ -33,12 +35,14 @@ function AssetPage() {
             console.log(newBalance)
             dispatch(transActions.postTransactions({userId:currentUser.id, symbol:currentStock.symbol, shares:shares, total:total, balance:newBalance, buy:'yes', sell:null}))
             //Add validator where if newBalance < 0 return error
+            history.push(`/transactions`)
         }
         if (btnVal === 'SELL') {
             let total = price * shares
             let newBalance = currentUser.balance + total
             console.log(newBalance)
             dispatch(transActions.postTransactions({userId:currentUser.id, symbol:currentStock.symbol, shares:shares, total:total, balance:newBalance, buy: null, sell:'yes'}))
+            history.push(`/transactions`)
         }
     }
 
@@ -54,7 +58,7 @@ function AssetPage() {
                 <div>
                     <h1>{currentStock?.name} ({currentStock?.symbol})</h1>
                     {/* <div> <AssetLineGraph /> </div> */}
-                    <img max-width="500px" src={currentStock.imgUrl} />
+                    {/* <img max-width="500px" src={currentStock.imgUrl} /> */}
                     <div>{currentStock?.ceo}</div>
                     <div>{currentStock?.employees}</div>
                     <div>{currentStock?.headquarters}</div>
