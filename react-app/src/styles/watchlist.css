@@ -1,10 +1,20 @@
 .watchlist__container {
+    grid-area: sidebar;
     flex: 0.3;
     color: white;
     background-color: rgb(32, 29, 29);
-    height: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    border: 1px inset black;
+    box-shadow: .5px .5px 0.625rem -2px rgb(14, 14, 14);
+    margin: 5%;
+    padding: 3%;
     width: 500px;
     padding-left: 2rem;
+    position: relative;
+    right: 0;
+    bottom: 0;
+    top: 0;
 }
 
 .symbol-link {

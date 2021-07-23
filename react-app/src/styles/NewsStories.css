@@ -1,0 +1,14 @@
+.news-stories {
+    grid-area: leftBottom;
+    margin-left: 10%;
+    padding: 5%;
+}
+
+.news-story {
+    width: 50%
+}
+
+.news-story-image {
+    height: 50%;
+    width: 100%;
+}
