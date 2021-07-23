@@ -8,23 +8,18 @@ import '../styles/transactions.css'
 function Transactions() {
   const dispatch = useDispatch()
   const userId = useSelector(state => state.session.user?.id)
-  const data = useSelector(state => state.transactions.transactions)
+  const transactionData = useSelector(state => state.transactions?.transactions)
 
   useEffect(() => {
     dispatch(transActions.getTransactions(userId))
   }, []);
 
-  // const userComponents = users.map((user) => {
-  //   return (
-  //     <li key={user.id}>
-  //       <NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
-  //     </li>
-  //   );
-  // });
 
   return (
     <div className='table-container'>
-      <h1 className='table-title'>Transaction History</h1>
+      <div>
+        <h1 className='table-title'>Transaction History</h1>
+      </div>
       <table className='table'>
         <thead>
           <tr>
@@ -37,11 +32,19 @@ function Transactions() {
             <th>Time</th>
           </tr>
         </thead>
-        {/* <tbody>
-          {data.map((id) =>
-            (<tr className='active-row'>{id}</tr>)
-          )}
-        </tbody> */}
+        <tbody>
+          {transactionData.map((transaction, key) => {
+            return <tr key={key} className='active-row'>
+              <td>{transaction.id}</td>
+              <td>{transaction.symbol}</td>
+              <td>{transaction.buy}</td>
+              <td>{transaction.sell}</td>
+              <td>{transaction.shares}</td>
+              <td>${transaction.total.toFixed(2)}</td>
+              <td>{transaction.time}</td>
+            </tr>
+          })}
+        </tbody>
       </table>
     </div>
   );
