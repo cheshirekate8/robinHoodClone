@@ -9,7 +9,6 @@ const getAllTransactions = (transactions) => ({
 });
 
 export const getTransactions = (userId) => async (dispatch) => {
-    console.log('USER ID ======> ', userId)
     const response = await fetch(`/api/users/${userId}/transactions`);
 
     if (response.ok) {
