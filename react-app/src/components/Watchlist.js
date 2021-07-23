@@ -3,6 +3,7 @@ import { useHistory, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as watchlistActions from '../store/watchlist'
 import WatchlistGraph from './WatchlistGraph';
+import LineGraph from './LineGraph';
 import '../styles/watchlist.css'
 import socket from './websocket'
 
@@ -59,14 +60,21 @@ function Watchlist() {
 
   return (
     <div className='watchlist__container'>
-      <h1>My Watchlist</h1>
+      <h3 classname='watchlist-label'>My Watchlist </h3>
 
       <div className="testwatchlist">
         {theWatches?.map((watch) => {
+          const prevClose = watch.spark.c[0]
+          const diff = (watch.price - prevClose).toFixed(2)
+          const diffPercent = (diff / prevClose * 100).toFixed(2)
           return (
-          <div key={watch.stockId}>
-            <p className='watchlist-link' key={watch.stockId}>
-            <Link className='symbol-link' key={watch.symbol} to={`/${watch.symbol}`} >{watch.symbol}</Link>, {watch.price}</p>
+          <div className='watch-wrapper' key={watch.stockId}>
+            <h4 className='watchlist-link' key={watch.stockId}>{watch.symbol}</h4>
+            <LineGraph />
+            <div>
+              <h4>{watch.price}</h4>
+              <h4>{diffPercent}%</h4>
+            </div>
           </div>
           )
         })}
