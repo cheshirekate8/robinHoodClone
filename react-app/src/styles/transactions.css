@@ -1,1 +1,47 @@
+.container {
+  text-align: left;
+  overflow: hidden;
+  width: 80%;
+  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+}
 
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+}
+
+
+.container td, .container th {
+	padding-bottom: 2%;
+	padding-top: 2%;
+  padding-left:2%;
+}
+
+/* title */
+.container th {
+    background-color: #5d0c12;
+    text-align: left;
+    font-weight: bold;
+    font-size: larger;
+    }
+
+/* bg-color odd rows */
+.container tr:nth-child(odd) {
+	background-color: rgb(104, 103, 103);
+  color: white;
+}
+
+/* bg color even rows */
+.container tr:nth-child(even) {
+	background-color: #d0d1d4;
+  color: black;
+}
+
+
+
+@media (max-width: 800px) {
+.container td:nth-child(4),
+.container th:nth-child(4) { display: none; }
+}
