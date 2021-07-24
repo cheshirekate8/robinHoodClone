@@ -16,13 +16,26 @@ function Ticker() {
     
     return (
         <marquee className='ticker' id='ticker' scroll='auto'>
-            {ticker?.map(data => (
+            {ticker?.map(data => {
+                let price;
+                let change;
+                let changePercent;
+                if (data.regularMarketPrice && data.regularMarketChange && data.regularMarketChangePercent) {  
+                    price = (data.regularMarketPrice).toFixed(2)
+                    change = (data.regularMarketChange).toFixed(2)
+                    changePercent = (data.regularMarketChangePercent).toFixed(2)
+                } else {
+                    price = 142.55
+                    change = 15.89
+                    changePercent = -0.01
+                }
+                return (
                 <span key={data.symbol}>
                     <p className='symbol'>{data.symbol}</p> 
                     <p className='price-traded'
                         style={data.regularMarketChange > 0
                         ? {color:'chartreuse'} : {color:'red'}
-                    }>${data.regularMarketPrice.toFixed(2)}</p>   
+                    }>${price}</p>   
                     <span className='change-direction material-icons'
                         style={data.regularMarketChange > 0
                         ? {color:'chartreuse'} : {color:'red'}
@@ -30,13 +43,13 @@ function Ticker() {
                     <p className='change-amount'
                         style={data.regularMarketChange > 0
                         ? {color:'chartreuse'} : {color:'red'}
-                        }>${data.regularMarketChange.toFixed(2)}</p> 
+                        }>${change}</p> 
                     <p className='change-percent' 
                         style={data.regularMarketChange > 0
                         ? {color:'chartreuse'} : {color:'red'}
-                        }>{data.regularMarketChangePercent.toFixed(2)}%</p>
+                        }>{changePercent}%</p>
                 </span>
-            ))}
+            )})}
         </marquee>
     )
        

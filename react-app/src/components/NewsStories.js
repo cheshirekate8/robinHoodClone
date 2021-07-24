@@ -27,7 +27,9 @@ const NewsStories = () => {
                 <div to={story.url} className="news-story" key={story.id}>
                     <h2 className="news-story-source">{story.source}</h2>
                     <p className="news-story-headline">{story.headline}</p>
+                    <a href={story.url}>
                     <img src={story.image} alt={story.headline} className="news-story-image" />
+                    </a>
                     <p className="news-story-summary">{story.summary}</p>
                 </div>
             ))}
