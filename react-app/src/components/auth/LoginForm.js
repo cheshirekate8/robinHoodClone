@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import '../../styles/login-form.css';
+import logo from '../../media/zorro_logo_RED.png';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -43,6 +44,7 @@ const LoginForm = () => {
               <div key={ind}>{error}</div>
             ))}
           </div>
+          <img src={logo} className='login-logo'></img>
           <h1>Welcome to Zorro</h1>
           <div class="form-input-material">
             <input

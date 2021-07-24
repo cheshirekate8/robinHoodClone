@@ -17,13 +17,13 @@
 
 .right-login {
   grid-column: 2;
-  background-color: #f2f4f8;
+  background-color: black;
   display: flex;
+  flex-direction: row;
   flex-grow: 1;
-  /* justify-content: flex-start; */
+  justify-content: flex-start;
   width: 860px;
   align-items: center;
-  background: grey;
   padding-left: 2rem;
 
 }
@@ -61,4 +61,9 @@
   height: 40px;
   font-size: 23px;
   text-align: center;
+}
+
+.login-logo {
+  height: 200px;
+  width: 200px;
 }
