@@ -3,15 +3,17 @@ import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 
 function LineGraph({props, watch}) {
+
     // time format for portfolio 'MM/dd/yyyy HH:mm'
     // props = {
-    //     dates: [], // array of dates
-    //     balance: [], // array of prices
-    //     xdisplay: true || false,
-    //     ydisplay: true || false,
-    //     timeFormat: 'MM/dd/yyyy HH:mm',
-    // }
+        //     dates: [], // array of dates
+        //     balance: [], // array of prices
+        //     xdisplay: true || false,
+        //     ydisplay: true || false,
+        //     timeFormat: 'MM/dd/yyyy HH:mm',
+        // }
     if (watch && props) {
+        console.log(watch)
         props.balance = watch.spark?.c.slice(0, 10);
         props.dates = watch.spark?.c.slice(0, 10);
     }

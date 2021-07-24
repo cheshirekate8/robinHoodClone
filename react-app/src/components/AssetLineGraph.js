@@ -3,14 +3,19 @@ import { Line } from 'react-chartjs-2';
 import { useSelector } from 'react-redux'
 
 
-function AssetLineGraph() {
+function AssetLineGraph({props}) {
     
-    const [count, setCount] = useState(0);
-    const stock = useSelector(state => state.stocks.currentStock)
-    const sparkData = useSelector(state => state.stocks.currentStock?.spark)
+    console.log(props)
 
+    const sparkData = props.slice(props.length - 30, props.length)
     
+    let labels = [];
+    for(let i = 0; i < 30; i++) {
+        labels.push(i)
+    }
+
     const config = {
+        labels: labels,
         datasets: [
             {   // sparkData is what it doesn't like, i dont know
                 // why it's not liking this array?
@@ -25,6 +30,11 @@ function AssetLineGraph() {
     
 
     const options = {
+        elements: {
+            point: {
+                radius: 0
+            }
+        },
         plugins: {
             legend: {
                 display: false
@@ -37,7 +47,7 @@ function AssetLineGraph() {
         scales: {
             xAxes: {
                 ticks: {
-                    display: true
+                    display: false
                 }
             },
             yAxes: {

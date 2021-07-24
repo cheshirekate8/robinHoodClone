@@ -57,7 +57,7 @@ function Newsfeed() {
                 const newBalance = startingBalance.current
                 balanceArr.push(newBalance)
                 difference.current += transaction.total
-                percentage.current = newBalance / user.balance
+                percentage.current = newBalance / startingBalance
                 setBalance(balanceArr)
             } else {
                 return;
@@ -79,9 +79,9 @@ function Newsfeed() {
         <div className='newsfeed__container'>
             <div className='newsfeed__chartSection'>
                 <div className='newsfeed__portfolio'>
-                    <h1>${startingBalance.current}</h1>
+                    <h1>${user.balance.toFixed(2)}</h1>
                     <p style={difference.current > 0 ? {color:'chartreuse'} : {color:'red'} } >
-                        {difference.current} {difference.current > 0 ? + percentage.current.toFixed(2) : - percentage.current.toFixed(2)}% Today</p>
+                        {difference.current.toFixed(2)} {difference.current > 0 ? + percentage.current.toFixed(2) : - percentage.current.toFixed(2)}% Today</p>
                 </div>
                 <div className='newsfeed__chart'>
                     <LineGraph props={graphProps} />
