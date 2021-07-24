@@ -32,11 +32,11 @@ function App() {
     (async () => {
       await dispatch(authenticate());
       if (user?.username) {
-        await dispatch(stockActions.addAllStocks())
-        await dispatch(transActions.getTransactions(user?.id))
-        await dispatch(newsActions.getNews())
-        await dispatch(stockActions.getTicker())
-        await dispatch(watchActions.getWatches(user?.id))
+        dispatch(newsActions.getNews())
+        dispatch(stockActions.addAllStocks())
+        dispatch(transActions.getTransactions(user?.id))
+        dispatch(stockActions.getTicker())
+        dispatch(watchActions.getWatches(user?.id))
       }
       setLoaded(true);
     })();

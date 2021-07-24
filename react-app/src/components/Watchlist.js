@@ -57,7 +57,7 @@ function Watchlist() {
 
   return (
     <div className='watchlist__container'>
-      <h2 classname='watchlist-label'>Watchlist </h2>
+      <h2 id='watchlist-label'>Watchlist </h2>
       <div className="watch-container">
         {theWatches?.map((watch) => {
           const prevClose = watch.spark.c[0]
@@ -79,7 +79,8 @@ function Watchlist() {
             </div>
           </div>
           )
-        })}
+        })
+        }
       </div>
 
     </div >
