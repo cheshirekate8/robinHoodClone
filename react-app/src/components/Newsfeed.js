@@ -15,11 +15,7 @@ function Newsfeed() {
     let percentage = useRef(0);
 
     let balanceArr = [startingBalance.current]
-    // console.log(startingBalance)
-
-    
-    
-
+   
     // const createUserBalanceHistory = () => {
     //     let balances = [];
     //     for(let i = 30; i > 0; i--) {
@@ -29,8 +25,6 @@ function Newsfeed() {
     //     balances.push(startingBalance.current.toFixed(2))
     //     setBalance(balances)
     // }
-
-
 
     const createDates = () => {
         let dates = [];
@@ -47,17 +41,17 @@ function Newsfeed() {
         transactions?.forEach(transaction => {
             if (transaction.buy === 'yes') {
                 startingBalance.current -= transaction.total
-                const newBalance = startingBalance.current
+                const newBalance = startingBalance.current.toFixed(2)
                 balanceArr.push(newBalance)
                 difference.current -= transaction.total
-                percentage.current = newBalance / user.balance
+                percentage.current = (newBalance / user.balance).toFixed(2)
                 setBalance(balanceArr)
             } else if (transaction.sell === 'yes') {
                 startingBalance.current += transaction.total
                 const newBalance = startingBalance.current
                 balanceArr.push(newBalance)
                 difference.current += transaction.total
-                percentage.current = newBalance / startingBalance
+                percentage.current = (newBalance / startingBalance.current).toFixed(2)
                 setBalance(balanceArr)
             } else {
                 return;
@@ -81,7 +75,7 @@ function Newsfeed() {
                 <div className='newsfeed__portfolio'>
                     <h1>${user.balance.toFixed(2)}</h1>
                     <p style={difference.current > 0 ? {color:'chartreuse'} : {color:'red'} } >
-                        {difference.current.toFixed(2)} {difference.current > 0 ? + percentage.current.toFixed(2) : - percentage.current.toFixed(2)}% Today</p>
+                        {difference.current.toFixed(2)} {difference.current > 0 ? + percentage.current : - percentage.current}% Today</p>
                 </div>
                 <div className='newsfeed__chart'>
                     <LineGraph props={graphProps} />

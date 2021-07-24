@@ -18,7 +18,7 @@ function SearchBar() {
   return (
     <div className='search-container'>
       <input type='text' placeholder='Search' className='search-input' onChange={event => { setSearchTerm(event.target.value) }} />
-      {data.filter((val) => {
+      {data?.filter((val) => {
         if (searchTerm == '') {
           return val
         } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase()) || val.symbol.toLowerCase().includes(searchTerm.toLowerCase())) {
