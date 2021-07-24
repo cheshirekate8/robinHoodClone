@@ -16,7 +16,6 @@ const DailyMover = () => {
     const movers = (quotes?.filter((quote) => {
         return quote.regularMarketChange > 2 || quote.regularMarketChange < -2;
     }))?.slice(0, 10)
-    // console.log('TICKERQUOTES!!!!!!!!!!!!!!!!!!', tickerQuotes)
     return (
         <div className="movers-wrapper">
         <h2 className='movers-header'>Daily Movers</h2>
@@ -30,8 +29,14 @@ const DailyMover = () => {
                 <div className="daily-mover" key={quote.symbol}>
                 <p className="mover-symbol">{quote.symbol}</p>
                 <div className='mover-prices'>
-                <p className="mover-price">{price}</p>
-                <p className="mover-change">{change}</p>
+                <p className="mover-price" 
+                style={price > 0
+                        ? {color:'chartreuse'} : {color:'red'}
+                    }>{price}</p>
+                <p className="mover-change"
+                style={change > 0
+                    ? {color:'chartreuse'} : {color:'red'}
+                }>{change}</p>
                 </div>
                 </div>
                 )})}

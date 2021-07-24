@@ -71,7 +71,7 @@ function Newsfeed() {
         dates: dates, // array of dates if you want that to show, otherwise just the same length as balance.
         balance: balance, // array of prices
         xdisplay: false,
-        ydisplay: false,
+        ydisplay: true,
         timeFormat: 'MM/dd/yyyy HH:mm',
       }
 
