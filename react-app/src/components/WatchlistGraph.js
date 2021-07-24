@@ -5,7 +5,7 @@ let months = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "No
 
 function WatchlistGraph({props}) {
 
-  console.log(props)
+  // console.log(props)
 
   let sparks = [];
   let labels = [];

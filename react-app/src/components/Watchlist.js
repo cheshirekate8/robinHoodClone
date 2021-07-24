@@ -89,7 +89,7 @@ function Watchlist() {
           return (
             <div className='watch-wrapper' key={watch.stockId}>
             <h4 className='watchlist-link' key={watch.stockId}>{watch.symbol}</h4>
-            <div className='watches-graph' key={watch.stockId}>
+            <div className='watches-graph' key={watch.price}>
               <WatchlistGraph props={watch.spark.c.slice(watch.spark.c.length - 24, watch.spark.length)} />
             </div>
             <div>

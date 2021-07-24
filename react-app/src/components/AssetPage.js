@@ -24,6 +24,8 @@ function AssetPage() {
     const currentUser = useSelector(state => state.session.user);
     const [shares, setShares] = useState(0);
 
+    // console.log(currentStock.spark)
+
     let btnVal;
     let price = currentStock?.spark[0];
 
@@ -56,7 +58,7 @@ function AssetPage() {
         return (
             <div className='stockDiv'>
                 <h1 className='stockTitle'>{currentStock?.name} ({currentStock?.symbol})</h1>
-                <div className='lineGraphDiv'> <AssetLineGraph /> </div>
+                <div className='lineGraphDiv'> <AssetLineGraph props={currentStock?.spark}/> </div>
                 {/* <img className='imgDiv' src={currentStock.imgUrl} /> */}
                 <div className='ceoLabel'>CEO</div>
                 <div className='ceoInfo'>{currentStock?.ceo}</div>
