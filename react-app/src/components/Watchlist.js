@@ -79,9 +79,8 @@ function Watchlist() {
 
   return (
     <div className='watchlist__container'>
-      <h3 className='watchlist-label'>My Watchlist </h3>
-
-      <div className="testwatchlist">
+      <h2 classname='watchlist-label'>Watchlist </h2>
+      <div className="watch-container">
         {theWatches?.map((watch) => {
           const prevClose = watch.spark.c[0]
           const diff = (watch.price - prevClose).toFixed(2)
