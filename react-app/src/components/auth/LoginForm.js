@@ -34,36 +34,38 @@ const LoginForm = () => {
   return (
     <div className='login-container'>
       <div className='left-login'>
-        <img src='https://lh3.googleusercontent.com/proxy/Po85iLQWalAqj0ibuXzO9ZeZQkFhlTKiy-i8C14qmDEOcwNPFvXEqWUufU7iJzrm_cPbyHOu0iB6M6o3wwyHIfX31HmloWHKsKEywOkrK5Xr6v1TDyfW1Fa2ErFY'></img>
+        <img src='https://www.americaremembers.com/wp-content/uploads/2013/09/zorrologo.jpg'></img>
       </div>
       <div className='right-login'>
-        <form onSubmit={onLogin}>
+        <form className='login-form' onSubmit={onLogin}>
           <div>
             {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>
           <h1>Welcome to Zorro</h1>
-          <div>
-            <label htmlFor='email'>Email</label>
+          <div class="form-input-material">
             <input
               name='email'
               type='text'
               placeholder='Email'
+              className='login-input'
               value={email}
               onChange={updateEmail}
             />
           </div>
-          <div>
-            <label htmlFor='password'>Password</label>
+          <div class="form-input-material">
             <input
               name='password'
               type='password'
               placeholder='Password'
+              className='login-input'
               value={password}
               onChange={updatePassword}
             />
-            <button type='submit'>Login</button>
+          </div>
+          <div>
+            <button type='submit' className='btn'>Login</button>
           </div>
         </form>
       </div>
