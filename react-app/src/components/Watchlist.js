@@ -30,7 +30,7 @@ function Watchlist() {
       })
     }
 
-}, [])
+}, [dispatch])
 
   
   // const graphProps = {
@@ -58,7 +58,6 @@ function Watchlist() {
   return (
     <div className='watchlist__container'>
       <h2 classname='watchlist-label'>Watchlist </h2>
-
       <div className="watch-container">
         {theWatches?.map((watch) => {
           const prevClose = watch.spark.c[0]
