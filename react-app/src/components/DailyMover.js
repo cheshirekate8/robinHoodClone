@@ -16,7 +16,7 @@ const DailyMover = () => {
     const movers = (quotes?.filter((quote) => {
         return quote.regularMarketChange > 2 || quote.regularMarketChange < -2;
     }))?.slice(0, 10)
-    console.log('TICKERQUOTES!!!!!!!!!!!!!!!!!!', tickerQuotes)
+    // console.log('TICKERQUOTES!!!!!!!!!!!!!!!!!!', tickerQuotes)
     return (
         <div className="movers-wrapper">
         <h2 className='movers-header'>Daily Movers</h2>
@@ -24,7 +24,7 @@ const DailyMover = () => {
             {movers && movers.map( quote => {
                 const price = (quote.regularMarketPrice).toFixed(2)
                 const change = (quote.regularMarketChange).toFixed(2)
-                console.log('MOVER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', quote)
+                // console.log('MOVER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', quote)
              return (
                 
                 <div className="daily-mover" key={quote.symbol}>

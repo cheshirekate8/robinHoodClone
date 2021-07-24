@@ -10,30 +10,19 @@ import socket from './websocket'
 function Watchlist() {
   const [socketData, setSocketData] = useState(null);
   const dispatch = useDispatch();
-  // const history = useHistory();
-  let user = useSelector(state => state.session.user)
+
   let watches = useSelector(state => state?.watches?.userWatches)
   
+  // console.log(watches)
  
 
 
 
-  let userId;
-  if (user) {
-    userId = user.id
-  }
+
 
 
  
-  // Once the user has been grabbed from the store, 
-  // update the watches store for that user.
-  useEffect(() => {
-    if (userId)
-      dispatch(watchlistActions.getWatches(userId))
-  }, [])
 
-  // grab the data from the websocket and set 
-  // to socketData slice of state.
 
   let data;
   socket.onmessage = function(event) {
@@ -80,9 +69,17 @@ function Watchlist() {
   // console.log(theWatches)
   if (watches) theWatches = Object.values(watches)
 
+  // console.log(theWatches)
+  let sparks = []
+    theWatches?.forEach(watch => {
+      sparks.push(watch.spark.c.slice(watch.spark.c.length -24, watch.spark.c.length))
+    });
+
+  // console.log(sparks)
+
   return (
     <div className='watchlist__container'>
-      <h3 classname='watchlist-label'>My Watchlist </h3>
+      <h3 className='watchlist-label'>My Watchlist </h3>
 
       <div className="testwatchlist">
         {theWatches?.map((watch) => {
@@ -90,10 +87,10 @@ function Watchlist() {
           const diff = (watch.price - prevClose).toFixed(2)
           const diffPercent = (diff / prevClose * 100).toFixed(2)
           return (
-          <div className='watch-wrapper' key={watch.stockId}>
+            <div className='watch-wrapper' key={watch.stockId}>
             <h4 className='watchlist-link' key={watch.stockId}>{watch.symbol}</h4>
-            <div className='watches-graph'>
-            <LineGraph props={graphProps} watch={watch} />
+            <div className='watches-graph' key={watch.price}>
+              <WatchlistGraph props={watch.spark.c.slice(watch.spark.c.length - 24, watch.spark.length)} />
             </div>
             <div>
               <h4>{watch.price}</h4>
