@@ -17,7 +17,7 @@ const NavBar = () => {
         <div className='leftNav'>
           <li className='navbar-link'>
             <NavLink to='/home' exact={true} activeClassName='active'>
-              <img src={logo} height='64px' width='64px' />
+              <img src={logo} height='30px' width='30px' />
             </NavLink>
           </li>
         </div>

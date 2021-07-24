@@ -1,11 +1,54 @@
 .form-container {
-  background: lightslategrey;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 900px;
 }
+.select-container {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-select {
+  margin: 0;
+  height: 30px;
+  width: 300px;
+  font-size: 23px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 
 .signup-label {
   margin: 5px;
+}
+
+.signup-logo {
+  height: 200px;
+  width: 200px;
+  }
+
+.signup-logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-btn {
+  width: 100px;
+  height: 35px;
+  margin: 18px 0 9px 0;
+  padding: 2rem;
+  border: solid white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
 }
