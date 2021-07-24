@@ -16,6 +16,7 @@ import { authenticate } from './store/session';
 import * as stockActions from './store/stock';
 import * as transActions from './store/transactions';
 import * as newsActions from './store/news';
+import * as watchActions from './store/watchlist'
 import SplashPage from './components/SplashPage'
 
 
@@ -35,6 +36,7 @@ function App() {
         await dispatch(transActions.getTransactions(user?.id))
         await dispatch(newsActions.getNews())
         await dispatch(stockActions.getTicker())
+        await dispatch(watchActions.getWatches(user?.id))
       }
       setLoaded(true);
     })();
