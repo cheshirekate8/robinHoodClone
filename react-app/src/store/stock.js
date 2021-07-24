@@ -101,6 +101,7 @@ export const getStock = (symbol) => async (dispatch) => {
         // building my own stock object to show only relevant info needed
         // in the store.
         const currentStock = {
+            id: db.id,
             symbol: db.symbol,
             name: db.name,
             imgUrl: db.imgUrl,
@@ -119,9 +120,7 @@ export const getStock = (symbol) => async (dispatch) => {
             // sparkline data is here
             spark: sparkPrices
         }
-        // if(isWatch === true) {
-        //     return currentStock;
-        // }
+        
         dispatch(setStock(currentStock));
     }
 }
