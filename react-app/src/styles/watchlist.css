@@ -3,6 +3,30 @@
   display: none; /* for Chrome, Safari, and Opera */
 }
 
+.watch-info {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.watch-prices {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.watches-symbol_and_delete {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+  z-index: 2;
+}
+
+.remove-watch_btn {
+  font-size: 1em;
+  color: red;
+}
+
 #watchlist-label {
   height: fit-content;
   width: fit-content;
@@ -62,7 +86,7 @@
   justify-content: space-between;
   padding: 10px;
   margin: 5px;
-  
+  height: fit-content;
 }
 
 .watch-container {

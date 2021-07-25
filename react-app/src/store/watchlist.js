@@ -6,9 +6,9 @@ const UPDATE_PRICE = 'watchlist/UPDATE_PRICE';
 const ADD_WATCH = 'watchlist/ADD_WATCH';
 const REMOVE_WATCH = 'watchlist/REMOVE_WATCH';
 
-const setWatch = (watch) => ({
+const setWatch = (watches) => ({
   type: SET_WATCH,
-  payload: watch
+  payload: watches
 });
 
 const updatePrice = (symbol, price) => ({
@@ -50,13 +50,14 @@ export const getWatches = (userId) => async (dispatch) => {
     // get current unix timestamp
     let today = Math.floor(Date.now() / 1000);
     // get yesterday's unix timestamp
-    let yesterday = today - 86400;
+    let oneWeekAgo = today - 86400 * 7;
 
     const watches = {};
     data.watches.forEach(async watch => {
       // get daily stats (resolution=(the number of minutes between quotes, or d w m for day week and month))
-      const candleRes = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${watch.symbol}&resolution=5&from=${yesterday}&to=${today}&token=c3st2naad3ide69e8pk0`)
+      const candleRes = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${watch.symbol}&resolution=5&from=${oneWeekAgo}&to=${today}&token=c3st2naad3ide69e8pk0`)
       const candle = await candleRes.json();
+      console.log(candle)
       watch.spark = candle
       // set the price to default to the most recent close price. (will update dynamically if market is open)
       watch.price = watch.spark.c[0];
@@ -64,7 +65,7 @@ export const getWatches = (userId) => async (dispatch) => {
     })
 
     dispatch(setWatch(watches));
-  }
+  } 
 }
 
 // Update the price for a single stock in the watchlist.
@@ -101,9 +102,9 @@ export const addWatch = (userId, stockId, watch) => async(dispatch) => {
 export const removeWatch = (userId, watchId) => async(dispatch) => {
   const response = await fetch(`/api/users/${userId}/watches/${watchId}`, {method: "DELETE"})
   if (response.ok) {
-    const data = response.json()
+    const data = await response.json()
+    dispatch(setWatch(data));
   }
-    dispatch(removeOneWatch(watchId))
 }
 
 
@@ -116,7 +117,7 @@ export default function reducer(state = initialState, action) {
     case ADD_WATCH:
       return {...state, userWatches: action.payload}
     case REMOVE_WATCH:
-      return { ...state}
+      return { ...state, userWatches: action.payload}
     case UPDATE_PRICE:
       // set the price of the stock with the key of the symbol in the payload.
       state.userWatches[action.payload.symbol].price = action.payload.price

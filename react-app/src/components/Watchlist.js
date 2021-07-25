@@ -8,9 +8,16 @@ import socket from './websocket'
 
 function Watchlist() {
   const [socketData, setSocketData] = useState(null);
+  const [theWatches, setTheWatches] = useState(null);
   const dispatch = useDispatch();
 
   let watches = useSelector(state => state?.watches?.userWatches)
+  const user = useSelector(state => state?.session.user)
+
+  // Turn watches into an array of the watchinfo
+  useEffect(() => {
+    if (watches) setTheWatches(Object.values(watches))
+  }, [watches])
 
   let data;
   socket.onmessage = function(event) {
@@ -46,34 +53,36 @@ function Watchlist() {
   //   MSFT: {id: 1, symbol: 'MSFT', userid: 1, price:0}
   // }
 
-  // Turn watches into an array of the watchinfo
-  let theWatches;
-  if (watches) theWatches = Object.values(watches)
-
-  let sparks = []
-    theWatches?.forEach(watch => {
-      sparks.push(watch.spark.c.slice(watch.spark.c.length -24, watch.spark.c.length))
-    });
+ 
+  
+  const removeWatch = (watchId) => {
+    dispatch(watchlistActions.removeWatch(user.id, watchId))
+  }
 
   return (
     <div className='watchlist__container'>
       <h2 id='watchlist-label'>Watchlist </h2>
       <div className="watch-container">
         {theWatches?.map((watch) => {
-          const prevClose = watch.spark.c[0]
+          const prevClose = watch.spark?.c[0]
           const diff = (watch.price - prevClose).toFixed(2)
           const diffPercent = (diff / prevClose * 100).toFixed(2)
           return (
             <div className='watch-wrapper' key={watch.stockId}>
             <div className='watches-graph' key={watch.price}>
+            <div className='watches-symbol_and_delete'>
+            <button className='remove-watch_btn' onClick={() => removeWatch(watch.id)}>
+            <i className="fas fa-minus-circle"></i>
+            </button>
             <Link to={`/${watch.symbol}`} className='watchlist-link' key={watch.stockId}>{watch.symbol}</Link>
-              <WatchlistGraph props={watch.spark.c.slice(watch.spark.c.length - 24, watch.spark.length)} />
+            </div>
+              <WatchlistGraph theWatches={theWatches} />
             </div>
             <div className='watch-prices'>
-              <h4 style={diff > 0
+              <h4 className='watch-info' style={diff > 0
                         ? {color:'chartreuse'} : {color:'red'}
                     }>{watch.price}</h4>
-              <h4 style={diffPercent > 0
+              <h4 className='watch-info' style={diffPercent > 0
                         ? {color:'chartreuse'} : {color:'red'}
                     }>{diffPercent}%</h4>
             </div>

@@ -3,11 +3,19 @@ import { Line } from 'react-chartjs-2';
 
 let months = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-function WatchlistGraph({props}) {
+function WatchlistGraph({theWatches}) {
 
-  // console.log(props)
+     // let sparks = []
+  // useEffect(() => {
+  //   theWatches?.forEach(watch => {
+  //     sparks.push(watch.spark.c?.slice(watch.spark.c?.length -24, watch.spark.c?.length))
+  //   });
+  // }, [sparks, theWatches])
+  
 
-  let sparks = [];
+  let sparks = theWatches.map(watch => {
+    return watch.spark.c?.slice(watch.spark.c?.length -24, watch.spark.c?.length)
+  })
   let labels = [];
 
 
@@ -24,7 +32,7 @@ function WatchlistGraph({props}) {
     labels: labels,
     datasets: [
         {
-            data: props,
+            data: sparks,
             fill: false,
             backgroundColor: '#00C807',
             borderColor: '#00C807',
@@ -55,7 +63,7 @@ const options = {
             },
             type: 'time',
             time: {
-                parser: props?.timeFormat,
+                parser: sparks?.timeFormat,
                 tooltipFormat: '11 HH:mm',
                 unit: 'day',
                 unitStepSize: 1,
