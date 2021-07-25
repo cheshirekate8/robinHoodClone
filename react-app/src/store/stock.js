@@ -46,7 +46,7 @@ export const getTicker = () => async (dispatch) => {
         "method": "GET",
         "headers": {
 
-            "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
+            "x-rapidapi-key": "27c4c91c34msh87bc96871d8040ep170963jsnd1b7bb2a66b6",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -65,7 +65,7 @@ export const getStock = (symbol) => async (dispatch) => {
         "method": "GET",
         "headers": {
 
-            "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
+            "x-rapidapi-key": "27c4c91c34msh87bc96871d8040ep170963jsnd1b7bb2a66b6",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -73,7 +73,7 @@ export const getStock = (symbol) => async (dispatch) => {
         "method": "GET",
         "headers": {
 
-            "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
+            "x-rapidapi-key": "27c4c91c34msh87bc96871d8040ep170963jsnd1b7bb2a66b6",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -132,7 +132,7 @@ export const updateSpark = (symbol, int = '5m', range = '1d') => async dispatch 
         "method": "GET",
         "headers": {
 
-            "x-rapidapi-key": "a6e398708amsh1d2ced535a1c674p1e3ca7jsn15c86763fdca",
+            "x-rapidapi-key": "27c4c91c34msh87bc96871d8040ep170963jsnd1b7bb2a66b6",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })

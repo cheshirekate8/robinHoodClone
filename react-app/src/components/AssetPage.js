@@ -8,6 +8,7 @@ import * as stockActions from '../store/stock'
 import socket from './websocket'
 import '../styles/AssetPage.css'
 import * as transActions from '../store/transactions'
+import * as watchActions from '../store/watchlist'
 import { useHistory } from "react-router";
 
 function AssetPage() {
@@ -22,6 +23,8 @@ function AssetPage() {
 
     const currentStock = useSelector(state => state.stocks.currentStock);
     const currentUser = useSelector(state => state.session.user);
+    const allStocks = useSelector(state => state.stocks.allStocks.stocks);
+    const watchez = useSelector(state => state.watches.userWatches.watches);
     const [shares, setShares] = useState(0);
 
     // console.log(currentStock.spark)
@@ -48,6 +51,36 @@ function AssetPage() {
         }
     }
 
+    const addToWatchlist = async (e) => {
+
+        let currentStockId;
+        allStocks.forEach(stock => {
+            if (stock.symbol === currentStock.symbol) {
+                currentStockId = stock.id
+            }
+        })
+
+        // let assign = false;
+        // watchez.forEach(watch => {
+        //     if (watch.symbol === currentStock.symbol) {
+        //         return;
+        //     } else {
+        //         assign = true
+        //     }
+        // })
+
+        // if (assign) {
+        //     dispatch(watchActions.addWatch(currentUser.id, currentStockId, currentStock.symbol))
+        //     window.alert('Added to Watchlist!')
+        // } else {
+        //     window.alert('Already added to Watchlist!')
+        // }
+
+
+        dispatch(watchActions.addWatch(currentUser.id, currentStockId, currentStock.symbol))
+        window.alert('Added to Watchlist!')
+    }
+
 
 
     if (currentStock === null) {
@@ -57,8 +90,13 @@ function AssetPage() {
     } else {
         return (
             <div className='stockDiv'>
-                <h1 className='stockTitle'>{currentStock?.name} ({currentStock?.symbol})</h1>
-                <div className='lineGraphDiv'> <AssetLineGraph props={currentStock?.spark}/> </div>
+                <h1 className='stockTitle'>
+                    {currentStock?.name} ({currentStock?.symbol})
+                    <button onClick={() => addToWatchlist()}>
+                        <i class="fas fa-plus-circle"> Add to Watchlist</i>
+                    </button>
+                </h1>
+                <div className='lineGraphDiv'> <AssetLineGraph props={currentStock?.spark} /> </div>
                 {/* <img className='imgDiv' src={currentStock.imgUrl} /> */}
                 <div className='ceoLabel'>CEO</div>
                 <div className='ceoInfo'>{currentStock?.ceo}</div>
@@ -74,7 +112,7 @@ function AssetPage() {
                     <div className='stockFormTitle' for='stockInput'> Buy or Sell ({currentStock?.symbol})!</div>
                     <input className='stockFormInput' name="stockInput" placeholder="Please enter an amount" type="number" step="1" onChange={(e) => setShares(e.target.value)}></input>
                     <button className='stockFormBuy' value='buy' onClick={() => btnVal = 'BUY'}>Buy</button>
-                    <button className='stockFormSell'  value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
+                    <button className='stockFormSell' value='sell' onClick={() => btnVal = 'SELL'}>Sell</button>
                 </form>
             </div>
         )
