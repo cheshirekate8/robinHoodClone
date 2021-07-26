@@ -14,7 +14,7 @@ function WatchlistGraph({theWatches}) {
   
 
   let sparks = theWatches.map(watch => {
-    return watch.spark.c?.slice(watch.spark.c?.length -24, watch.spark.c?.length)
+    return watch?.spark?.c?.slice(watch?.spark?.c?.length -24, watch?.spark?.c?.length)
   })
   let labels = [];
 
