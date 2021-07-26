@@ -76,7 +76,7 @@ function Watchlist() {
             </button>
             <Link to={`/${watch.symbol}`} className='watchlist-link' key={watch.stockId}>{watch.symbol}</Link>
             </div>
-              <WatchlistGraph theWatches={theWatches} />
+              <WatchlistGraph watch={watch?.spark?.c} />
             </div>
             <div className='watch-prices'>
               <h4 className='watch-info' style={diff > 0

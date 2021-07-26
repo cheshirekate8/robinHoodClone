@@ -3,7 +3,8 @@ import { Line } from 'react-chartjs-2';
 
 let months = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-function WatchlistGraph({theWatches}) {
+function WatchlistGraph({watch}) {
+    console.log(watch)
 
      // let sparks = []
   // useEffect(() => {
@@ -13,9 +14,8 @@ function WatchlistGraph({theWatches}) {
   // }, [sparks, theWatches])
   
 
-  let sparks = theWatches.map(watch => {
-    return watch?.spark?.c?.slice(watch?.spark?.c?.length -24, watch?.spark?.c?.length)
-  })
+  let sparks = watch?.slice(watch.length -24, watch.length)
+  
   let labels = [];
 
 
@@ -26,7 +26,7 @@ function WatchlistGraph({theWatches}) {
 
   
 
-// console.log(sparks)
+console.log(sparks)
 
   const data = {
     labels: labels,
